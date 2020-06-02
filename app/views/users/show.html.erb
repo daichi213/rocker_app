@@ -1,0 +1,35 @@
+<% provide(:title, @user.name) %>
+<%= render 'shared/sidebar' %>
+<div class="row">
+    <aside class="col-md-8">
+        <section class="user-edit">
+            <h1 class='user-edit-image'>
+                <% if current_user.picture? %>
+                    <%= image_tag current_user.picture.url %>
+                <% else %>
+                    <%= image_tag "/uploads/user/picture/thumb_default.jpg" %>
+                <% end %>
+            </h1>
+            <%= form_for @user do |f| %>
+                <%= f.label :name, "ニックネーム" %>
+                <%= f.text_field :name, placeholder: @user.name, class: "user-name" %>
+
+                <%= f.label :email, "Eメールアドレス" %>
+                <%= f.email_field :email, placeholder: @user.email, class: "user-email" %>
+
+                <%= f.label :picture, "ユーザー画像" %>
+                <%= f.file_field :picture %>
+
+                <%= f.submit "変更完了", class: "btn btn-primary" %>
+            <% end %>
+        </section>
+        <section class='stats'>
+            <!-- relationships実装後に開放 -->
+            <%#= render 'shared/stats' %>
+        </section>
+    </aside>
+    <div class="col-md-8">
+        <!-- relationships実装後に開放 -->
+        <%#= render 'follow_form' if logged_in? %>
+    </div>
+</div>

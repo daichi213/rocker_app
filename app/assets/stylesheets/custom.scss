@@ -1,0 +1,272 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing{
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* universal */
+
+body{
+    padding-top:60px;
+}
+
+section{
+    overflow: auto;
+}
+
+textarea{
+    resize: vertical;
+}
+
+.center{
+    text-align: center;
+}
+
+.center h1{
+    margin-bottom: 10px;
+}
+
+img {
+  border-radius: inherit;
+}
+
+/* header */
+
+// header{
+//   .container{
+//     background-color: rgb(120, 247, 240);
+//   }
+// }
+
+#logo{
+    float: left;
+    margin-right: 10px;
+
+    /* em(えむ)は文字の大きさを基準にしている単位で、文字の大きさを20pxとしている場合は
+    1emは20pxとなる。
+    これは相対単位と呼ばれ、ブラウザから文字の大きさの要求があった場合にそれに合わせて文字
+    の大きさが変化するため、一般的に使用が推奨されている。 */
+    font-size: 1.7em;
+    color: #fff;
+
+    /* 大文字表記 */
+    text-transform: uppercase;
+
+    /* 文字の間隔 */
+    letter-spacing:-1px;
+
+    padding-top: 9px;
+    font-weight:bold;
+    /* Sassは、SCSSをCSSに変換する際に、&:hoverを#logo:hoverに置き換えている。
+     さらに、このように表記することで#logoの繰り返し表記を避けることができる。*/
+    &:hover{
+        color:#fff;
+        text-decoration: none;
+    }
+}
+
+/* footer */
+
+footer{
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid $gray-medium-light;
+    color: $gray-light;
+    a{
+        color: $gray;
+    }
+    small{
+        float: left;
+    }
+
+    ul {
+        float: right;
+        list-style: none;
+      }
+
+    ul li{
+        float: right;
+        margin-left: 15px;
+    }
+}
+
+.debug_dump{
+    clear:both;
+    float:left;
+    width:100%;
+    margin-top:45px;
+    @include box_sizing;
+}
+
+/* sidebar */
+
+  .slidebar{
+    background-color: rgb(79, 219, 172);
+    aside {
+      section.user_info {
+        margin-top: 20px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        div {
+          display: block;
+          h1.user-image{
+            display: block;
+            overflow: none;
+            img {
+              border-radius: 80%;
+            }
+          }
+          span{
+            text-align: right;
+          }
+        }
+      }
+      section {
+        padding: 10px 0;
+        margin-top: 20px;
+        &:first-child {
+          border: 0;
+          padding-top: 0;
+        }
+        span {
+          display: block;
+          margin-bottom: 3px;
+          line-height: 1;
+        }
+        h1 {
+          display: block;
+          font-size: 1.4em;
+          letter-spacing: -1px;
+          margin-bottom: 3px;
+          margin-top: 0px;
+        }
+      }
+      section.menu-content {
+        padding-top: 0;
+        margin-top: 0;
+        ul {
+          display: block;
+          padding-left: 0;
+          list-style-type: none;
+          li {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+  
+  .stats{
+    overflow: auto;
+    margin-top: 0;
+    padding: 0;
+    a{
+      float: left;
+      padding: 0 10px;
+      border-left: 1px solid $gray-lighter;
+      color: gray;
+      &:first-child{
+        padding-left: 0;
+        border: 0;
+      }
+      &:hover{
+        text-decoration: none;
+        color: blue;
+      }
+    }
+      strong{
+        display: block;
+      }
+  }
+
+  .user_avatars{
+    overflow: auto;
+    margin-top: 10px;
+    .gravatar{
+      margin: 1px 1px;
+    }
+    a{
+      padding: 0;
+    }
+  }
+
+  .users.follow{
+    padding: 0;
+  }
+
+  /* user edit page */
+  .user-edit {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    .user-edit-image {
+      display: block;
+      margin: 0 auto;
+      img {
+        border-radius: 80%;
+        margin: 0 auto;
+      }
+    }
+    .user-name {
+      display: block;
+    }
+  }
+
+  /* forms */
+
+  input, textarea, select, .uneditable-input{
+      border:1px solid #bbb;
+      width:100%;
+      margin-bottom:15px;
+      @include box_sizing;
+  }
+
+  input{
+      height:auto !important;
+  }
+
+  #error_explanation{
+    color:red;
+    ul{
+      color:red;
+      margin: 0 0 30px 0;
+    }
+  }
+  
+  .field_with_errors{
+    @extend .has-error;
+    .form-control{
+      color:$state-danger-text;
+    }
+  }
+
+  .checkbox{
+    margin-top: -10px;
+    margin-bottom: 10px;
+    span{
+      margin-left: 20px;
+      font-weight: normal;
+    }
+  }
+
+  #session_remember_me{
+    width:auto;
+    margin-left: 0;
+  }
+
+  /* Users index */ 
+
+  .users{
+    list-style:none;
+    margin:0;
+    li{
+      overflow:auto;
+      padding: 10px 0;
+      border-bottom:1px solid $gray-lighter;
+    }
+  }

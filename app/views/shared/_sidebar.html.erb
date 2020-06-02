@@ -1,0 +1,36 @@
+<% if logged_in? %>
+    <div class='col-md-2 slidebar'>
+    <aside>
+        <section class="user_info">
+            <div>
+                <h1 class="user-image">
+                    <%= link_to current_user do %>
+                        <% if current_user.picture? %>
+                            <%= image_tag current_user.picture.thumb50.url %>
+                        <% else %>
+                            <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+                        <% end %>
+                    <% end %>
+                    <%= current_user.name %>
+                </h1>
+                <% if request.fullpath != "/users/#{params[:id]}" %>
+                    <span><%= link_to "編集", current_user %></span>
+                <% end %>
+            </div>
+        </section>
+        <section class="stats">
+            <%#= render 'shared/stats' %>
+        </section>
+        <section class='menu-content'>
+            <ul>
+                <li><%= link_to "マップ", "#" %></li>
+                <li><%= link_to "リクエスト一覧", root_path %></li>
+                <li><%= link_to "リクエスト依頼", "#" %></li>
+                <li><%= link_to "リクエスト依頼", "#" %></li>
+                <li><%= link_to "リクエスト依頼", "#" %></li>
+                <li><%= link_to "リクエスト依頼", "#" %></li>
+            </ul>
+        </section>
+    </aside>
+    </div>
+<% end %>

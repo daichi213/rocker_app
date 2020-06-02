@@ -1,0 +1,10 @@
+<li>
+    <!-- ユーザー画像 -->
+    <%= link_to user.name, user %>
+    <!-- !current_user?(user)は管理者以外がログインしない為の条件
+    link_toの第２引数はそれぞれのユーザーのdestroyアクションを実行するためのリンク -->
+    <% if current_user.admin? && !current_user?(user) %>
+        |<%= link_to "delete", user, method: :delete,
+                date: {confirm: "Yes sure?"} %>
+    <% end %>
+</li>
