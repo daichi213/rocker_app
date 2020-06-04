@@ -30,7 +30,7 @@
                     <%= f.label :request_content, "その他取扱注意事項があれば記入して下さい。", class: "baggage-notice" %>
                     <%= f.text_area :request_content, class: "baggage-notice", value: "記入例）\n傷が入りやすい品物が中に入っておりますので、できれば棚などの上において頂けると助かります。" %>
 
-                    <%= f.label :baggage_content, "簡単に荷物の内容を記述下さい。", class: "baggage-content" %>
+                    <%= f.label :baggage_content, "簡単に荷物の内容を記入して下さい。", class: "baggage-content" %>
                     <%= f.text_area :baggage_content, class: "baggage-content" %>
 
                     <h3>希望取引日時</h3>
@@ -44,7 +44,7 @@
                     <div class="to_daytime">
                         <%= f.date_select :to_day, class: "to_day" %>
                         <h3></h3>
-                        <%= f.time_select :to_time, class: "to_time" %>
+                        <%= f.time_select :to_timeto_time, class: "to_time" %>
                         <h3></h3>
                     </div>
 

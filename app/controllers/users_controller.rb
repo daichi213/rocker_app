@@ -54,7 +54,13 @@ class UsersController < ApplicationController
   end
 
   def leaved
-    @transaction = Transaction.new()
+    @transaction = Transaction.new(request_params)
+    if @transaction.save
+      flash[:success] = "送信に成功しました"
+      # redirect先の設定
+    else
+      render 'leaved_baggage'
+    end
   end
 
   def received_baggage
@@ -79,6 +85,23 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,
                       :password_confirmation, :picture)
+    end
+
+    def request_params
+      params.require(:request).permit(:large_scale_baggage,
+                                      :heavy_weight_baggage,
+                                      :precision_machine_baggage,
+                                      :dont_reverse_baggage,
+                                      :broken_article,
+                                      :refrigerated_baggage,
+                                      :feezed_baggage,
+                                      :request_content,
+                                      :baggage_content,
+                                      :from_day,
+                                      :from_time,
+                                      :to_day,
+                                      :to_time,
+                                      :transaction_message)
     end
 
     def correct_user
