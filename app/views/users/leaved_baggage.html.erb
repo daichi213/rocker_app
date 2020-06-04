@@ -1,0 +1,59 @@
+<% provide(:tile, "リクエスト依頼") %>
+
+<div class='row'>
+    <section class='col-md-8'>
+        <div class='request-form'>
+            <% if logged_in? %>
+                <%= form_for @transaction, url: users_leaved_path do |f| %>
+                    <h3>荷物タイプ</h3>
+                    <%= f.check_box :large_scale_baggage, class: "baggage-type" %>
+                    <%= f.label :large_scale_baggage, "大物" %>
+
+                    <%= f.check_box :heavy_weight_baggage, class: "baggage-type" %>
+                    <%= f.label :heavy_weight_baggage, "重量物" %>
+
+                    <%= f.check_box :precision_machine_baggage, class: "baggage-type" %>
+                    <%= f.label :precision_machine_baggage, "精密機械" %>
+
+                    <%= f.check_box :dont_reverse_baggage, class: "baggage-type" %>
+                    <%= f.label :dont_reverse_baggage, "天地無用荷物" %>
+
+                    <%= f.check_box :broken_article, class: "baggage-type" %>
+                    <%= f.label :broken_article, "割れ物" %>
+
+                    <%= f.check_box :refrigerated_baggage, class: "baggage-type" %>
+                    <%= f.label :refrigerated_baggage, "冷蔵必須品" %>
+
+                    <%= f.check_box :feezed_baggage, class: "baggage-type" %>
+                    <%= f.label :feezed_baggage, "冷凍必須品" %>
+
+                    <%= f.label :request_content, "その他取扱注意事項があれば記入して下さい。", class: "baggage-notice" %>
+                    <%= f.text_area :request_content, class: "baggage-notice", value: "記入例）\n傷が入りやすい品物が中に入っておりますので、できれば棚などの上において頂けると助かります。" %>
+
+                    <%= f.label :baggage_content, "簡単に荷物の内容を記述下さい。", class: "baggage-content" %>
+                    <%= f.text_area :baggage_content, class: "baggage-content" %>
+
+                    <h3>希望取引日時</h3>
+                    <div class="from_daytime">
+                        <%= f.date_select :from_day, class: "from_day", date_separator: "/" %>
+                        <h3></h3>
+                        <%= f.time_select :from_time, class: "from_time" %>
+                        <h3></h3>
+                    </div>
+                    <h3>↓</h3>
+                    <div class="to_daytime">
+                        <%= f.date_select :to_day, class: "to_day" %>
+                        <h3></h3>
+                        <%= f.time_select :to_time, class: "to_time" %>
+                        <h3></h3>
+                    </div>
+
+                    <h3>取引メッセージ</h3>
+                    <%= f.text_area :transaction_message, value: "こんにちは、荷物預かって頂けませんか？" %>
+
+                    <%= f.submit '送信', class: "btn btn-primary" %>
+                <% end %>
+            <% end %>
+        </div>
+    </section>
+</div>

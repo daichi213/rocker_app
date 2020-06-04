@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200530023953) do
+ActiveRecord::Schema.define(version: 20200603000548) do
+
+  create_table "transactions", force: :cascade do |t|
+    t.string "item_name"
+    t.integer "item_num"
+    t.integer "leaver_id"
+    t.integer "receiver_id"
+    t.boolean "leaver_authenticate"
+    t.boolean "receiver_authenticate"
+    t.date "terminated_at"
+    t.decimal "leaver_point"
+    t.decimal "receiver_point"
+    t.text "request_content"
+    t.text "baggage_content"
+    t.text "transaction_message"
+    t.boolean "large_scale_baggage"
+    t.boolean "heavy_weight_baggage"
+    t.boolean "precision_machine_baggage"
+    t.boolean "dont_reverse_baggage"
+    t.boolean "broken_article"
+    t.boolean "refrigerated_baggage"
+    t.boolean "feezed_baggage"
+    t.date "from_day"
+    t.time "from_time"
+    t.date "to_day"
+    t.time "to_time"
+    t.integer "amount_billed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"

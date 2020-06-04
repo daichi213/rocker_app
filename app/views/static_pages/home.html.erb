@@ -2,4 +2,22 @@
 
 <div class='row'>
     <%= render 'shared/sidebar' %>
+    <div class='container'>
+        <% if logged_in? %>
+            <% if flash[:request] %>
+                <h1 class='receive_message'><%= flash[:receive_message] %></h1>
+            <% end %>
+            <div class='request-message'>
+                <h1>
+                    <% if current_user.picture? %>
+                        <%= image_tag current_user.picture.thumb50.url %>
+                    <% else %>
+                        <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+                    <% end %>
+                    <%= current_user.name %>
+                </h1>
+            </div>
+        <% else %>
+    </div>
+    <% end %>
 </div>

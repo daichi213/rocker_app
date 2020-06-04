@@ -49,6 +49,18 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def leaved_baggage
+    @transaction = Transaction.new
+  end
+
+  def leaved
+    @transaction = Transaction.new()
+  end
+
+  def received_baggage
+
+  end
+
   def following
     @title = "Following"
     @user = User.find(params[:id])
