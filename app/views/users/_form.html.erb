@@ -19,7 +19,7 @@
     <%= f.file_field :picture, class:"form-control" %>
 
     <h2>取扱情報</h2>
-        <%= f.fields_for :receivable_baggages do |b| %>
+        <%= f.fields_for :receivable_baggages, @user.receivable_baggages.build do |b| %>
             <%#= b.check_box :large_scale_baggage, class: "baggage-type" %>
             <%#= b.label :large_scale_baggage, "大物" %>
 
