@@ -115,14 +115,7 @@ class UsersController < ApplicationController
     end
 
     def request_params
-      params.require(:request).permit(:large_scale_baggage,
-                                      :heavy_weight_baggage,
-                                      :precision_machine_baggage,
-                                      :dont_reverse_baggage,
-                                      :broken_article,
-                                      :refrigerated_baggage,
-                                      :feezed_baggage,
-                                      :request_content,
+      params.require(:request).permit(:request_content,
                                       :baggage_content,
                                       :from_day,
                                       :from_time,
