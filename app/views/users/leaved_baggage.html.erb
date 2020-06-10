@@ -1,5 +1,6 @@
 <% provide(:tile, "リクエスト依頼") %>
 
+<!-- ユーザー一覧ページからこのフォームにリダイレクトする -->
 <div class='row'>
     <section class='col-md-8'>
         <div class='request-form'>
@@ -42,15 +43,19 @@
                     </div>
                     <h3>↓</h3>
                     <div class="to_daytime">
-                        <%= f.date_select :to_day, class: "to_day" %>
+                        <%= f.date_select :to_day, class: "to_day", date_separator: "/"  %>
                         <h3></h3>
-                        <%= f.time_select :to_timeto_time, class: "to_time" %>
+                        <%= f.time_select :to_time, class: "to_time" %>
                         <h3></h3>
                     </div>
 
                     <h3>取引メッセージ</h3>
                     <%= f.text_area :transaction_message, value: "こんにちは、荷物預かって頂けませんか？" %>
 
+                    <h3>リクエストするユーザー</h3>
+                    <%= f.label %>
+
+                    <!-- ここにjQueryを利用して依頼先ユーザー入力欄の追加を行う -->
                     <%= f.submit '送信', class: "btn btn-primary" %>
                 <% end %>
             <% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  leaver_id: 1
+  required_id: 1
+  transaction_id: 1
+
+two:
+  leaver_id: 1
+  required_id: 1
+  transaction_id: 1

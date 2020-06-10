@@ -13,6 +13,9 @@ $gray-medium-light: #eaeaea;
 
 body{
     padding-top:60px;
+    font-family: 'Comic Sans MS', 'Wawati SC';
+    color: black;
+    background-color: rgb(191, 224, 196);
 }
 
 section{
@@ -35,24 +38,31 @@ img {
   border-radius: inherit;
 }
 
+.btn-primary {
+  background-color: rgb(173, 89, 50);
+  border-color: rgb(173, 89, 50);
+}
+
 /* header */
 
-// header{
-//   .container{
-//     background-color: rgb(120, 247, 240);
-//   }
-// }
+header{
+  font-family: 'Comic Sans MS';
+  a {
+    color: black;
+  }
+}
 
 #logo{
     float: left;
     margin-right: 10px;
+    font-family: 'Comic Sans MS';
+    color: black;
 
     /* em(えむ)は文字の大きさを基準にしている単位で、文字の大きさを20pxとしている場合は
     1emは20pxとなる。
     これは相対単位と呼ばれ、ブラウザから文字の大きさの要求があった場合にそれに合わせて文字
     の大きさが変化するため、一般的に使用が推奨されている。 */
     font-size: 1.7em;
-    color: #fff;
 
     /* 大文字表記 */
     text-transform: uppercase;
@@ -65,10 +75,11 @@ img {
     /* Sassは、SCSSをCSSに変換する際に、&:hoverを#logo:hoverに置き換えている。
      さらに、このように表記することで#logoの繰り返し表記を避けることができる。*/
     &:hover{
-        color:#fff;
         text-decoration: none;
     }
 }
+
+
 
 /* footer */
 
@@ -106,7 +117,8 @@ footer{
 /* sidebar */
 
   .slidebar{
-    background-color: rgb(79, 219, 172);
+    background-color: rgb(173, 89, 50);
+    border-radius: 20px;
     nav {
       section.user_info {
         margin-top: 20px;
@@ -115,6 +127,7 @@ footer{
         div {
           display: block;
           h1.user-image{
+            color: white;
             display: block;
             overflow: none;
             img {
@@ -155,6 +168,9 @@ footer{
           list-style-type: none;
           li {
             margin-bottom: 5px;
+            a {
+              color: white;
+            }
           }
         }
       }
@@ -228,6 +244,11 @@ footer{
 
   input{
       height:auto !important;
+  }
+
+  input[type=checkbox] {
+    width: 20px;
+    word-wrap: break-word;
   }
 
   #error_explanation{

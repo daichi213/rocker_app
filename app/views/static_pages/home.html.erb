@@ -1,7 +1,7 @@
 <% provide(:title, "Home") %>
 
+<%= render 'shared/sidebar' %>
 <div class='row'>
-    <%= render 'shared/sidebar' %>
     <div class='container'>
         <% if logged_in? %>
             <% if flash[:request] %>

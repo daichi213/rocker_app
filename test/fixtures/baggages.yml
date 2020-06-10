@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  baggage_size_w: MyString
+  baggage_size_l: MyString
+  baggage_size_h: MyString
+
+two:
+  user_id: 1
+  baggage_size_w: MyString
+  baggage_size_l: MyString
+  baggage_size_h: MyString

@@ -20,6 +20,9 @@ class CreateTransactions < ActiveRecord::Migration[5.1]
       t.boolean :broken_article
       t.boolean :refrigerated_baggage
       t.boolean :feezed_baggage
+      t.integer :about_baggage_size_w
+      t.integer :about_baggage_size_l
+      t.integer :about_baggage_size_h
       t.date :from_day
       t.time :from_time
       t.date :to_day

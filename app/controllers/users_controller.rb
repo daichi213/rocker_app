@@ -29,6 +29,20 @@ class UsersController < ApplicationController
     end
   end
 
+  # def available_baggage_new
+  #   @available_baggage = User.new()
+  # end
+
+  # def available_baggage
+  #   @available_baggage = User.new(available_baggage_params)
+  #   if @available_baggage.save
+  #     flash[:success] = "編集に成功しました"
+  #     redirect_to root_url
+  #   else
+  #     render "available_baggage_new"
+  #   end
+  # end
+
   def edit
     @user = User.find(params[:id])
   end
@@ -63,6 +77,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # 受信したリクエストを表示させるアクション
   def received_baggage
 
   end
@@ -84,7 +99,19 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                      :password_confirmation, :picture)
+                                  :password_confirmation,
+                                  :picture,
+                                  receivable_baggages_attributes: [
+                                  # :large_scale_baggage,
+                                  # :heavy_weight_baggage,
+                                  # :precision_machine_baggage,
+                                  # :dont_reverse_baggage,
+                                  # :broken_article,
+                                  # :refrigerated_baggage,
+                                  # :feezed_baggage,
+                                  :baggage_size_w,
+                                  :baggage_size_l,
+                                  :baggage_size_h])
     end
 
     def request_params

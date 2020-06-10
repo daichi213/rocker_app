@@ -23,12 +23,16 @@
             </section>
             <section class='menu-content'>
                 <ul>
-                    <li><%= link_to "マップ", "#" %></li>
-                    <li><%= link_to "リクエスト一覧", root_path %></li>
-                    <li><%= link_to "リクエスト依頼", "#" %></li>
-                    <li><%= link_to "リクエスト依頼", "#" %></li>
-                    <li><%= link_to "リクエスト依頼", "#" %></li>
-                    <li><%= link_to "リクエスト依頼", "#" %></li>
+                    <% if request.fullpath == root_path %>
+
+                    <% elsif request.fullpath == user_path current_user %>
+                        <li><%= link_to "マップ", "#" %></li>
+                        <li><%= link_to "リクエスト一覧", root_path %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+                    <% end %>
                 </ul>
             </section>
         </nav>

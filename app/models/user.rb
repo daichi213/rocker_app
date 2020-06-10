@@ -8,6 +8,20 @@ class User < ApplicationRecord
     #                                 dependent: :destroy
     # has_many :following, through: :active_relationships, source: :followed
     # has_many :followers, through: :passive_relationships, source: :follower
+    has_many :receivable_baggages, class_name: "Baggage",
+                                foreign_key: "user_id",
+                                dependent: :destroy
+    has_many :leaves, class_name: "Transaction",
+                                foreign_key: "leaver_id",
+                                dependent: :destroy
+    has_many :received, class_name: "Transaction",
+                                foreign_key: "receiver_id",
+                                dependent: :destroy
+    
+    
+
+    accepts_nested_attributes_for :receivable_baggages
+
     attr_accessor :remember_token
 
     before_save {self.email = email.downcase}   # または、{email.downcase!}

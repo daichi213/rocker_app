@@ -1,6 +1,12 @@
 <li>
     <!-- ユーザー画像 -->
+    <% if user.picture? %>
+        <%= image_tag user.picture.thumb50.url %>
+    <% else %>
+        <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+    <% end %>
     <%= link_to user.name, user %>
+    
     <!-- !current_user?(user)は管理者以外がログインしない為の条件
     link_toの第２引数はそれぞれのユーザーのdestroyアクションを実行するためのリンク -->
     <% if current_user.admin? && !current_user?(user) %>

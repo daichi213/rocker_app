@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200603000548) do
+ActiveRecord::Schema.define(version: 20200610064726) do
+
+  create_table "baggages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "about_baggage_size_w"
+    t.integer "about_baggage_size_l"
+    t.integer "about_baggage_size_h"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "leaver_id"
+    t.integer "required_id"
+    t.integer "transaction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "transactions", force: :cascade do |t|
     t.string "item_name"
@@ -25,13 +42,9 @@ ActiveRecord::Schema.define(version: 20200603000548) do
     t.text "request_content"
     t.text "baggage_content"
     t.text "transaction_message"
-    t.boolean "large_scale_baggage"
-    t.boolean "heavy_weight_baggage"
-    t.boolean "precision_machine_baggage"
-    t.boolean "dont_reverse_baggage"
-    t.boolean "broken_article"
-    t.boolean "refrigerated_baggage"
-    t.boolean "feezed_baggage"
+    t.integer "about_baggage_size_w"
+    t.integer "about_baggage_size_l"
+    t.integer "about_baggage_size_h"
     t.date "from_day"
     t.time "from_time"
     t.date "to_day"
@@ -43,13 +56,18 @@ ActiveRecord::Schema.define(version: 20200603000548) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+    t.boolean "sex"
+    t.date "birthday"
+    t.string "occupation"
+    t.string "address"
     t.string "email"
     t.string "picture"
     t.boolean "admin"
     t.string "password_digest"
+    t.string "remember_digest"
+    t.decimal "user_apparause_point"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "remember_digest"
   end
 
 end
