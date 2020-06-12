@@ -1,6 +1,7 @@
 class Baggage < ApplicationRecord
-    belongs_to :user, class_name: "User"
-    validates :user_id, presence: true
+    belongs_to :user, class_name: "User",
+                        optional: true
+    validates :user_id, presence: true, allow_nil: true
     validates :about_baggage_size_w, presence: true
     validates :about_baggage_size_l, presence: true
     validates :about_baggage_size_h, presence: true

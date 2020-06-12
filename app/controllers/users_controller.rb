@@ -109,9 +109,9 @@ class UsersController < ApplicationController
                                   # :broken_article,
                                   # :refrigerated_baggage,
                                   # :feezed_baggage,
-                                  :baggage_size_w,
-                                  :baggage_size_l,
-                                  :baggage_size_h])
+                                  :about_baggage_size_w,
+                                  :about_baggage_size_l,
+                                  :about_baggage_size_h])
     end
 
     def request_params
