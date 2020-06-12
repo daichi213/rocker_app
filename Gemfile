@@ -42,6 +42,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'rails-erd'
+gem 'forgery_ja'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
