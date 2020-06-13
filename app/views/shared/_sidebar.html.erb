@@ -13,7 +13,7 @@
                         <% end %>
                         <%= current_user.name %>
                     </h1>
-                    <% if request.fullpath != "/users/#{params[:id]}" %>
+                    <% if(request.fullpath != "/users/#{params[:id]}") && (request.fullpath != "/users/#{params[:id]}/edit") %>
                         <span><%= link_to "編集", current_user %></span>
                     <% end %>
                 </div>
@@ -24,6 +24,26 @@
             <section class='menu-content'>
                 <ul>
                     <% if request.fullpath == root_path %>
+
+                    <% elsif request.fullpath == users_path %>
+                        <%= form_tag("/search", method: "get") do %>
+                            <%= label :area, 'ユーザーを絞り込む' %>
+                            <%= text_field_tag :area %>
+                            <%= submit_tag "探す" %>
+                        <% end %>
+                        <%= form_tag("/current_location_around", method: "get") do %>
+                            <%= label :area, '現在地周辺のユーザーを絞り込む' %>
+                            <%= text_field_tag :area %>
+                            <%= submit_tag "探す" %>
+                        <% end %>
+                        <script>
+                            $('form').submit(function(){
+                                var area = $('#area').val();
+
+
+                            })
+                        </script>
+
 
                     <% elsif request.fullpath == user_path(current_user) %>
                         <li><%= link_to "マップ", "#" %></li>
