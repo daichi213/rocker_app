@@ -10,10 +10,10 @@ class User < ApplicationRecord
     # has_many :followers, through: :passive_relationships, source: :follower
     has_many :receivable_baggages, class_name: "Baggage",
                                 foreign_key: "user_id"
-    has_many :leaves, class_name: "Transaction",
+    has_many :requests, class_name: "Request",
                                 foreign_key: "leaver_id"
-    has_many :received, class_name: "Transaction",
-                                foreign_key: "receiver_id"
+    has_many :received, class_name: "Request",
+                                foreign_key: "required_id"
     
     
 

@@ -6,6 +6,12 @@
     <%= f.label :name %>
     <%= f.text_field :name, class:"form-control" %>
 
+    <%= f.label :sex, "性別" %>
+    <%= f.select :sex,[["男", 1],["女", 0]]  %>
+
+    <%= f.label :birthday, "誕生日" %>
+    <%= f.date_select :birthday, class: "from_day", date_separator: "/" %>
+
     <%= f.label :email %>
     <%= f.email_field :email, class:"form-control" %>
 
@@ -17,6 +23,9 @@
 
     <%= f.label :picture, 'picture' %>
     <%= f.file_field :picture, class:"form-control" %>
+
+    <%= f.label :address, '住所' %>
+    <%= f.text_field :address, class:"form-control" %>
 
     <h2>取扱情報</h2>
         <%= f.fields_for :receivable_baggages, @user.receivable_baggages.build do |b| %>

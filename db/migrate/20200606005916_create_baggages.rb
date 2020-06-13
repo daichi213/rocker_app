@@ -12,6 +12,7 @@ class CreateBaggages < ActiveRecord::Migration[5.1]
       t.integer :broken_article
       t.integer :refrigerated_baggage
       t.integer :feezed_baggage
+      t.integer :del_flag
 
       t.timestamps
     end

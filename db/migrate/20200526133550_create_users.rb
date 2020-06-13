@@ -12,6 +12,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :password_digest
       t.string :remember_digest
       t.decimal :user_apparause_point
+      t.integer :amount_billed
+      t.integer :del_flag
 
       t.timestamps
     end
