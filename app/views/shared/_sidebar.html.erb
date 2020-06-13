@@ -13,8 +13,8 @@
                         <% end %>
                         <%= current_user.name %>
                     </h1>
-                    <% if(request.fullpath != "/users/#{params[:id]}") && (request.fullpath != "/users/#{params[:id]}/edit") %>
-                        <span><%= link_to "編集", current_user %></span>
+                    <% if request.fullpath != "/users/#{params[:id]}/edit" %>
+                        <span><%= link_to "編集", edit_user_path(current_user) %></span>
                     <% end %>
                 </div>
             </section>

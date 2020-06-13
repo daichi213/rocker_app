@@ -215,23 +215,35 @@ footer{
     padding: 0;
   }
 
-  /* user edit page */
-  .user-edit {
-    display: block;
-    margin-right: auto;
+  /* user page */
+  aside.col-md-8 {
+    display: flex;
     margin-left: auto;
-    .user-edit-image {
-      display: block;
-      margin: 0 auto;
-      img {
-        border-radius: 80%;
-        margin: 0 auto;
+    margin-right: auto;
+    .user-show {
+      .user-show-top {
+        display: flex;
+        margin-right: auto;
+        margin-left: auto;
+        .user-show-image {
+          display: block;
+          margin: 0 auto;
+          img {
+            border-radius: 80%;
+            padding: 0 auto;
+          }
+        }
+        ul {
+          display: block;
+          list-style-type: none;
+        }
+      }
+      div.user-info {
+
       }
     }
-    .user-name {
-      display: block;
-    }
   }
+
 
   /* forms */
 
