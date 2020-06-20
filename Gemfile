@@ -43,6 +43,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 # gem 'capistrano-rails', group: :development
 gem 'rails-erd'
 gem 'forgery_ja'
+gem 'geocoder', '~> 1.6', '>= 1.6.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
