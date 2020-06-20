@@ -1,4 +1,4 @@
-<li>
+<%= content_tag :li, data: {address: user.address} do %>
     <!-- ユーザー画像 -->
     <% if user.picture? %>
         <%= image_tag user.picture.thumb50.url %>
@@ -13,4 +13,4 @@
         |<%= link_to "delete", user, method: :delete,
                 date: {confirm: "Yes sure?"} %>
     <% end %>
-</li>
+<% end %>
