@@ -7,9 +7,6 @@ class UsersController < ApplicationController
   def index
     # ここで、paginateメソッドを使用しているためviewsでは引数を指定する必要はない
     @users = User.paginate(page: params[:page])
-    # if @places
-    #   render 'search'
-    # end
   end
 
   def search
@@ -17,9 +14,9 @@ class UsersController < ApplicationController
     lng = params[:longitude]
     range = params[:range]
 
-    @places = User.all.within(range, origin: [lat, lng])
-    @closest_place = @places.closest(origin: [lat, lng])
-    render 'index'
+    @users = User.all.within(range, origin: [lat, lng])
+    # 現在地から最も近いユーザーのidを取得
+    @closest_user_id = @users.closest(origin: [lat, lng]).id
   end
 
   def show
