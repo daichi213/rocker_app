@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    # include Geocoder::Model::Mongoid
+    # include Geocoder::Model::MongoMapper
 
     # has_many :active_relationships, class_name: "Relationship",
     #                                 foreign_key: "follower_id",
@@ -8,14 +10,12 @@ class User < ApplicationRecord
     #                                 dependent: :destroy
     # has_many :following, through: :active_relationships, source: :followed
     # has_many :followers, through: :passive_relationships, source: :follower
-    has_many :receivable_baggages, class_name: "Baggage",
+    has_one :receivable_baggages, class_name: "Baggage",
                                 foreign_key: "user_id"
     has_many :requests, class_name: "Request",
                                 foreign_key: "leaver_id"
     has_many :received, class_name: "Request",
                                 foreign_key: "required_id"
-    
-    
 
     accepts_nested_attributes_for :receivable_baggages
 
@@ -34,6 +34,9 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, presence: true, length: {minimum: 6}, allow_nil: true
     mount_uploader :picture, ImageUploader
+
+    geocoded_by :address
+    after_validation :geocode, if: :address_changed?
 
     def User.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
