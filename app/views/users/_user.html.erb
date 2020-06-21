@@ -1,4 +1,8 @@
 <%= content_tag :li, data: {address: user.address} do %>
+    <!-- 最近辺ユーザーの表示 -->
+    <% if user.id == @closest_user_id %>
+        <h3>現在地から最も近いユーザーです</h3>
+    <% end %>
     <!-- ユーザー画像 -->
     <% if user.picture? %>
         <%= image_tag user.picture.thumb50.url %>

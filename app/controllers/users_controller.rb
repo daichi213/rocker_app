@@ -7,6 +7,19 @@ class UsersController < ApplicationController
   def index
     # ここで、paginateメソッドを使用しているためviewsでは引数を指定する必要はない
     @users = User.paginate(page: params[:page])
+    # if @places
+    #   render 'search'
+    # end
+  end
+
+  def search
+    lat = params[:latitude]
+    lng = params[:longitude]
+    range = params[:range]
+
+    @places = User.all.within(range, origin: [lat, lng])
+    @closest_place = @places.closest(origin: [lat, lng])
+    render 'index'
   end
 
   def show
@@ -98,7 +111,9 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password,
+      params.require(:user).permit(:name, :sex, :birthday,
+                                  :occupation, :address,
+                                  :email, :password,
                                   :password_confirmation,
                                   :picture,
                                   receivable_baggages_attributes: [
