@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20200613074057) do
     t.date "birthday"
     t.string "occupation"
     t.string "address"
+    t.decimal "longitude"
+    t.decimal "latitude"
     t.string "email"
     t.string "picture"
     t.integer "admin"

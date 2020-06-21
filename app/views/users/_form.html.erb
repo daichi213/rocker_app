@@ -28,7 +28,7 @@
     <%= f.text_field :address, class:"form-control" %>
 
     <h2>取扱情報</h2>
-        <%= f.fields_for :receivable_baggages, @user.receivable_baggages.build do |b| %>
+        <%= f.fields_for :receivable_baggages, @user.build_receivable_baggages do |b| %>
             <%#= b.check_box :large_scale_baggage, class: "baggage-type" %>
             <%#= b.label :large_scale_baggage, "大物" %>
 
@@ -61,14 +61,14 @@
             <%= b.label :about_baggage_size_l, "荷物の奥行" %>
             <%= b.select :about_baggage_size_l, [["0〜30cm", 30],
                                                 ["30cm〜60cm", 60], 
-                                                ["60cm〜100cm", 80], 
+                                                ["60cm〜100cm", 100], 
                                                 ["100cm〜160cm", 160]],
                                                 {iclude_blank: true, selected: 30}, {class: "baggage-size"} %>
 
             <%= b.label :about_baggage_size_h, "荷物の高さ" %>
             <%= b.select :about_baggage_size_h, [["0〜30cm", 30],
                                                 ["30cm〜60cm", 60], 
-                                                ["60cm〜100cm", 80], 
+                                                ["60cm〜100cm", 100], 
                                                 ["100cm〜160cm", 160]],
                                                 {iclude_blank: true, selected: 30}, {class: "baggage-size"} %>
         <% end %>

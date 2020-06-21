@@ -7,7 +7,7 @@ User.create!(name: "Daichi Ozaki",
             password_confirmation: "foobar",
             birthday: Date.new(1994, 2, 13),
             occupation: "フリーター",
-            address: "東京都豊島区巣鴨4丁目",
+            address: "東京都北区西ヶ原4-50-7",
             user_apparause_point: 3.0,
             admin: 1)
 
@@ -29,6 +29,29 @@ User.create!(name: "Daichi Ozaki",
                 occupation: occupation,
                 address: address,
                 user_apparause_point: user_apparause_point)
+end
+
+# size = [30, 60, 100, 150]
+# 100.times do |n|
+#     about_baggage_size_w = size.sample
+#     about_baggage_size_l = size.sample
+#     about_baggage_size_h = size.sample
+#     Baggage.create!(user_id: n+1,
+#                     about_baggage_size_w: about_baggage_size_w,
+#                     about_baggage_size_l: about_baggage_size_l,
+#                     about_baggage_size_h: about_baggage_size_h)
+# end
+
+# 以下、belogns_to,belongs_toの対応付のためcreate!メソッド使えず
+users = User.order(:created_at).take(100)
+size = [30, 60, 100, 150]
+users.each do |user|
+    about_baggage_size_w = size.sample
+    about_baggage_size_l = size.sample
+    about_baggage_size_h = size.sample
+    user.create_receivable_baggages!(about_baggage_size_w: about_baggage_size_w,
+                                    about_baggage_size_l: about_baggage_size_l,
+                                    about_baggage_size_h: about_baggage_size_h)
 end
 
 # users = User.order(:created_at).take(6)

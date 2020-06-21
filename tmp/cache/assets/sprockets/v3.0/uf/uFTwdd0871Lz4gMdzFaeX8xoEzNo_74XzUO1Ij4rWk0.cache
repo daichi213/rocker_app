@@ -1,0 +1,44 @@
+I"�(function() {
+  this.CurrentLocations = (function() {
+    var failGetPosition, options, successGetPosition;
+
+    function CurrentLocations() {}
+
+    CurrentLocations.getCurrentLocation = function() {
+      return $('.current_location').on('click', function() {
+        var message;
+        if (navigator.geolocation) {
+          return navigator.geolocation.getCurrentPosition(successGetPosition, failGetPosition, options);
+        } else {
+          message = 'ご使用中のブラウザは現在地検索に対応されておりません。';
+          return Alert.set('warning', message);
+        }
+      });
+    };
+
+    successGetPosition = function(position) {
+      return window.location.href = "/shops/searches?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
+    };
+
+    options = {
+      enableHighAccuracy: true
+    };
+
+    failGetPosition = function(error) {
+      var message;
+      switch (error.code) {
+        case 1:
+          message = '位置情報の提供を許可してください。';
+          break;
+        case 2:
+          message = '位置情報の取得に失敗しました。';
+      }
+      return Alert.set('warning', message);
+    };
+
+    return CurrentLocations;
+
+  })();
+
+}).call(this);
+:ET
