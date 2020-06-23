@@ -35,9 +35,6 @@ class User < ApplicationRecord
     validates :password, presence: true, length: {minimum: 6}, allow_nil: true
     mount_uploader :picture, ImageUploader
 
-    geocoded_by :address
-    after_validation :geocode, if: :address_changed?
-
     def User.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                     BCrypt::Engine.cost
@@ -81,4 +78,15 @@ class User < ApplicationRecord
     def following?(other_user)
         following.include?(other_user)
     end
+
+    def address
+        # 最初はgeocoderのreadmeに従い、join(', ')としていたが、geocoded_by :addressでエラーが発生したため以下に修正
+        [state, city, street, house].compact.join('')
+    end
+
+    geocoded_by :address
+    after_validation :geocode, if: (:state_changed? ||
+                                    :city_changed? ||
+                                    :street_changed? ||
+                                    :house_changed?)
 end
