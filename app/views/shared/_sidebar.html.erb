@@ -32,12 +32,8 @@
                             <%= submit_tag "探す" %>
                         <% end %>
                         <input id='search_range'>
-                        <%= button_tag '現在地周辺のユーザーを探す', class: 'current_location' %>
+                        <%= button_tag '現在地周辺のユーザーを探す', class: 'current_search' %>
                         <script>
-                            $('.current_location').on('click',
-                                function geoFindUser();
-                            );
-
                             function geoFindUser() {
                                 //ユーザーのブラウザがGeolocation APIに対応していた場合
                                 if (navigator.geolocation) {
@@ -46,7 +42,7 @@
                                     navigator.geolocation.getCurrentPosition(
 
                                         //現在地の取得に成功した場合の処理
-                                        function(position) {
+                                        function (position) {
 
                                             //データを変数にして整理（position.coords.latitude/longitudeが座標）
                                             var lat = position.coords.latitude;
@@ -91,7 +87,13 @@
 
                                     alert( errorMessage ) ;
                                 }
-                                }
+                            }
+
+
+                            $('.current_search').on('click',
+                                geoFindUser();
+                            );
+
                         </script>
 
                     <% elsif request.fullpath == user_path(current_user) %>
