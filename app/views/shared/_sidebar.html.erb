@@ -42,6 +42,7 @@
                                     navigator.geolocation.getCurrentPosition(
 
                                         //現在地の取得に成功した場合の処理
+                                        // 動作不良原因
                                         function (position) {
 
                                             //データを変数にして整理（position.coords.latitude/longitudeが座標）
@@ -70,7 +71,7 @@
                                             var errorNo = error.code ;
                                             //エラーメッセージに、先に定義したエラーコードと、エラー番号に対応した情報をalert表示させる
                                             var errorMessage = "[エラー番号: " + errorNo + "]\n" + errorInfo[ errorNo ] ;
-                                            alert( errorMessage ) ;
+                                            alert( errorMessage );
                                         } 
                                         //オプション設定（10秒でタイムアウトになる）
                                         {
@@ -90,15 +91,15 @@
                             }
 
 
-                            $('.current_search').on('click',
+                            $('.current_search').on('click',function(){
                                 geoFindUser();
-                            );
+                            });
 
                         </script>
 
                     <% elsif request.fullpath == user_path(current_user) %>
-                        <li><%= link_to "マップ", "#" %></li>
-                        <li><%= link_to "リクエスト一覧", root_path %></li>
+                        <li><%= link_to "マップ", root_path %></li>
+                        <li><%= link_to "リクエスト一覧", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
