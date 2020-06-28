@@ -10,7 +10,7 @@
     <%= f.select :sex,[["男", 1],["女", 0]]  %>
 
     <%= f.label :birthday, "誕生日" %>
-    <%= f.date_select :birthday, class: "from_day", date_separator: "/" %>
+    <%= f.date_select :birthday, class: "from_day", date_separator: "/", start_year: 1920, end_year: 2020 %>
 
     <%= f.label :email %>
     <%= f.email_field :email, class:"form-control" %>
@@ -24,8 +24,20 @@
     <%= f.label :picture, 'picture' %>
     <%= f.file_field :picture, class:"form-control" %>
 
-    <%= f.label :address, '住所' %>
-    <%= f.text_field :address, class:"form-control" %>
+    <%= f.label :postcode, '郵便番号(ハイフンなしで連番で記入して下さい)' %>
+    <%= f.text_field :postcode, placeholder: '1000014' %>
+
+    <%= f.label :prefecture_code, '都道府県' %>
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {include_blank: true, selected: group.prefecture_code} %>
+
+    <%= f.label :city, '区市町村' %>
+    <%= f.text_field :city, placeholder: '千代田区永田町', class:"form-control" %>
+
+    <%= f.label :street, '番地' %>
+    <%= f.text_field :street, placeholder: '1-7-1', class:"form-control" %>
+
+    <%= f.label :house, 'アパート名' %>
+    <%= f.text_field :house, placeholder: 'ハイツロッカー', class:"form-control" %>
 
     <h2>取扱情報</h2>
         <%= f.fields_for :receivable_baggages, @user.build_receivable_baggages do |b| %>
@@ -56,21 +68,27 @@
                                                 ["30cm〜60cm", 60], 
                                                 ["60cm〜100cm", 100], 
                                                 ["100cm〜160cm", 160]],
-                                                {iclude_blank: true, selected: 30}, {class: "baggage-size"} %>
+                                                {iclude_blank: true, 
+                                                selected: group.receivable_baggages.about_baggage_size_w}, 
+                                                {class: "baggage-size"} %>
 
             <%= b.label :about_baggage_size_l, "荷物の奥行" %>
             <%= b.select :about_baggage_size_l, [["0〜30cm", 30],
                                                 ["30cm〜60cm", 60], 
                                                 ["60cm〜100cm", 100], 
                                                 ["100cm〜160cm", 160]],
-                                                {iclude_blank: true, selected: 30}, {class: "baggage-size"} %>
+                                                {iclude_blank: true, 
+                                                selected: group.receivable_baggages.about_baggage_size_l}, 
+                                                {class: "baggage-size"} %>
 
             <%= b.label :about_baggage_size_h, "荷物の高さ" %>
             <%= b.select :about_baggage_size_h, [["0〜30cm", 30],
                                                 ["30cm〜60cm", 60], 
                                                 ["60cm〜100cm", 100], 
                                                 ["100cm〜160cm", 160]],
-                                                {iclude_blank: true, selected: 30}, {class: "baggage-size"} %>
+                                                {iclude_blank: true, 
+                                                selected: group.receivable_baggages.about_baggage_size_h}, 
+                                                {class: "baggage-size"} %>
         <% end %>
 
     <%= f.submit yield(:button_text) , class:"btn btn-primary" %>

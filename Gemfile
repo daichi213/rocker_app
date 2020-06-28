@@ -42,6 +42,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'rails-erd'
+gem 'jp_prefecture'
 gem 'forgery_ja'
 gem 'geocoder', '~> 1.6', '>= 1.6.3'
 gem 'geokit-rails'

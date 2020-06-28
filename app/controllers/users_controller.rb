@@ -7,17 +7,20 @@ class UsersController < ApplicationController
   def index
     # ここで、paginateメソッドを使用しているためviewsでは引数を指定する必要はない
     @users = User.paginate(page: params[:page])
+
+    @search_params = user_search_params
+
   end
 
-  def search
-    lat = params[:latitude]
-    lng = params[:longitude]
-    range = params[:range]
+  # def search
+  #   lat = params[:latitude]
+  #   lng = params[:longitude]
+  #   range = params[:range]
 
-    @users = User.all.within(range, origin: [lat, lng])
-    # 現在地から最も近いユーザーのidを取得
-    @closest_user_id = @users.closest(origin: [lat, lng]).id
-  end
+  #   @users = User.all.within(range, origin: [lat, lng])
+  #   # 現在地から最も近いユーザーのidを取得
+  #   @closest_user_id = @users.closest(origin: [lat, lng]).id
+  # end
 
   def show
     @user = User.find(params[:id])
@@ -30,6 +33,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.update_attributes(state: @user.prefecture_name)
       @user.picture = "/uploads/user/picture/default.jpg" unless @user.picture
       log_in @user
       flash[:success] = "Welcome to the Sample App!"
@@ -54,12 +58,15 @@ class UsersController < ApplicationController
   # end
 
   def edit
+    # debugger
     @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
+      # debugger
+      @user.update_attributes(state: @user.prefecture_name)
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -109,7 +116,9 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :sex, :birthday,
-                                  :occupation, :address,
+                                  :occupation,
+                                  :postcode, :prefecture_code,
+                                  :city, :street, :house,
                                   :email, :password,
                                   :password_confirmation,
                                   :picture,
@@ -134,6 +143,12 @@ class UsersController < ApplicationController
                                       :to_day,
                                       :to_time,
                                       :transaction_message)
+    end
+
+    def user_search_params
+      # permit内にデータが内場合に例外を発生させないための記法
+      params.fetch(:search, {}).permit(:name, :sex, :state, 
+                                      :city, :street, :house)
     end
 
     def correct_user

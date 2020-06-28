@@ -5,12 +5,14 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.integer :sex
       t.date :birthday
       t.string :occupation
+      t.integer :postcode
+      t.integer :prefecture_code
       t.string :state
       t.string :city
       t.string :street
       t.string :house
-      t.decimal :longitude
-      t.decimal :latitude
+      t.float :longitude
+      t.float :latitude
       t.string :email
       t.string :picture
       t.integer :admin

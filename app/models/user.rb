@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+    include JpPrefecture
+    jp_prefecture :prefecture_code
+
     # include Geocoder::Model::Mongoid
     # include Geocoder::Model::MongoMapper
 
@@ -79,14 +82,23 @@ class User < ApplicationRecord
         following.include?(other_user)
     end
 
+    def prefecture_name
+        # tryメソッドは対象関数のインスタンスが存在している場合は:nameを実行する
+        JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+    end
+
+    # def prefecture_code(prefecture_name)
+    #     self.prefecture_code = JpPrefecture::Prefecture.find(name: state).code
+    # end
+
     def address
         # 最初はgeocoderのreadmeに従い、join(', ')としていたが、geocoded_by :addressでエラーが発生したため以下に修正
         [state, city, street, house].compact.join('')
     end
 
-    geocoded_by :address
-    after_validation :geocode, if: (:state_changed? ||
-                                    :city_changed? ||
-                                    :street_changed? ||
-                                    :house_changed?)
+    # geocoded_by :address
+    # after_validation :geocode, if: (:state_changed? ||
+    #                                 :city_changed? ||
+    #                                 :street_changed? ||
+    #                                 :house_changed?)
 end
