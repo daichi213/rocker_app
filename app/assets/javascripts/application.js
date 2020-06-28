@@ -46,7 +46,7 @@ function getLocationByHtml5() {
 }
 
 function showPositionByHtml5(position) {
-    alert(`緯度:${position.coords.latitude},経度:${position.coords.longitude}`);
+    alert(`${position.coords.latitude},${position.coords.longitude}`);
 }
 
 function errorCallbackByHtml5(error) {

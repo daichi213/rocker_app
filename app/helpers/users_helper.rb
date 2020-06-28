@@ -1,4 +1,5 @@
 module UsersHelper
+
     def search_circumference(range, lat, lng)
         # User model 側で記述
         User.within(range, origin: [lng, lat])
