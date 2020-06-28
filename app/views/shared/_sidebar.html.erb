@@ -26,9 +26,11 @@
                     <% if request.fullpath == root_path %>
 
                     <% elsif (request.fullpath == users_path) || (request.fullpath == (users_path + "?page=#{params[:page]}")) %>
-                        <%= form_tag("/search", method: "get") do %>
-                            <%= label :area, 'ユーザーを絞り込む' %>
-                            <%= text_field_tag :area %>
+                        <%= form_with(scope: :search, users_path, method: "get", local: true) do |f| %>
+                            <%= f.label :name, 'ユーザーを絞り込む' %>
+                            <%= f.text_field :name, value: @search_params[:name] %>
+
+                            <%= f.label :sex,  %>
                             <%= submit_tag "探す" %>
                         <% end %>
                         <input id='search_range'>
