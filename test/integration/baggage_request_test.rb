@@ -5,6 +5,5 @@ class BaggageRequestTest < ActionDispatch::IntegrationTest
   def setup
 
   end
-
   
 end
