@@ -26,13 +26,59 @@
                     <% if request.fullpath == root_path %>
 
                     <% elsif (request.fullpath == users_path) || (request.fullpath == (users_path + "?page=#{params[:page]}")) %>
-                        <%= form_with(scope: :search, users_path, method: "get", local: true) do |f| %>
-                            <%= f.label :name, 'ユーザーを絞り込む' %>
-                            <%= f.text_field :name, value: @search_params[:name] %>
+                        <%#= form_with(scope: :search, users_path, method: "get", local: true) do |f| %>
+                            <%#= f.label :name, 'ユーザーを絞り込む' %>
+                            <%#= f.text_field :name, value: @search_params[:name] %>
 
-                            <%= f.label :sex,  %>
-                            <%= submit_tag "探す" %>
-                        <% end %>
+                            <%#= f.label :sex,  %>
+                            <%#= submit_tag "探す" %>
+                        <%# end %>
+
+                        <div class="btn-group dropright">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ユーザーの絞込み
+                            </button>
+                            <div class="dropdown-menu">
+                                <% @prefecture_names.each do |pre| %>
+                                    <!-- button_tagで実装して、jsで絞り込みを実装 -->
+                                    <%= button_tag pre.name, class: "dropdown-item search_item", data: {state: pre.name} %>
+                                <% end %>
+                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
+                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
+                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
+                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
+                                <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">その他リンク</a>
+                            </div><!-- /.dropdown-menu -->
+                        </div><!-- /.btn-group -->
+                        <script>
+                            var searchItem = '.search_item';   // 絞り込む項目を選択するエリア
+                            var listItem = '.list_item';       // 絞り込み対象のアイテム
+                            var hideClass = 'is-hide';         // 絞り込み対象外の場合に付与されるclass名
+                            var activeClass = 'is-active';     // 選択中のグループに付与されるclass名
+                            
+                            $(function () {
+                                $(searchItem).on('click', function(){
+                                    $(searchItem).removeClass(activeClass);
+                                    var area = $(this).addClass(activeClass).data('state');
+                                    search_filter('state', area);
+                                });
+                            });
+
+                            function search_filter(data_type, area) {
+                                $(listItem).removeClass(hideClass);
+                                if(area == ''){
+                                    return;
+                                }
+                                for (var i=0; i< $(listItem).length; i++) {
+                                    var itemData = $(listItem).eq(i).data(data_type);
+                                    if (itemData !== area) {
+                                        $(listItem).eq(i).addClass(hideClass);
+                                    }
+                                }
+                            }
+                        </script>
+                        
                         <input id='search_range'>
                         <button onclick="getLocationByHtml5()">現在地の取得</button>
 

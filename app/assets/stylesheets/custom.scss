@@ -176,6 +176,19 @@ footer{
               color: white;
             }
           }
+          // ドロップダウン用
+          div.btn-group {
+            button {
+              display: block;
+              width: 100%;
+            }
+            .dropdown-menu {
+              a{
+                display: block;
+                width: auto;
+              }
+            }
+          }
         }
       }
     }
@@ -305,6 +318,9 @@ footer{
       overflow:auto;
       padding: 10px 0;
       border-bottom:1px solid $gray-lighter;
+    }
+    .is-hide {
+      display: none;
     }
   }
 

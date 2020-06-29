@@ -1,4 +1,7 @@
-<%= content_tag :li, data: {address: user.address} do %>
+<%= content_tag :li, class:"list_item", data: {state: user.state,
+                                                city: user.city,
+                                                street: user.street,
+                                                user_apparause_point: user.user_apparause_point} do %>
     <!-- 最近辺ユーザーの表示 -->
     <% if user.id == @closest_user_id %>
         <h3>現在地から最も近いユーザーです</h3>
