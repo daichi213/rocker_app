@@ -40,42 +40,54 @@
                             </button>
                             <div class="dropdown-menu">
                                 <% @prefecture_names.each do |pre| %>
-                                    <!-- button_tagで実装して、jsで絞り込みを実装 -->
                                     <%= button_tag pre.name, class: "dropdown-item search_item", data: {state: pre.name} %>
                                 <% end %>
-                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
-                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
-                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
                                 <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
                                 <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">その他リンク</a>
                             </div><!-- /.dropdown-menu -->
                         </div><!-- /.btn-group -->
                         <script>
+                            // ここは変数定義をしない
                             var searchItem = '.search_item';   // 絞り込む項目を選択するエリア
                             var listItem = '.list_item';       // 絞り込み対象のアイテム
                             var hideClass = 'is-hide';         // 絞り込み対象外の場合に付与されるclass名
                             var activeClass = 'is-active';     // 選択中のグループに付与されるclass名
                             
                             $(function () {
+                                // stateレベルでの絞り込み検索
                                 $(searchItem).on('click', function(){
                                     $(searchItem).removeClass(activeClass);
                                     var area = $(this).addClass(activeClass).data('state');
-                                    search_filter('state', area);
+                                    city_areas = search_filter('state', area, 'city');
+                                    city_areas = city_areas.filter(function (x, i, self) {
+                                        return self.indexOf(x) === i;
+                                    });
+                                    for (var i=0; i<city_areas.length; i++) {
+                                        $('div.dropdown-menu').append(`<button class="search_item">${city_areas[i]}</button>`);
+                                    }
                                 });
+
+                                // cityレベルでの絞り込み検索実装
                             });
 
-                            function search_filter(data_type, area) {
+                            function search_filter(data_type, area, data_type_2) {
                                 $(listItem).removeClass(hideClass);
                                 if(area == ''){
                                     return;
                                 }
+                                var city_areas = [];
                                 for (var i=0; i< $(listItem).length; i++) {
                                     var itemData = $(listItem).eq(i).data(data_type);
+                                    
                                     if (itemData !== area) {
                                         $(listItem).eq(i).addClass(hideClass);
+                                    }else{
+                                        var city_area = $(listItem).eq(i).data(data_type_2);
+                                        city_areas.push(city_area);
                                     }
                                 }
+                                return city_areas;
                             }
                         </script>
                         
