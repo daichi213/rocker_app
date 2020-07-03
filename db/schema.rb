@@ -10,21 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200613074057) do
+ActiveRecord::Schema.define(version: 20200702065555) do
 
-  create_table "baggages", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "about_baggage_size_w"
-    t.integer "about_baggage_size_l"
-    t.integer "about_baggage_size_h"
-    t.integer "del_flag"
+  create_table "baggage_request_to_users", force: :cascade do |t|
+    t.integer "baggage_request_id"
+    t.integer "required_id"
+    t.integer "requires_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "requests", force: :cascade do |t|
+  create_table "baggage_requests", force: :cascade do |t|
     t.integer "leaver_id"
-    t.integer "required_id"
     t.date "from_day"
     t.time "from_time"
     t.date "to_day"
@@ -36,6 +33,15 @@ ActiveRecord::Schema.define(version: 20200613074057) do
     t.integer "about_baggage_size_l"
     t.integer "about_baggage_size_h"
     t.integer "approval_flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "baggages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "about_baggage_size_w"
+    t.integer "about_baggage_size_l"
+    t.integer "about_baggage_size_h"
     t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,7 +58,7 @@ ActiveRecord::Schema.define(version: 20200613074057) do
     t.datetime "terminated_at"
     t.decimal "leaver_point"
     t.decimal "receiver_point"
-    t.integer "request_id"
+    t.integer "required_id"
     t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

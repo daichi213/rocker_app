@@ -28,13 +28,13 @@
     <%= f.text_field :postcode, placeholder: '1000014' %>
 
     <%= f.label :prefecture_code, '都道府県' %>
-    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {include_blank: true, selected: group.prefecture_code} %>
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {selected: group.prefecture_code} %>
 
-    <%= f.label :city, '区市町村' %>
-    <%= f.text_field :city, placeholder: '千代田区永田町', class:"form-control" %>
+    <%= f.label :city, '市区町村' %>
+    <%= f.text_field :city, placeholder: '千代田区', class:"form-control" %>
 
-    <%= f.label :street, '番地' %>
-    <%= f.text_field :street, placeholder: '1-7-1', class:"form-control" %>
+    <%= f.label :street, '町域番地' %>
+    <%= f.text_field :street, placeholder: '永田町1-7-1', class:"form-control" %>
 
     <%= f.label :house, 'アパート名' %>
     <%= f.text_field :house, placeholder: 'ハイツロッカー', class:"form-control" %>

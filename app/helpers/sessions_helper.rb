@@ -60,4 +60,5 @@ module SessionsHelper
         # request.original_urlでリクエスト先のurlが取得できる
         session[:forwarding_url] = request.original_url if request.get?
     end
+
 end
