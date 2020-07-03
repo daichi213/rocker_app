@@ -1,3 +1,3 @@
 class Transaction < ApplicationRecord
-    belongs_to :requests, class_name: "Request"
+    belongs_to :require, class_name: "Require"
 end

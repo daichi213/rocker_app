@@ -15,10 +15,11 @@ class User < ApplicationRecord
     # has_many :followers, through: :passive_relationships, source: :follower
     has_one :receivable_baggages, class_name: "Baggage",
                                 foreign_key: "user_id"
-    has_many :requests, class_name: "Request",
-                                foreign_key: "leaver_id"
-    has_many :received, class_name: "Request",
-                                foreign_key: "required_id"
+    has_many :active_requires, class_name: "BaggageRequestToUser",
+                                foreign_key: "requires_id"
+    has_many :requires, through: :active_requires, source: :requires
+    has_many :required, through: :active_requires, source: :required
+    has_many :request_content, through: :active_requires, source: :baggage_request
 
     accepts_nested_attributes_for :receivable_baggages
 
