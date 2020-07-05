@@ -1,0 +1,25 @@
+<% provide(:title, 'Destinatin of Request') %>
+
+<h1>All users</h1>
+<%= will_paginate %>
+
+<ul class="users">
+    <%= content_tag :li, class:"list_item", data: {state: user.state,
+                                                    city: user.city,
+                                                    street: user.street,
+                                                    user_apparause_point: user.user_apparause_point} do %>
+        <!-- 最近辺ユーザーの表示 -->
+        <% if user.id == @closest_user_id %>
+            <h3>現在地から最も近いユーザーです</h3>
+        <% end %>
+        
+        <% if user.picture? %>
+            <%= image_tag user.picture.thumb50.url %>
+        <% else %>
+            <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+        <% end %>
+        <%= link_to user.name, destination_path(user), {method: :post} %>
+    <% end %>
+</ul>
+
+<%= will_paginate %>

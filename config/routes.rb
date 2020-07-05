@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'searches/user_search'
-
-  get 'searches/aea_search'
 
   # home page
   root 'static_pages#home'
@@ -13,17 +10,22 @@ Rails.application.routes.draw do
   get '/users/searches', to: 'users#search', as: 'users_search'
   resources :users
 
+  # user_search
+  get 'searches/user_search'
+  get 'searches/aea_search'
+
   # log in
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  # baggage
+  # baggage_request
   get 'baggages/:id/request_form', to: 'baggages#new', as: 'request_form'
-  get 'baggages/:id/request', to: 'baggages#create', as: 'request'
+  post 'baggages/:id/request', to: 'baggages#create', as: 'request'
+  post 'baggages/:id/destination', to: 'baggages#destination', as: 'destination'
   get 'baggages/:id/request_history', to: 'baggages#index', as: 'request_history'
   get 'baggages/:id/request_list', to: 'baggages#receives', as: 'request_list'
-  get 'baggages/:id/approval', to: 'baggages#update', as: 'approval'
+  put 'baggages/:id/approval', to: 'baggages#update', as: 'approval'
   get 'baggages/:id/transaction_history', to: 'baggages#received', as: 'transaction_history'
 
 end
