@@ -12,9 +12,10 @@
     <% else %>
         <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
     <% end %>
-    <%#= link_to user.name, request_to_user_path, {method: post} %>
     <%= link_to user.name, user %>
-    
+
+    <%= link_to "リクエストを送信する", destination_path(user), {method: :post} %>
+        
     <!-- !current_user?(user)は管理者以外がログインしない為の条件
     link_toの第２引数はそれぞれのユーザーのdestroyアクションを実行するためのリンク -->
     <% if current_user.admin? && !current_user?(user) %>
