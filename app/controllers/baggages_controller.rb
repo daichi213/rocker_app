@@ -30,7 +30,7 @@ class BaggagesController < ApplicationController
   def index
   end
 
-  # リクエストの詳細・承認ページ
+  # リクエストの詳細・承認ページgit
   def receives
   end
 
