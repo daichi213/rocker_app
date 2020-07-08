@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200702065555) do
+ActiveRecord::Schema.define(version: 20200707084952) do
 
   create_table "baggage_request_to_users", force: :cascade do |t|
     t.integer "baggage_request_id"
@@ -87,6 +87,9 @@ ActiveRecord::Schema.define(version: 20200702065555) do
     t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
   end
 
 end

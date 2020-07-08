@@ -2,9 +2,6 @@ class User < ApplicationRecord
     include JpPrefecture
     jp_prefecture :prefecture_code
 
-    # include Geocoder::Model::Mongoid
-    # include Geocoder::Model::MongoMapper
-
     # has_many :active_relationships, class_name: "Relationship",
     #                                 foreign_key: "follower_id",
     #                                 dependent: :destroy
@@ -23,7 +20,10 @@ class User < ApplicationRecord
 
     accepts_nested_attributes_for :receivable_baggages
 
-    attr_accessor :remember_token
+    attr_accessor :remember_token, :activation_token
+    before_save :downcase_email
+    # dbにcreateされる前に行われる処理
+    before_create :create_activation_digest     
 
     before_save {self.email = email.downcase}   # または、{email.downcase!}
 
@@ -102,4 +102,15 @@ class User < ApplicationRecord
     #                                 :city_changed? ||
     #                                 :street_changed? ||
     #                                 :house_changed?)
+
+    private
+
+        def downcase_email
+            self.email = email.downcase
+        end
+
+        def create_activation_digest
+            self.activation_token = User.new_token
+            self.activation_digest = User.digest(activation_token)
+        end
 end

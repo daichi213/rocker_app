@@ -1,0 +1,10 @@
+<h1>Locker APP</h1>
+
+<p><%= @user.name %> さん</p>
+
+<p>
+  Locker app へようこそ！
+  以下のリンクをクリックして、アカウントの有効化を行って下さい。
+</p>
+
+<%= link_to "アカウントの有効化", edit_account_activation_url(@user.activation_token, email: @user.email) %>

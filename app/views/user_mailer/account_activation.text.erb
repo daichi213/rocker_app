@@ -1,0 +1,5 @@
+<%= @user.name %> 様
+Locker app へようこそ！
+以下のリンクをクリックして、アカウントの有効化を行って下さい。
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

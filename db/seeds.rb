@@ -12,7 +12,9 @@ User.create!(name: "Daichi Ozaki",
             street: '西ヶ原4-50-7',
             house: 'ハイツボナール101号室',
             user_apparause_point: 3.0,
-            admin: 1)
+            admin: 1,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "尾崎　大地",
             sex: 1,
@@ -25,7 +27,9 @@ User.create!(name: "尾崎　大地",
             city: '千葉市',
             street: '中央区東千葉2-5-22',
             house: 'リブリメゾン雅208号室',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "舘　ひろし",
             sex: 1,
@@ -38,7 +42,9 @@ User.create!(name: "舘　ひろし",
             city: '世田谷区',
             street: '桜丘5-8-22',
             house: 'グリーンヒル101号室',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "宮川　大輔",
             sex: 1,
@@ -50,7 +56,9 @@ User.create!(name: "宮川　大輔",
             state: '東京都',
             city: '文京区',
             street: '小石川3-17',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "山下　きよし",
             sex: 1,
@@ -63,7 +71,9 @@ User.create!(name: "山下　きよし",
             city: '渋谷区',
             street: '神宮前1-15-6',
             house: 'ピロティ原宿',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "福沢　諭吉",
             sex: 1,
@@ -75,7 +85,9 @@ User.create!(name: "福沢　諭吉",
             state: '東京都',
             city: '芝区',
             street: '三田2',
-            user_apparause_point: 5.0)
+            user_apparause_point: 5.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "ビッグダディ",
             sex: 1,
@@ -87,7 +99,9 @@ User.create!(name: "ビッグダディ",
             state: '東京都',
             city: '渋谷区',
             street: '東1-10-10',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "一宮　隆",
             sex: 1,
@@ -99,7 +113,9 @@ User.create!(name: "一宮　隆",
             state: '東京都',
             city: '渋谷区',
             street: '東2-27-1',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "山田　浩貴",
             sex: 1,
@@ -112,7 +128,9 @@ User.create!(name: "山田　浩貴",
             city: '渋谷区',
             street: '代官山町3-3',
             house: 'ソミュール代官山',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "戸田　啓太",
             sex: 1,
@@ -125,7 +143,9 @@ User.create!(name: "戸田　啓太",
             city: '渋谷区',
             street: '道玄坂1-17-3',
             house: '第２野々ビル',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "佐々木　智子",
             sex: 0,
@@ -138,7 +158,9 @@ User.create!(name: "佐々木　智子",
             city: '渋谷区',
             street: '南平台町5-6',
             house: '東急南平台町ビル',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "平野　はるか",
             sex: 0,
@@ -151,7 +173,9 @@ User.create!(name: "平野　はるか",
             city: '渋谷区',
             street: '神泉町12-5',
             house: 'ジェイパーク渋谷神泉',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "中島　愛菜",
             sex: 0,
@@ -164,7 +188,9 @@ User.create!(name: "中島　愛菜",
             city: '世田谷区',
             street: '桜丘5-8-22',
             house: 'グリーンヒル101号室',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "宮里　大貴",
             sex: 1,
@@ -176,7 +202,9 @@ User.create!(name: "宮里　大貴",
             state: '東京都',
             city: '渋谷区',
             street: '道玄坂2-25-14',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "山崎　亮太",
             sex: 1,
@@ -189,7 +217,9 @@ User.create!(name: "山崎　亮太",
             city: '渋谷区',
             street: '道玄坂1-15-17',
             house: 'セントラル道玄坂',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "安藤　裕翔",
             sex: 1,
@@ -202,7 +232,9 @@ User.create!(name: "安藤　裕翔",
             city: '渋谷区',
             street: '南平台町13-1',
             house: '南平台佐藤ビル',
-            user_apparause_point: 5.0)
+            user_apparause_point: 5.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "鈴木　悠斗",
             sex: 1,
@@ -215,7 +247,9 @@ User.create!(name: "鈴木　悠斗",
             city: '渋谷区',
             street: '神泉町12-6',
             house: '小松ビル',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "西森　健太",
             sex: 1,
@@ -228,7 +262,9 @@ User.create!(name: "西森　健太",
             city: '渋谷区',
             street: '神泉町11-8',
             house: '梅山ビル',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "相田　悟",
             sex: 1,
@@ -241,7 +277,9 @@ User.create!(name: "相田　悟",
             city: '渋谷区',
             street: '神泉町12-7',
             house: 'キング荘',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 User.create!(name: "山口　咲",
             sex: 0,
@@ -254,7 +292,9 @@ User.create!(name: "山口　咲",
             city: '渋谷区',
             street: '神泉町22-6',
             house: '渋谷MKBLD',
-            user_apparause_point: 3.0)
+            user_apparause_point: 3.0,
+            activated: true,
+            activated_at: Time.zone.now)
 
 # 99.times do |n|
 #     name = ForgeryJa(:name).full_name

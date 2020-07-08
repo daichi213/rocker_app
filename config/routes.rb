@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/users/searches', to: 'users#search', as: 'users_search'
   resources :users
+  resources :account_activations, only: [:edit]
 
   # user_search
   get 'searches/user_search'
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   # baggage_request
   get 'baggages/:id/request_form', to: 'baggages#new', as: 'request_form'
   post 'baggages/:id/request', to: 'baggages#create', as: 'request'
+  get 'baggages/:id/destination_list', to: 'baggages#destination_list', as: 'destination_list'
   post 'baggages/:id/destination', to: 'baggages#destination', as: 'destination'
   get 'baggages/:id/request_history', to: 'baggages#index', as: 'request_history'
   get 'baggages/:id/request_list', to: 'baggages#receives', as: 'request_list'
