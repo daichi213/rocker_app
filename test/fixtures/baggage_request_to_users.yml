@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-michael_request:
-  required: archer
-  baggage_request: one
-
-archer_request:
-  required: michael
-  baggage_request: two

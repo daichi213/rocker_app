@@ -16,7 +16,7 @@ class BaggagesController < ApplicationController
 
   # requestの送信先一覧ページ
   def destination_list
-
+    
   end
 
   # request_formへユーザーの追加用アクション
