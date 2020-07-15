@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20200702065555) do
   end
 
   create_table "baggage_requests", force: :cascade do |t|
-    t.integer "leaver_id"
     t.date "from_day"
     t.time "from_time"
     t.date "to_day"
@@ -48,17 +47,13 @@ ActiveRecord::Schema.define(version: 20200702065555) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string "item_name"
-    t.integer "item_num"
-    t.integer "leaver_id"
-    t.integer "receiver_id"
     t.integer "leaver_authenticate"
     t.integer "receiver_authenticate"
     t.datetime "started_at"
     t.datetime "terminated_at"
     t.decimal "leaver_point"
     t.decimal "receiver_point"
-    t.integer "required_id"
+    t.integer "baggage_request_id"
     t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

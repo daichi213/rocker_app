@@ -7,7 +7,13 @@ class UsersController < ApplicationController
   def index
     @users = User.paginate(page: params[:page])
     # 絞り込み検索
-    @prefecture_names = JpPrefecture::Prefecture.all
+    # @prefecture_names = JpPrefecture::Prefecture.all
+    # side_bar用の県名表示
+    @prefecture_names = []
+    @users.each do |user|
+      @prefecture_names.push user.state
+    end
+    @prefecture_names = @prefecture_names.uniq
   end
 
   def show

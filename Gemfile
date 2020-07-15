@@ -46,6 +46,7 @@ gem 'jp_prefecture'
 gem 'forgery_ja'
 gem 'geocoder', '~> 1.6', '>= 1.6.3'
 gem 'geokit-rails'
+gem 'gon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

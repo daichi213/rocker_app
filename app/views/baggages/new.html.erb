@@ -6,6 +6,7 @@
         <div class='request-form'>
             <% if logged_in? %>
                 <%= form_for @request, url: request_path do |f| %>
+                    <%= render "shared/error_messages", object: f.object %>
                     <h3>荷物タイプ</h3>
                     <%#= f.check_box :large_scale_baggage, class: "baggage-type" %>
                     <%#= f.label :large_scale_baggage, "大物" %>
@@ -53,7 +54,22 @@
                     <%= f.text_area :transaction_message, value: "こんにちは、荷物預かって頂けませんか？" %>
 
                     <h3>リクエストするユーザー</h3>
-                    <%= link_to "ユーザーの選択", destination_list_path, target: :_blank %>
+
+                    <%= f.fields_for :baggage_request_to, @request.baggage_request_to.build do |b| %>
+                        <ul class='users'>
+                            <%= b.collection_check_boxes(:required_id, User.all, :id, :name, 
+                                                        {multi_part: true, include_hidden: false
+                                                        }) do |c| %>
+                                <%= c.label(data: {state: c.object.state,
+                                                city: c.object.city,
+                                                street: c.object.street}) do %>
+                                    <%= c.check_box %>
+                                    <%= c.object.name %>
+                                    <%= c.object.state %>
+                                <% end %>
+                            <% end %>
+                        </ul>
+                    <% end %>
 
                     <!-- ここにjQueryを利用して依頼先ユーザー入力欄の追加を行う -->
                     <%= f.submit '送信', class: "btn btn-primary" %>

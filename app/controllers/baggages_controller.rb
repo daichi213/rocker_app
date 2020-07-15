@@ -1,22 +1,24 @@
 class BaggagesController < ApplicationController
   def new
     @request = BaggageRequest.new
+    @users = User.all
   end
 
   # フォームの作成アクション
   def create
-    @request = BaggageRequest.new(request_params)
+    @request = current_user.request_content.new(request_params)
+    # TODO strong parameterに書き換え
+    # TODO "0"を削除要検討
+    @required_ids = params[:baggage_request][:baggage_request_to_attributes]["0"][:required_id]
+    # @required_ids.each do |required|
+    #   @request.required_id = required
+    # end
     if @request.save
       flash[:success] = "送信に成功しました"
       redirect_to current_user
     else
       render 'new'
     end
-  end
-
-  # requestの送信先一覧ページ
-  def destination_list
-
   end
 
   # request_formへユーザーの追加用アクション
@@ -52,11 +54,8 @@ class BaggagesController < ApplicationController
                                       :from_time,
                                       :to_day,
                                       :to_time,
-                                      :transaction_message,
-                                      baggage_request_to: [
-                                        :requires_id,
-                                        :required_id
-                                      ])
+                                      :transaction_message
+                                      )
     end
     
 end

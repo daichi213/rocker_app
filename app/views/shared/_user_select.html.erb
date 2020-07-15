@@ -1,0 +1,19 @@
+<%= content_tag :li, class:"list_item", data: {state: destination_user.state,
+                                                city: destination_user.city,
+                                                street: destination_user.street,
+                                                user_apparause_point: destination_user.user_apparause_point} do %>
+    <!-- 最近辺ユーザーの表示 -->
+    <% if destination_user.id == @closest_user_id %>
+        <h3>現在地から最も近いユーザーです</h3>
+    <% end %>
+    <!-- ユーザー画像 -->
+    <% if destination_user.picture? %>
+        <%= image_tag destination_user.picture.thumb50.url %>
+    <% else %>
+        <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+    <% end %>
+    <%= link_to destination_user.name, user %>
+
+    <%= link_to "リクエストを送信する", destination_path(destination_user), {method: :post} %>
+
+<% end %>

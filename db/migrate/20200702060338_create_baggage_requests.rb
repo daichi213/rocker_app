@@ -1,7 +1,6 @@
 class CreateBaggageRequests < ActiveRecord::Migration[5.1]
   def change
     create_table :baggage_requests do |t|
-      t.integer :leaver_id
       t.integer :large_scale_baggage
       t.integer :heavy_weight_baggage
       t.integer :precision_machine_baggage

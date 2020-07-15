@@ -39,8 +39,12 @@
                             ユーザーの絞込み
                             </button>
                             <div class="dropdown-menu">
+                                <!-- JpPferecture使用、県名全表示 -->
+                                <%# @prefecture_names.each do |pre| %>
+                                    <%#= button_tag pre.name, class: "dropdown-item search_item", data: {state: pre.name} %>
+                                <%# end %>
                                 <% @prefecture_names.each do |pre| %>
-                                    <%= button_tag pre.name, class: "dropdown-item search_item", data: {state: pre.name} %>
+                                    <%= button_tag pre, class: "dropdown-item search_item", data: {state: pre} %>
                                 <% end %>
                                 <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
                                 <div class="dropdown-divider"></div>
@@ -58,36 +62,44 @@
                                 // stateレベルでの絞り込み検索
                                 $(searchItem).on('click', function(){
                                     $(searchItem).removeClass(activeClass);
+                                    $(".search_item_detail").remove();
                                     var area = $(this).addClass(activeClass).data('state');
                                     city_areas = search_filter('state', area, 'city');
                                     city_areas = city_areas.filter(function (x, i, self) {
                                         return self.indexOf(x) === i;
                                     });
                                     for (var i=0; i<city_areas.length; i++) {
-                                        $('div.dropdown-menu').append(`<button class="search_item">${city_areas[i]}</button>`);
+                                        $('div.dropdown-menu').append(`<button class="search_item_detail" data-city=${city_areas[i]}>${city_areas[i]}</button>`);
                                     }
                                 });
 
                                 // cityレベルでの絞り込み検索実装
+                                $(".search_item_detail").on('click', function(){
+                                    $(".search_item_detail").removeClass(activeClass);
+                                    var area = $(this).addClass(activeClass).data('city');
+                                    search_filter('city', area);
+                                });
                             });
 
-                            function search_filter(data_type, area, data_type_2) {
+                            function search_filter(area_type, area, detail_area_type) {
                                 $(listItem).removeClass(hideClass);
                                 if(area == ''){
                                     return;
                                 }
-                                var city_areas = [];
+                                var detail_areas = [];
                                 for (var i=0; i< $(listItem).length; i++) {
-                                    var itemData = $(listItem).eq(i).data(data_type);
+                                    var itemData = $(listItem).eq(i).data(area_type);
                                     
                                     if (itemData !== area) {
                                         $(listItem).eq(i).addClass(hideClass);
                                     }else{
-                                        var city_area = $(listItem).eq(i).data(data_type_2);
-                                        city_areas.push(city_area);
+                                        if(detail_area_type){
+                                            var detail_area = $(listItem).eq(i).data(detail_area_type);
+                                            detail_areas.push(detail_area);
+                                        }
                                     }
                                 }
-                                return city_areas;
+                                if(detail_areas) return detail_areas;
                             }
                         </script>
                         
