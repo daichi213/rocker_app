@@ -24,6 +24,7 @@
             <section class='menu-content'>
                 <ul>
                     <% if request.fullpath == root_path %>
+                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
 
                     <% elsif (request.fullpath == users_path) || (request.fullpath == (users_path + "?page=#{params[:page]}")) %>
                         <%#= form_with(scope: :search, users_path, method: "get", local: true) do |f| %>
@@ -108,7 +109,7 @@
 
                     <% elsif request.fullpath == user_path(current_user) %>
                         <li><%= link_to "マップ", root_path %></li>
-                        <li><%= link_to "リクエスト一覧", "#" %></li>
+                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
