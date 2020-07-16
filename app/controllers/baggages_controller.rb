@@ -6,13 +6,10 @@ class BaggagesController < ApplicationController
 
   # フォームの作成アクション
   def create
-    @request = current_user.request_content.new(request_params)
+    @request = current_user.active_requires.build(request_params)
     # TODO strong parameterに書き換え
-    # TODO "0"を削除要検討
-    @required_ids = params[:baggage_request][:baggage_request_to_attributes]["0"][:required_id]
-    # @required_ids.each do |required|
-    #   @request.required_id = required
-    # end
+    @request.required_for = params[:baggage_request][:required_for]
+    debugger
     if @request.save
       flash[:success] = "送信に成功しました"
       redirect_to current_user
@@ -54,7 +51,8 @@ class BaggagesController < ApplicationController
                                       :from_time,
                                       :to_day,
                                       :to_time,
-                                      :transaction_message
+                                      :transaction_message,
+                                      {:required_id => []}
                                       )
     end
     

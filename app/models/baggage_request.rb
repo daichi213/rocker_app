@@ -1,6 +1,17 @@
 class BaggageRequest < ApplicationRecord
-    has_many :baggage_request_to, class_name: "BaggageRequestToUser",
-                        foreign_key: "baggage_request_id"
+    belongs_to :users, class_name: "User"
+    # optional: true
 
-    accepts_nested_attributes_for :baggage_request_to
+    def BaggageRequest.extract(str)
+        str.scan(/\d{1,}/)
+    end
+
+    def BaggageRequest.convert_to_integer(ary)
+        BaggageRequest.extract(ary).map {|i| i.to_i}
+    end
+
+    # 配列でリクエスト先を出力
+    def required
+        BaggageRequest.convert_to_integer(self.required_for)
+    end
 end
