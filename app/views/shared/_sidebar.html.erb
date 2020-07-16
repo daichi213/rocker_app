@@ -61,8 +61,8 @@
                             $(function () {
                                 // stateレベルでの絞り込み検索
                                 $(searchItem).on('click', function(){
-                                    $(searchItem).removeClass(activeClass);
-                                    $(".search_item_detail").remove();
+                                    // $(searchItem).removeClass(activeClass);
+                                    // $(".search_item_detail").remove();
                                     var area = $(this).addClass(activeClass).data('state');
                                     city_areas = search_filter('state', area, 'city');
                                     city_areas = city_areas.filter(function (x, i, self) {

@@ -10,17 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200702065555) do
-
-  create_table "baggage_request_to_users", force: :cascade do |t|
-    t.integer "baggage_request_id"
-    t.integer "required_id"
-    t.integer "requires_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20200702062151) do
 
   create_table "baggage_requests", force: :cascade do |t|
+    t.string "required_for"
+    t.integer "requires_id"
     t.date "from_day"
     t.time "from_time"
     t.date "to_day"
