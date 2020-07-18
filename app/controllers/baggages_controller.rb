@@ -8,8 +8,8 @@ class BaggagesController < ApplicationController
   def create
     @request = current_user.active_requires.build(request_params)
     # TODO strong parameterに書き換え
-    @request.required_for = params[:baggage_request][:required_for]
-    debugger
+    # @request.required_for = params[:baggage_request][:required_for]
+    # debugger
     if @request.save
       flash[:success] = "送信に成功しました"
       redirect_to current_user
@@ -52,7 +52,7 @@ class BaggagesController < ApplicationController
                                       :to_day,
                                       :to_time,
                                       :transaction_message,
-                                      {:required_id => []}
+                                      {:to_user_ids => []}
                                       )
     end
     
