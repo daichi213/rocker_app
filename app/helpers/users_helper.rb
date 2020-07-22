@@ -37,13 +37,5 @@ module UsersHelper
         # 大円距離 (km)
         degree * radius
       end
-
-      def unique(array, mem)
-        @array_uniq=[]
-        array.each do |a|
-            @array_uniq.push a.mem
-        end
-        @array_uniq.uniq
-      end
    
 end

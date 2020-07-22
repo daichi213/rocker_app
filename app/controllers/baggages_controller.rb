@@ -7,10 +7,21 @@ class BaggagesController < ApplicationController
   # フォームの作成アクション
   def create
     @request = current_user.active_requires.build(request_params)
-    # TODO strong parameterに書き換え
-    # @request.required_for = params[:baggage_request][:required_for]
-    # debugger
     if @request.save
+      # リクエスト先の処理
+      # TODO strong parameterに書き換え
+      params[:baggage_request][:to_user_ids].each do |required_id|
+        @request_to = @request.to_users.new(required_id: required_id,
+                                            finished_flag: 0)
+        result = @request_to.save
+        # debugger
+        if !result
+          @error_user = "#{User.find_by id: required_id},"
+        end
+      end
+      if @error_user
+        flash[:error] = "#{@error_user}さんへの送信に失敗しました"
+      end
       flash[:success] = "送信に成功しました"
       redirect_to current_user
     else

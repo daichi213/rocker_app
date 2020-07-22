@@ -16,7 +16,35 @@ class User < ApplicationRecord
     has_one :receivable_baggages, class_name: "Baggage",
                                 foreign_key: "user_id"
     has_many :active_requires, class_name: "BaggageRequest",
-                                foreign_key: "requires_id"
+                                foreign_key: "user_id"
+
+    def requires
+        if !self.active_requires.blank?
+            self.active_requires.last.to_users.map{|i| i.required_id}
+        else
+            0
+        end
+    end
+
+    # includes内のキー名称は左側に従属するクラスのキーを持ってくる
+    def required
+        BaggageRequest.includes(
+            user: :active_requires
+        ).where(id: BaggageRequest.get_required_baggage_request(self.id))
+    end
+
+    # includesを使用したrequiresメソッド（requiresメソッドと等価）
+    # def get_baggage_request_id
+    #     self.active_requires.order(id: "DESC").limit(1).pluck(:id)[0]
+    # end
+
+    # def get_recently_requires
+    #     BaggageRequestToUser.includes(
+    #         baggage_request_to: :user
+    #     ).where(
+    #         baggage_request_id: self.get_baggage_request_id
+    #     ).map{|i| i.required_id}
+    # end
 
     accepts_nested_attributes_for :receivable_baggages
 

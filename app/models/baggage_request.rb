@@ -5,8 +5,12 @@ class BaggageRequest < ApplicationRecord
 
     accepts_nested_attributes_for :to_users
 
-    def BaggageRequest.extract(str)
-        str.scan(/\d{1,}/)
+    def BaggageRequest.get_required_baggage_request(user_id)
+        BaggageRequestToUser.includes(
+            baggage_request_to: :user
+        ).where(
+            "(required_id = ?) AND (finished_flag = ?)", user_id, 0
+        ).map{|i| i.baggage_request_id}
     end
 
     def BaggageRequest.convert_to_integer(ary)
