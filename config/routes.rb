@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
   get '/users/searches', to: 'users#search', as: 'users_search'
-  resources :users
+  resources :users do
+    resources :baggages, only: [:request_content, :approval]
+  end
 
   # user_search
   get 'searches/user_search'
@@ -23,9 +25,9 @@ Rails.application.routes.draw do
   get 'baggages/:id/request_form', to: 'baggages#new', as: 'request_form'
   post 'baggages/:id/request', to: 'baggages#create', as: 'request'
   post 'baggages/:id/destination', to: 'baggages#destination', as: 'destination'
-  get 'baggages/:id/request_history', to: 'baggages#index', as: 'request_history'
-  get 'baggages/:id/request_list', to: 'baggages#receives', as: 'request_list'
-  put 'baggages/:id/approval', to: 'baggages#update', as: 'approval'
-  get 'baggages/:id/transaction_history', to: 'baggages#received', as: 'transaction_history'
+  get 'baggages/:id/request_list', to: 'baggages#index', as: 'request_list'
+  # get 'baggages/:baggage_request_id/request_content', to: 'baggages#receives', as: 'request_content'
+  # put 'baggages/:baggage_request_id/approval', to: 'baggages#update', as: 'approval'
+  get 'baggages/:id/transaction_history', to: 'baggages#transaction_history', as: 'transaction_history'
 
 end

@@ -1,0 +1,13 @@
+<%= content_tag :li, class:"list_item", data: {state: baggage_request.user.state,
+                                                city: baggage_request.user.city,
+                                                street: baggage_request.user.street,
+                                                user_apparause_point: baggage_request.user.user_apparause_point} do %>
+    <!-- ユーザー画像 -->
+    <% if baggage_request.user.picture? %>
+        <%= image_tag baggage_request.user.picture.thumb50.url %>
+    <% else %>
+        <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+    <% end %>
+    <%= link_to baggage_request.user.name, request_list_path(baggage_request) %>
+
+<% end %>

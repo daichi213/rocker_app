@@ -110,6 +110,7 @@
                     <% elsif request.fullpath == user_path(current_user) %>
                         <li><%= link_to "マップ", root_path %></li>
                         <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
+                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
