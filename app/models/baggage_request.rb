@@ -1,5 +1,5 @@
 class BaggageRequest < ApplicationRecord
-    belongs_to :users, class_name: "User"
+    belongs_to :user, class_name: "User"
     #  optional: true
     has_many :to_users, class_name: "BaggageRequestToUser"
 
@@ -19,6 +19,6 @@ class BaggageRequest < ApplicationRecord
 
     # 配列でリクエスト先を出力
     def required
-        BaggageRequest.convert_to_integer(self.required_for)
+        BaggageRequest.convert_to_integer(self.user_id)
     end
 end

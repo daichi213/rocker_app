@@ -1,4 +1,7 @@
 class BaggagesController < ApplicationController
+  before_action :logged_in_user
+  before_action :correct_user
+  
   def new
     @request = BaggageRequest.new
     @users = User.all
@@ -10,12 +13,11 @@ class BaggagesController < ApplicationController
     if @request.save
       # リクエスト先の処理
       # TODO strong parameterに書き換え
-      params[:baggage_request][:to_user_ids].each do |required_id|
-        @request_to = @request.to_users.new(required_id: required_id,
+      params[:baggage_request][:required_id].each do |required_id|
+        @request_to = @request.to_users.create(required_id: required_id,
                                             finished_flag: 0)
-        result = @request_to.save
         # debugger
-        if !result
+        if !@request_to.valid?
           @error_user = "#{User.find_by id: required_id},"
         end
       end
@@ -38,10 +40,15 @@ class BaggagesController < ApplicationController
 
   # 受けているリクエストの一覧ページ
   def index
+    @baggage_requests = current_user.required
+    # respond_to do |format|
+    #   format.html
+    # end
   end
 
   # リクエストの詳細・承認ページgit
   def receives
+    @baggage_request 
   end
 
   # updateですがリクエストの受け手側の承認時に使用するアクションになります。
@@ -50,7 +57,8 @@ class BaggagesController < ApplicationController
   end
 
   # 過去に受けたリクエストの履歴
-  def received
+  def transaction_history
+    
   end
 
   private
@@ -63,7 +71,7 @@ class BaggagesController < ApplicationController
                                       :to_day,
                                       :to_time,
                                       :transaction_message,
-                                      {:to_user_ids => []}
+                                      {:to_users => []}
                                       )
     end
     

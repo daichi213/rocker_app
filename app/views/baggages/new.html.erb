@@ -54,11 +54,17 @@
                     <%= f.text_area :transaction_message, value: "こんにちは、荷物預かって頂けませんか？" %>
 
                     <h3>リクエストするユーザー</h3>
-                    <%= f.fields_for :to_users, @request.baggage_request_to.build do |b| %>
                         <ul class='users'>
-                            <%= b.check_box(:required_id, User.all, :id, :name, {checked:@request.to_user_ids, include_hidden: false}) %>
+                            <%= f.collection_check_boxes(:required_id, User.all, :id, :name, 
+                                                        {checked:@request.to_user_ids, include_hidden: false}) do |c|%>
+                                <%= c.label(data: {state: c.object.state,
+                                                city: c.object.city,
+                                                street: c.object.street}) do %>
+                                    <%= c.check_box %>
+                                    <%= c.object.name %>
+                                <% end %>
+                            <% end %>
                         </ul>
-                    <% end %>
 
                     <!-- ここにjQueryを利用して依頼先ユーザー入力欄の追加を行う -->
                     <%= f.submit '送信', class: "btn btn-primary" %>
