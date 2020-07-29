@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/users/searches', to: 'users#search', as: 'users_search'
   resources :users do
-    resources :baggages, only: [:request_content, :approval]
+    # resources :baggages, only: [:request_content, :approval]
   end
 
   # user_search
@@ -22,12 +22,12 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   # baggage_request
-  get 'baggages/:id/request_form', to: 'baggages#new', as: 'request_form'
-  post 'baggages/:id/request', to: 'baggages#create', as: 'request'
-  post 'baggages/:id/destination', to: 'baggages#destination', as: 'destination'
-  get 'baggages/:id/request_list', to: 'baggages#index', as: 'request_list'
-  # get 'baggages/:baggage_request_id/request_content', to: 'baggages#receives', as: 'request_content'
-  # put 'baggages/:baggage_request_id/approval', to: 'baggages#update', as: 'approval'
-  get 'baggages/:id/transaction_history', to: 'baggages#transaction_history', as: 'transaction_history'
+  get '/:id/baggages/request_form', to: 'baggages#new', as: 'request_form'
+  post '/:id/baggages/request', to: 'baggages#create', as: 'request'
+  post '/:id/baggages/destination', to: 'baggages#destination', as: 'destination'
+  get '/:id/baggages/request_list', to: 'baggages#index', as: 'request_list'
+  get '/:id/baggages/:baggage_request_id/request_content', to: 'baggages#receives', as: 'request_content'
+  put '/:id/baggages/:baggage_request_id/approval', to: 'baggages#update', as: 'approval'
+  get '/:id/baggages/transaction_history', to: 'baggages#transaction_history', as: 'transaction_history'
 
 end
