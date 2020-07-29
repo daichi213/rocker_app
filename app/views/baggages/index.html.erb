@@ -3,39 +3,13 @@
 <h1>Request List</h1>
 
 <ul class="baggage_requests">
-    <%= @baggage_requests.each do |baggage_request| %>
+    <% @baggage_requests.each do |baggage_request| %>
         <%= render "baggage_request", baggage_request: baggage_request %>
     <% end %>
 </ul>
 
 <script>
-    // $(document).on('turbolinks:load', function(){
-
-    //     // ここから自動更新機能
-    //     var reloadMessages = function(){
-    //         if (window.location.href.match(/\/baggages\/\d+\/request_list/)){    // group/:group_id/messagesというURLの時だけ、以降の記述が実行されます。
-    //             var href = 'baggages#receives {:format=>"html"}'              // リクエスト先と形式を指定しています。
-    //             // var last_message_id = $('.message:last').data('message-id');   // カスタムデータ属性を利用して、最新のメッセージIDを取得しています。
-
-    //             // ajaxの形式をそれぞれ指定しています。
-    //             $.ajax({
-    //                 url:  href,
-    //                 type: 'GET',
-    //                 // data: {id: last_message_id},
-    //                 dataType: 'html'
-    //             })
-    //             .done(function(messages){        // フォームに入力されたデータを引数として取得しています。
-    //                 var insertHTML='';
-    //                 messages.forEach(function(message){
-    //                     insertHTML = buildHTML(message);
-    //                     $('.messages').append(insertHTML);
-    //                     $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
-    //                 });
-    //             })
-    //             .fail(function(){
-    //                 alert("自動更新に失敗しました")
-    //             });
-    //         }
-    //     };
-    // };
+    setTimeout(function () {
+        location.reload();
+    }, 43200000);
 </script>
