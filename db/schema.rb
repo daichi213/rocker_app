@@ -22,9 +22,7 @@ ActiveRecord::Schema.define(version: 20200716145520) do
 
   create_table "baggage_requests", force: :cascade do |t|
     t.integer "user_id"
-    t.date "from_day"
-    t.time "from_time"
-    t.date "to_day"
+    t.datetime "from_time"
     t.time "to_time"
     t.text "request_content"
     t.text "baggage_content"

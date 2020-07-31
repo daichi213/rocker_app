@@ -36,16 +36,12 @@
 
                     <h3>希望取引日時</h3>
                     <div class="from_daytime">
-                        <%= f.date_select :from_day, class: "from_day", date_separator: "/" %>
-                        <h3></h3>
-                        <%= f.time_select :from_time, class: "from_time" %>
+                        <%= f.datetime_select :from_time, class: "from_time" %>
                         <h3></h3>
                     </div>
                     <h3>↓</h3>
                     <div class="to_daytime">
-                        <%= f.date_select :to_day, class: "to_day", date_separator: "/"  %>
-                        <h3></h3>
-                        <%= f.time_select :to_time, class: "to_time" %>
+                        <%= f.datetime_select :to_time, class: "to_time" %>
                         <h3></h3>
                     </div>
 

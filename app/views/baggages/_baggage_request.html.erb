@@ -9,9 +9,21 @@
     <% else %>
         <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
     <% end %>
-    <%= link_to baggage_request.user.name, request_content_path(current_user, baggage_request) %>
+    <%= link_to baggage_request.user.name, user_path(baggage_request.user), class: "user_show_links" %>
     <div>
+        <h4>荷物の内容</h4>
         <%= baggage_request.baggage_content %>
     </div>
+    <div>
+        <h4>荷物に関する要望</h4>
+        <%= baggage_request.request_content %>
+    </div>
+    <div>
+        <h4>預り希望時間帯</h4>
+        <%= baggage_request.from_time %>
+        <%= baggage_request.to_time %>
+    </div>
+    <div class="request_index_link_row">
+    <%= link_to "リクエストの詳細を確認", request_content_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
 
 <% end %>
