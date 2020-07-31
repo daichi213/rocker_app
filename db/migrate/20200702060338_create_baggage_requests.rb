@@ -9,9 +9,8 @@ class CreateBaggageRequests < ActiveRecord::Migration[5.1]
       t.integer :broken_article
       t.integer :refrigerated_baggage
       t.integer :feezed_baggage
-      t.date :from_day
-      t.time :from_time
-      t.date :to_day
+      t.datetime :from_time
+      t.datetime :from_time
       t.time :to_time
       t.text :request_content
       t.text :baggage_content
