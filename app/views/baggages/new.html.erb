@@ -36,18 +36,15 @@
                     <%= f.text_area :baggage_content, class: "baggage-content" %>
 
                     <h3>希望取引日時</h3>
-                    <div class="from_daytime">
-                        <%= f.date_select :from_day, class: "from_day", date_separator: "/" %>
-                        <h3></h3>
-                        <%= f.time_select :from_time, class: "from_time" %>
-                        <h3></h3>
-                    </div>
-                    <h3>↓</h3>
-                    <div class="to_daytime">
-                        <%= f.date_select :to_day, class: "to_day", date_separator: "/"  %>
-                        <h3></h3>
-                        <%= f.time_select :to_time, class: "to_time" %>
-                        <h3></h3>
+                    <div class="request-time">
+                        <div class='from_time'>
+                            <h5>From</h5>
+                            <%= f.datetime_field :from_time, class: "from_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1 %>
+                        </div>
+                        <div class='from_time'>
+                            <h5>To</h5>
+                            <%= f.datetime_field :to_time, class: "to_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1 %>
+                        </div>
                     </div>
 
                     <h3>取引メッセージ</h3>

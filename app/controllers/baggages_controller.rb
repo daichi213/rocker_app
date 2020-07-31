@@ -66,9 +66,7 @@ class BaggagesController < ApplicationController
     def request_params
       params.require(:baggage_request).permit(:request_content,
                                       :baggage_content,
-                                      :from_day,
                                       :from_time,
-                                      :to_day,
                                       :to_time,
                                       :transaction_message,
                                       {:to_users => []}
