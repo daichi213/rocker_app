@@ -280,17 +280,6 @@ User.create!(name: "山口　咲",
 #                 user_apparause_point: user_apparause_point)
 # end
 
-# size = [30, 60, 100, 150]
-# 100.times do |n|
-#     about_baggage_size_w = size.sample
-#     about_baggage_size_l = size.sample
-#     about_baggage_size_h = size.sample
-#     Baggage.create!(user_id: n+1,
-#                     about_baggage_size_w: about_baggage_size_w,
-#                     about_baggage_size_l: about_baggage_size_l,
-#                     about_baggage_size_h: about_baggage_size_h)
-# end
-
 # 以下、belogns_to,belongs_toの対応付のためcreate!メソッド使えず
 users = User.order(:created_at).take(10)
 size = [30, 60, 100, 150]
@@ -301,6 +290,40 @@ users.each do |user|
     user.create_receivable_baggages!(about_baggage_size_w: about_baggage_size_w,
                                     about_baggage_size_l: about_baggage_size_l,
                                     about_baggage_size_h: about_baggage_size_h)
+end
+
+# BaggageRequest用
+users = User.order(:created_at).take(10)
+at_now = Time.zone.now
+at_now_plus_1_month = at_now + 1.month
+baggage_contents = ["服","割れ物","家電","本","重量物"]
+request_contents = ["傷が入りやすい品物もありますので、棚の上などに保管願います。",
+                "少し重い品物になりますので、脆いものの上などに置かないよう注意して下さい。",
+                "日光になうべく当てたくないので、暗所での保管をお願い致します。",
+                "振動に弱い品物がありますので、機械のそばに置かないよう願います。"]
+transaction_messages = ["こんにちは、取引よろしくお願いします。",
+                "荷物を取りに行く時間がはっきりと確定していないので、取引時間にある程度融通のきく方歓迎致します。",
+                "品物への匂い移りのため、部屋での喫煙はご遠慮下さい"]
+size = [30, 60, 100, 150]
+
+users.each do |user|
+    rand_time = Time.at(rand(at_now..at_now_plus_1_month))
+    request = 
+        user.active_requires.create!(
+            from_time: rand_time,
+            to_time: rand_time+3.hour,
+            request_content: request_contents.sample,
+            baggage_content: baggage_contents.sample,
+            transaction_message: transaction_messages.sample,
+            about_baggage_size_w: size.sample,
+            about_baggage_size_l: size.sample,
+            about_baggage_size_h: size.sample,
+            approval_flag: 0
+        )
+    10.times do |n|
+        request.to_users.create!(required_id: n,
+                                del_flag: 0)
+    end
 end
 
 # users = User.order(:created_at).take(6)
