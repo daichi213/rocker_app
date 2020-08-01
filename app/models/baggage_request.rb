@@ -2,6 +2,7 @@ class BaggageRequest < ApplicationRecord
     belongs_to :user, class_name: "User"
     #  optional: true
     has_many :to_users, class_name: "BaggageRequestToUser"
+    has_many :of_transaction, through: :to_users, source: :transactions
 
     accepts_nested_attributes_for :to_users
 
@@ -9,7 +10,7 @@ class BaggageRequest < ApplicationRecord
         BaggageRequestToUser.includes(
             baggage_request_to: :user
         ).where(
-            "(required_id = ?) AND (finished_flag = ?)", user_id, 0
+            "(required_id = ?) AND (del_flag = ?)", user_id, 0
         ).map{|i| i.baggage_request_id}
     end
 

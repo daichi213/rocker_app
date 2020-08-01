@@ -1,2 +1,30 @@
-<h1>Baggages#received</h1>
-<p>Find me in app/views/baggages/received.html.erb</p>
+<div class='user-show-top'>
+    <h1 class='user-show-image'>
+        <% if current_user.picture? %>
+            <%= image_tag current_user.picture.thumb50.url %>
+        <% else %>
+            <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+        <% end %>
+    </h1>
+    <ul>
+        <li><%= @user.name %></li>
+        <li><%= @user.email %></li>
+        <li><%= "評価 #{@user.user_apparause_point}点" %></li>
+    </ul>
+</div>
+<div>
+    <h4>荷物の内容</h4>
+    <%= @baggage_request.baggage_content %>
+</div>
+<div>
+    <h4>荷物に関する要望</h4>
+    <%= @baggage_request.request_content %>
+</div>
+<div>
+    <h4>預り希望時間帯</h4>
+    <%= @baggage_request.from_time %>
+    <br>
+    <%= @baggage_request.to_time %>
+</div>
+
+<%= button_to "リクエスト送信", approval_path, {method: :patch} %>
