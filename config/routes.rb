@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   post '/:id/baggages/destination', to: 'baggages#destination', as: 'destination'
   get '/:id/baggages/request_list', to: 'baggages#index', as: 'request_list'
   get '/:id/baggages/:baggage_request_id/request_content', to: 'baggages#receives', as: 'request_content'
-  put '/:id/baggages/:baggage_request_id/approval', to: 'baggages#update', as: 'approval'
+  patch '/:id/baggages/:baggage_request_id/update', to: 'baggages#update', as: 'approval'
   get '/:id/baggages/transaction_history', to: 'baggages#transaction_history', as: 'transaction_history'
 
 end
