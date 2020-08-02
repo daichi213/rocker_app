@@ -30,21 +30,14 @@ class User < ApplicationRecord
     def required
         BaggageRequest.includes(
             user: :active_requires
-        ).where(id: BaggageRequest.get_required_baggage_request(self.id))
+        ).where(
+            id: BaggageRequest.get_required_baggage_request(self.id)
+        )
     end
 
-    # includesを使用したrequiresメソッド（requiresメソッドと等価）
-    # def get_baggage_request_id
-    #     self.active_requires.order(id: "DESC").limit(1).pluck(:id)[0]
-    # end
-
-    # def get_recently_requires
-    #     BaggageRequestToUser.includes(
-    #         baggage_request_to: :user
-    #     ).where(
-    #         baggage_request_id: self.get_baggage_request_id
-    #     ).map{|i| i.required_id}
-    # end
+    def approval_request
+        BaggageRequest.get_approval_baggage_request(self.id).where(approval_flag: 1)
+    end
 
     accepts_nested_attributes_for :receivable_baggages
 

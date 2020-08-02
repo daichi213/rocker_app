@@ -2,7 +2,7 @@ class BaggageRequest < ApplicationRecord
     belongs_to :user, class_name: "User"
     #  optional: true
     has_many :to_users, class_name: "BaggageRequestToUser"
-    has_many :of_transaction, through: :to_users, source: :transactions
+    # TODO BaggageRequestとTransactionへの紐付けが難しいため、includesを使用したメソッドを作成する
 
     accepts_nested_attributes_for :to_users
 
@@ -14,12 +14,11 @@ class BaggageRequest < ApplicationRecord
         ).map{|i| i.baggage_request_id}
     end
 
-    def BaggageRequest.convert_to_integer(ary)
-        BaggageRequest.extract(ary).map {|i| i.to_i}
-    end
-
-    # 配列でリクエスト先を出力
-    def required
-        BaggageRequest.convert_to_integer(self.user_id)
+    def BaggageRequest.get_approval_baggage_request(user_id)
+        BaggageRequest.includes(
+            :to_users
+        ).where(
+            "(required_id = ?) AND (del_flag = ?)", user_id, 0
+        ).references(:to_users)
     end
 end
