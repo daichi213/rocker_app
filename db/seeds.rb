@@ -321,7 +321,7 @@ users.each do |user|
             approval_flag: 0
         )
     10.times do |n|
-        request.to_users.create!(required_id: n,
+        request.to_users.create!(required_id: n+1,
                                 del_flag: 0)
     end
 end
