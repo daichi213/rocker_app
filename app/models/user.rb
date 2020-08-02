@@ -35,7 +35,7 @@ class User < ApplicationRecord
         )
     end
 
-    def approval_request
+    def approval_requests
         BaggageRequest.get_approval_baggage_request(self.id).where(approval_flag: 1)
     end
 
