@@ -34,7 +34,7 @@ class BaggagesController < ApplicationController
   # 受けているリクエストの一覧ページ
   def index
     @baggage_requests = current_user.required
-    debugger
+    # debugger
   end
 
   # リクエストの詳細・承認ページgit
@@ -47,12 +47,11 @@ class BaggagesController < ApplicationController
     # リクエストの承認手続き
     @baggage_request = BaggageRequest.find_by(id: params[:baggage_request_id])
     @baggage_request_flag = @baggage_request.update_attribute(:approval_flag, 1)
-    # @baggage_request.to_users.map{|to_user| to_user.del_flag = 1 if to_user.id != params[:baggage_request_id]}
     @to_users_flag = @baggage_request.to_users.update_all(del_flag: 1)
-
-    # Transaction_tableの作成
-    # TODO 取引者のto_usersのdel_flagをここで0にする
-    @trasaction
+    # debugger
+    @request_to_transaction = @baggage_request.to_users.find_by(required_id: params[:id])
+    @request_to_transaction.update_attribute(:del_flag, 0)
+    # debugger
     if @baggage_request_flag && @to_users_flag
       redirect_to user_path current_user
     else
