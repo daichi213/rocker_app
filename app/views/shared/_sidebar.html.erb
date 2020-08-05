@@ -111,8 +111,40 @@
                         <li><%= link_to "マップ", root_path %></li>
                         <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
                         <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
+                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
+                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
+
+                    <% elsif request.fullpath == request_form_path(current_user) %>
+                        <li><%= link_to "マップ", root_path %></li>
+                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
+                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
+                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+
+                    <% elsif request.fullpath == request_list_path(current_user) %>
+                        <li><%= link_to "マップ", root_path %></li>
+                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
+                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
+                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+
+                    <% elsif request.fullpath == approval_requests_path(current_user) %>
+                        <li><%= link_to "マップ", root_path %></li>
+                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
+                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
+                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+                        <li><%= link_to "リクエスト依頼", "#" %></li>
+
+                    <% elsif request.fullpath == intend_to_requests_path(current_user) %>
+                        <li><%= link_to "マップ", root_path %></li>
+                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
+                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
+                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                         <li><%= link_to "リクエスト依頼", "#" %></li>
                     <% end %>

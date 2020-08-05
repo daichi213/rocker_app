@@ -1,0 +1,9 @@
+<% provide(:title, '荷物預り予定一覧') %>
+
+<h1>Approval Request List</h1>
+
+<ul class="baggage_requests">
+    <% @approval_requests.each do |baggage_request| %>
+        <%= render "baggage_request", baggage_request: baggage_request %>
+    <% end %>
+</ul>

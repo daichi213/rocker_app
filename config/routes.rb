@@ -8,9 +8,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
   get '/users/searches', to: 'users#search', as: 'users_search'
-  resources :users do
-    # resources :baggages, only: [:request_content, :approval]
-  end
+  resources :users
 
   # user_search
   get 'searches/user_search'
@@ -28,6 +26,12 @@ Rails.application.routes.draw do
   get '/:id/baggages/request_list', to: 'baggages#index', as: 'request_list'
   get '/:id/baggages/:baggage_request_id/request_content', to: 'baggages#receives', as: 'request_content'
   patch '/:id/baggages/:baggage_request_id/update', to: 'baggages#update', as: 'approval'
+  get '/:id/baggages/approval_requests', to: 'baggages#approval_requests', as: 'approval_requests'
+  get '/:id/baggages/intend_to_requests', to: 'baggages#intend_to_requests', as: 'intend_to_requests'
   get '/:id/baggages/transaction_history', to: 'baggages#transaction_history', as: 'transaction_history'
+
+  # message
+  get '/:id/messages/:to_user_id/message_page', to: 'messages#new', as: 'message_page'
+  post '/:id/messages/:to_user_id/post', to: 'messages#create', as: 'message_post'
 
 end

@@ -17,6 +17,8 @@ class User < ApplicationRecord
                                 foreign_key: "user_id"
     has_many :active_requires, class_name: "BaggageRequest",
                                 foreign_key: "user_id"
+    has_many :messages, class_name: "Message",
+                        foreign_key: "user_id"
 
     def requires
         if !self.active_requires.blank?
@@ -37,6 +39,10 @@ class User < ApplicationRecord
 
     def approval_requests
         BaggageRequest.get_approval_baggage_request(self.id).where(approval_flag: 1)
+    end
+
+    def intend_to_requests
+        BaggageRequest.get_intend_to_request(self.id)
     end
 
     accepts_nested_attributes_for :receivable_baggages

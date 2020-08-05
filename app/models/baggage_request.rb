@@ -6,6 +6,8 @@ class BaggageRequest < ApplicationRecord
 
     accepts_nested_attributes_for :to_users
 
+    # TODO VALIDATION追加
+
     def BaggageRequest.get_required_baggage_request(user_id)
         BaggageRequestToUser.includes(
             baggage_request_to: :user
@@ -14,11 +16,18 @@ class BaggageRequest < ApplicationRecord
         ).map{|i| i.baggage_request_id}
     end
 
+    # :to_usersで該当する条件をwhere句で取得してそれに紐づくBaggageRequestのレコードを取得
     def BaggageRequest.get_approval_baggage_request(user_id)
         BaggageRequest.includes(
             :to_users
         ).where(
             "(required_id = ?) AND (del_flag = ?)", user_id, 0
         ).references(:to_users)
+    end
+
+    def BaggageRequest.get_intend_to_request(user_id)
+        BaggageRequest.where(
+            "(user_id = ?) AND (approval_flag = ?)", user_id, 1
+        )
     end
 end

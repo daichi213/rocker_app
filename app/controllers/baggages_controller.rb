@@ -1,6 +1,8 @@
 class BaggagesController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user
+
+  # TODO BAGGAGE SIZEを受け入れ可能サイズへ変更
   
   def new
     @request = BaggageRequest.new
@@ -57,6 +59,14 @@ class BaggagesController < ApplicationController
     else
       render 'receives'
     end
+  end
+
+  def approval_requests
+    @approval_requests = current_user.approval_requests
+  end
+
+  def intend_to_requests
+    @intend_to_requests = current_user.intend_to_requests
   end
 
   # 過去に受けたリクエストの履歴
