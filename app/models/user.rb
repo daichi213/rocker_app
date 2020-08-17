@@ -17,28 +17,52 @@ class User < ApplicationRecord
                                 foreign_key: "user_id"
     has_many :active_requires, class_name: "BaggageRequest",
                                 foreign_key: "user_id"
-    has_many :messages, class_name: "Message",
-                        foreign_key: "user_id"
+    has_many :active_request, class_name: "BaggageRequestToUser",
+                                foreign_key: "requires_id"
+    has_many :passive_request, class_name: "BaggageRequestToUser",
+                                foreign_key: "required_id"
+    has_many :requires, through: :active_request, source: :required
+    has_many :required, through: :passive_request, source: :requires
+    has_many :messages_in_requires, through: :active_request, source: :messages
+    has_many :messages_in_required, through: :passive_request, source: :messages
 
-    def requires
-        if !self.active_requires.blank?
-            self.active_requires.last.to_users.map{|i| i.required_id}
-        else
-            0
-        end
-    end
+    # def requires
+    #     if !self.active_requires.blank?
+    #         self.active_requires.last.to_users.map{|i| i.required_id}
+    #     else
+    #         0
+    #     end
+    # end
 
-    # includes内のキー名称は左側に従属するクラスのキーを持ってくる
-    def required
-        BaggageRequest.includes(
-            user: :active_requires
-        ).where(
-            id: BaggageRequest.get_required_baggage_request(self.id)
+    def get_activation_request_to
+        self.active_request.
+        where(
+            'del_flag LIKE ?', 0
         )
     end
 
+    def get_activation_request_from
+        self.passive_request.
+        where(
+            'del_flag LIKE ?', 0
+        )
+    end
+
+    def get_active_request_id(baggage_request_id)
+        self.get_activation_request_to.find_by(baggage_request_id: baggage_request_id)
+    end
+
+    def get_passive_request_id(baggage_request_id)
+        get_activation_request_from.find_by(baggage_request_id: baggage_request_id)
+    end
+
+    # includes内のキー名称は左側に従属するクラスのキーを持ってくる
+    def required_baggage
+        BaggageRequest.get_required_baggage_request(self.id)
+    end
+
     def approval_requests
-        BaggageRequest.get_approval_baggage_request(self.id).where(approval_flag: 1)
+        self.required_baggage.where(approval_flag: 1)
     end
 
     def intend_to_requests
@@ -85,26 +109,6 @@ class User < ApplicationRecord
 
     def forget
         update_attribute(:remember_digest, nil)
-    end
-
-    # followユーザー一覧を取得
-    def feed
-        following_ids = "SELECT followed_id FROM relationships
-                    WHERE follower_id = :user_id"
-        Micropost.where("user_id IN (#{following_ids})
-                    OR user_id = :user_id", user_id: id)
-    end
-
-    def follow(other_user)
-        following << other_user
-    end
-
-    def unfollow(other_user)
-        active_relationships.find_by(followed_id: other_user.id).destroy
-    end
-
-    def following?(other_user)
-        following.include?(other_user)
     end
 
     def prefecture_name

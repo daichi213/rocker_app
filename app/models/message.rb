@@ -1,4 +1,5 @@
 class Message < ApplicationRecord
-    belongs_to :user, class_name: User
+    belongs_to :baggage_request_to_user, class_name: "BaggageRequestToUser"
+    belongs_to :user
     # TODO VALIDATION追加
 end

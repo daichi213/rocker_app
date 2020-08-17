@@ -8,21 +8,27 @@ class BaggageRequest < ApplicationRecord
 
     # TODO VALIDATION追加
 
-    def BaggageRequest.get_required_baggage_request(user_id)
-        BaggageRequestToUser.includes(
-            baggage_request_to: :user
-        ).where(
-            "(required_id = ?) AND (del_flag = ?)", user_id, 0
-        ).map{|i| i.baggage_request_id}
+    def get_baggage_request_to_in_required(user_id)
+        BaggageRequestToUser.get_baggage_request_to_in_required(user_id, self.id)
+    end
+
+    def get_baggage_request_to_in_requires(user_id)
+        BaggageRequest.to_users.find_by(required_id: user_id)
     end
 
     # :to_usersで該当する条件をwhere句で取得してそれに紐づくBaggageRequestのレコードを取得
-    def BaggageRequest.get_approval_baggage_request(user_id)
+    def BaggageRequest.get_required_baggage_request(user_id)
         BaggageRequest.includes(
             :to_users
         ).where(
             "(required_id = ?) AND (del_flag = ?)", user_id, 0
         ).references(:to_users)
+    end
+
+    def BaggageRequest.get_requires_baggage_request(user_id)
+        BaggageRequest.where(
+            "(user_id = ?) AND (approval_flag = ?)", user_id, 0
+        )
     end
 
     def BaggageRequest.get_intend_to_request(user_id)

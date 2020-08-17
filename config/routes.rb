@@ -31,7 +31,8 @@ Rails.application.routes.draw do
   get '/:id/baggages/transaction_history', to: 'baggages#transaction_history', as: 'transaction_history'
 
   # message
-  get '/:id/messages/:to_user_id/message_page', to: 'messages#new', as: 'message_page'
-  post '/:id/messages/:to_user_id/post', to: 'messages#create', as: 'message_post'
+  get '/:id/messages/:baggage_request_to_id/message_page', to: 'messages#new', as: 'message_page'
+  post '/:id/messages/:baggage_request_to_id/post', to: 'messages#create', as: 'message_post'
+  get '/:id/messages/:baggage_request_to_id/api/messages', to: 'api/messages#index'
 
 end
