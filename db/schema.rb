@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200803071258) do
+ActiveRecord::Schema.define(version: 20200805090531) do
 
   create_table "baggage_request_to_users", force: :cascade do |t|
     t.integer "required_id"
     t.integer "baggage_request_id"
+    t.integer "requires_id"
     t.integer "transaction_id"
     t.integer "del_flag"
     t.datetime "created_at", null: false
@@ -24,7 +25,7 @@ ActiveRecord::Schema.define(version: 20200803071258) do
   create_table "baggage_requests", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "from_time"
-    t.time "to_time"
+    t.datetime "to_time"
     t.text "request_content"
     t.text "baggage_content"
     t.text "transaction_message"
@@ -47,9 +48,10 @@ ActiveRecord::Schema.define(version: 20200803071258) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "to_user_id"
     t.text "content"
+    t.integer "user_id"
+    t.integer "for_user_id"
+    t.integer "baggage_request_to_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

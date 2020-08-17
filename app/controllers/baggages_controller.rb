@@ -17,6 +17,7 @@ class BaggagesController < ApplicationController
       # TODO strong parameterに書き換え
       params[:baggage_request][:required_id].each do |required_id|
         @request_to = @request.to_users.create(required_id: required_id,
+                                            requires_id: current_user.id,
                                             del_flag: 0)
         # debugger
         if !@request_to.valid?
@@ -35,7 +36,7 @@ class BaggagesController < ApplicationController
 
   # 受けているリクエストの一覧ページ
   def index
-    @baggage_requests = current_user.required
+    @baggage_requests = current_user.required_baggage
     # debugger
   end
 
@@ -83,6 +84,8 @@ class BaggagesController < ApplicationController
                                       :to_time,
                                       :transaction_message,
                                       {:to_users => []}
+                                      ).merge(
+                                        approval_flag: 0
                                       )
     end
     

@@ -322,6 +322,7 @@ users.each do |user|
         )
     10.times do |n|
         request.to_users.create!(required_id: n+1,
+                                requires_id: user.id,
                                 del_flag: 0)
     end
 end
