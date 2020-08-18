@@ -7,11 +7,12 @@
         <%= form_for @message, url: message_post_path(current_user, @baggage_request_to_user), remote: true do |f| %>
             <%= f.text_field :content, id: "new_message" %>
 
-            <%= f.button "送信" %>
+            <%= f.button "Send" %>
         <% end %>
     </div>
 </div>
 
+<!-- TODO jsファイルに移す -->
 <script>
     $(function(){ 
       function buildHTML(message){
@@ -110,6 +111,10 @@
 
       if (window.location.href.match(/\/messages\/\d+\/message_page/)) {
         setInterval(reloadMessages, 7000);
+        // TODO ページの遷移後のreloadMessagesの対処
+        // $(window).on('beforeunload', function(e) {
+        //   setInterval(function(){location.reload();}, 2000);
+        // });
       }
     });
 </script>
