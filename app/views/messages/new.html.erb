@@ -10,6 +10,7 @@
     </div>
     <div class='message-lists'>
         <!-- メッセージ一覧の表示 -->
+        <%= render @messages %>
     </div>
     <div class='message-form'>
         <%= form_for @message, url: message_post_path(current_user, @baggage_request_to_user), remote: true do |f| %>
@@ -62,58 +63,62 @@ $(function(){
      return html;
    };
  }
+
+//  Post a message
 $('#new_message').on('submit', function(e){
- e.preventDefault();
- var formData = new FormData(this);
- var url = $(this).attr('action')
- $.ajax({
-   url: url,
-   type: "POST",
-   data: formData,
-   dataType: 'json',
-   processData: false,
-   contentType: false
- })
-  .done(function(data){
-    var html = buildHTML(data);
-    $('.message-lists').append(html);      
-    $('form')[0].reset();
-    $('.message-lists').animate({ scrollTop: $('.message-lists')[0].scrollHeight});
-  })
-  .fail(function(data){
-    alert('エラーが発生したためメッセージは送信できませんでした。');
-  })
-  .always(function(data){
-    $('.send-btn').prop('disabled', false);
-  });
-  return false;
- })
-
- var reloadMessages = function() {
-  last_message_id = $('.message-list:last').data("message-id");
+  e.preventDefault();
+  var formData = new FormData(this);
+  var url = $(this).attr('action')
   $.ajax({
-    url: "api/messages",
-    type: 'get',
+    url: url,
+    type: "POST",
+    data: formData,
     dataType: 'json',
-    data: {id: last_message_id}
+    processData: false,
+    contentType: false
   })
-  .done(function(messages) {
-    if (messages.length !== 0) {
-    var insertHTML = '';
-
-    $.each(messages, function(i, message) {
-      insertHTML += buildHTML(message)
+    .done(function(data){
+      var html = buildHTML(data);
+      $('.message-lists').append(html);      
+      $('form')[0].reset();
+      $('.message-lists').animate({ scrollTop: $('.message-lists')[0].scrollHeight});
+    })
+    .fail(function(data){
+      alert('エラーが発生したためメッセージは送信できませんでした。');
+    })
+    .always(function(data){
+      $('.send-btn').prop('disabled', false);
     });
-    $('.message-lists').append(insertHTML);
-    $('.message-lists').animate({ scrollTop: $('.message-lists')[0].scrollHeight});
-  }
-  })
-  .fail(function() {
-    alert('error');
-  });
-};
+    // return false;
+})
+
+// Load messages
+  var reloadMessages = function() {
+    last_message_id = $('.message-list:last').data("message-id");
+    $.ajax({
+      url: "api/messages",
+      type: 'get',
+      dataType: 'json',
+      data: {last_message_id: last_message_id}
+    })
+    .done(function(messages) {
+      if (messages.length !== 0) {
+        var insertHTML = '';
+
+        $.each(messages, function(i, message) {
+          insertHTML += buildHTML(message)
+        });
+        $('.message-lists').append(insertHTML);
+        $('.message-lists').animate({ scrollTop: $('.message-lists')[0].scrollHeight});
+      }
+    })
+    .fail(function() {
+      alert('error');
+    });
+  };
+
   if (document.location.href.match(/\/messages\/\d+\/message_page/)) {
-    setInterval(reloadMessages, 70000);
- }
+    setInterval(reloadMessages, 7000);
+  }
 });
 </script>
