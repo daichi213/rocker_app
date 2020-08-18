@@ -59,6 +59,8 @@
   .message-lists {
     overflow: scroll;
     z-index: 0;
+    // display: flex;
+    // flex-direction: column;
     background-color: #fafafa;
     border-top-color: #eeeeee;
     border-bottom-color: #eeeeee;
