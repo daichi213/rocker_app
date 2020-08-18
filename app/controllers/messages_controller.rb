@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
     def new
         @message = Message.new
         @baggage_request_to_user = BaggageRequestToUser.find_by(id: params[:baggage_request_to_id])
+        @messages = @baggage_request_to_user.messages
         # debugger
     end
 
@@ -14,7 +15,6 @@ class MessagesController < ApplicationController
         if @message.save
             # debugger
             respond_to do |format|
-                format.html {redirect_to message_page_path(current_user, @baggage_request_to_user)}
                 format.json
             end
         else
