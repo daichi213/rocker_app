@@ -13,6 +13,7 @@
 </div>
 
 <!-- TODO jsファイルに移す -->
+
 <script>
     $(function(){ 
       function buildHTML(message){
@@ -109,12 +110,13 @@
         });
       };
 
-      if (window.location.href.match(/\/messages\/\d+\/message_page/)) {
+      // $(window).on('load',function(){
+      //   if(document.URL.match("message_page")) {
+      //     setInterval(reloadMessages, 5000);
+      //   }
+      // });
+      if (document.location.href.match(/\/messages\/\d+\/message_page/)) {
         setInterval(reloadMessages, 7000);
-        // TODO ページの遷移後のreloadMessagesの対処
-        // $(window).on('beforeunload', function(e) {
-        //   setInterval(function(){location.reload();}, 2000);
-        // });
       }
     });
 </script>

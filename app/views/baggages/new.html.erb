@@ -5,7 +5,8 @@
     <section class='col-md-8'>
         <div class='request-form'>
             <% if logged_in? %>
-                <%= form_for @request, url: request_path do |f| %>
+                <!-- TODO すべてのform_forに対してlocal: trueをつける -->
+                <%= form_for @request, url: request_path, local: true do |f| %>
                     <%= render "shared/error_messages", object: f.object %>
                     <h3>荷物タイプ</h3>
                     <%#= f.check_box :large_scale_baggage, class: "baggage-type" %>

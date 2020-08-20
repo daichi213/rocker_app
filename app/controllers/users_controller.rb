@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       @prefecture_names.push user.state
     end
     @prefecture_names = @prefecture_names.uniq
+    # debugger
   end
 
   def show

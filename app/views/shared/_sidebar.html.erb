@@ -23,10 +23,16 @@
             </section>
             <section class='menu-content'>
                 <ul>
-                    <% if request.fullpath == root_path %>
-                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
+                    <li><%= link_to "マップ", root_path if request.fullpath != root_path %></li>
+                    <li><%= link_to "リクエストフォーム", request_form_path(current_user) if request.fullpath != request_form_path(current_user) %></li>
+                    <li><%= link_to "リクエスト一覧", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
+                    <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) if request.fullpath != approval_requests_path(current_user) %></li>
+                    <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
+                    
+                    <input id='search_range'>
+                    <button onclick=getLocationByHtml5()>現在地の取得</button>
 
-                    <% elsif (request.fullpath == users_path) || (request.fullpath == (users_path + "?page=#{params[:page]}")) %>
+                    <% if (request.fullpath == users_path) || (request.fullpath == (users_path + "?page=#{params[:page]}")) %>
                         <%#= form_with(scope: :search, users_path, method: "get", local: true) do |f| %>
                             <%#= f.label :name, 'ユーザーを絞り込む' %>
                             <%#= f.text_field :name, value: @search_params[:name] %>
@@ -52,104 +58,62 @@
                                     <a class="dropdown-item" href="#">その他リンク</a>
                             </div><!-- /.dropdown-menu -->
                         </div><!-- /.btn-group -->
-                        <script>
-                            // ここは変数定義をしない
-                            var searchItem = '.search_item';   // 絞り込む項目を選択するエリア
-                            var listItem = '.list_item';       // 絞り込み対象のアイテム
-                            var hideClass = 'is-hide';         // 絞り込み対象外の場合に付与されるclass名
-                            var activeClass = 'is-active';     // 選択中のグループに付与されるclass名
-                            
-                            $(function () {
-                                // stateレベルでの絞り込み検索
-                                $(searchItem).on('click', function(){
-                                    // $(searchItem).removeClass(activeClass);
-                                    // $(".search_item_detail").remove();
-                                    var area = $(this).addClass(activeClass).data('state');
-                                    city_areas = search_filter('state', area, 'city');
-                                    city_areas = city_areas.filter(function (x, i, self) {
-                                        return self.indexOf(x) === i;
-                                    });
-                                    for (var i=0; i<city_areas.length; i++) {
-                                        $('div.dropdown-menu').append(`<button class="search_item_detail" data-city=${city_areas[i]}>${city_areas[i]}</button>`);
-                                    }
-                                });
-
-                                // cityレベルでの絞り込み検索実装
-                                $(".search_item_detail").on('click', function(){
-                                    $(".search_item_detail").removeClass(activeClass);
-                                    var area = $(this).addClass(activeClass).data('city');
-                                    search_filter('city', area);
-                                });
-                            });
-
-                            function search_filter(area_type, area, detail_area_type) {
-                                $(listItem).removeClass(hideClass);
-                                if(area == ''){
-                                    return;
-                                }
-                                var detail_areas = [];
-                                for (var i=0; i< $(listItem).length; i++) {
-                                    var itemData = $(listItem).eq(i).data(area_type);
-                                    
-                                    if (itemData !== area) {
-                                        $(listItem).eq(i).addClass(hideClass);
-                                    }else{
-                                        if(detail_area_type){
-                                            var detail_area = $(listItem).eq(i).data(detail_area_type);
-                                            detail_areas.push(detail_area);
-                                        }
-                                    }
-                                }
-                                if(detail_areas) return detail_areas;
-                            }
-                        </script>
-                        
-                        <input id='search_range'>
-                        <button onclick="getLocationByHtml5()">現在地の取得</button>
-
-                    <% elsif request.fullpath == user_path(current_user) %>
-                        <li><%= link_to "マップ", root_path %></li>
-                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
-                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
-                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
-                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-
-                    <% elsif request.fullpath == request_form_path(current_user) %>
-                        <li><%= link_to "マップ", root_path %></li>
-                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
-                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
-                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-
-                    <% elsif request.fullpath == request_list_path(current_user) %>
-                        <li><%= link_to "マップ", root_path %></li>
-                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
-                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
-                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-
-                    <% elsif request.fullpath == approval_requests_path(current_user) %>
-                        <li><%= link_to "マップ", root_path %></li>
-                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
-                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
-                        <li><%= link_to "荷物預け予定一覧", intend_to_requests_path(current_user) %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-
-                    <% elsif request.fullpath == intend_to_requests_path(current_user) %>
-                        <li><%= link_to "マップ", root_path %></li>
-                        <li><%= link_to "リクエストフォーム", request_form_path(current_user) %></li>
-                        <li><%= link_to "リクエスト一覧", request_list_path(current_user) %></li>
-                        <li><%= link_to "荷物預り予定一覧", approval_requests_path(current_user) %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
-                        <li><%= link_to "リクエスト依頼", "#" %></li>
                     <% end %>
                 </ul>
             </section>
         </nav>
     </div>
 <% end %>
+
+
+<script>
+    // ここは変数定義をしない
+    var searchItem = '.search_item';   // 絞り込む項目を選択するエリア
+    var listItem = '.list_item';       // 絞り込み対象のアイテム
+    var hideClass = 'is-hide';         // 絞り込み対象外の場合に付与されるclass名
+    var activeClass = 'is-active';     // 選択中のグループに付与されるclass名
+    
+    $(function () {
+        // stateレベルでの絞り込み検索
+        $(searchItem).on('click', function(){
+            // $(searchItem).removeClass(activeClass);
+            // $(".search_item_detail").remove();
+            var area = $(this).addClass(activeClass).data('state');
+            city_areas = search_filter('state', area, 'city');
+            city_areas = city_areas.filter(function (x, i, self) {
+                return self.indexOf(x) === i;
+            });
+            for (var i=0; i<city_areas.length; i++) {
+                $('div.dropdown-menu').append(`<button class="search_item_detail" data-city=${city_areas[i]}>${city_areas[i]}</button>`);
+            }
+        });
+
+        // cityレベルでの絞り込み検索実装
+        $(".search_item_detail").on('click', function(){
+            $(".search_item_detail").removeClass(activeClass);
+            var area = $(this).addClass(activeClass).data('city');
+            search_filter('city', area);
+        });
+    });
+
+    function search_filter(area_type, area, detail_area_type) {
+        $(listItem).removeClass(hideClass);
+        if(area == ''){
+            return;
+        }
+        var detail_areas = [];
+        for (var i=0; i< $(listItem).length; i++) {
+            var itemData = $(listItem).eq(i).data(area_type);
+            
+            if (itemData !== area) {
+                $(listItem).eq(i).addClass(hideClass);
+            }else{
+                if(detail_area_type){
+                    var detail_area = $(listItem).eq(i).data(detail_area_type);
+                    detail_areas.push(detail_area);
+                }
+            }
+        }
+        if(detail_areas) return detail_areas;
+    }
+</script>

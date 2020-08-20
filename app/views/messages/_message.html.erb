@@ -1,5 +1,4 @@
-
-<div class="message-list" data-message-id= ${message.id}>
+<%= content_tag :div, class:"message-list", data: {message_id: message.id} do %>
     <div class="message-list__upper-info">
         <div class="message-list__upper-info__user">
             <%= message.user.name %>
@@ -13,4 +12,4 @@
             <%= message.content %>
         </p>
     </div>
-</div>
+<% end %>

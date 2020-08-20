@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20200805090531) do
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
-    t.integer "for_user_id"
     t.integer "baggage_request_to_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

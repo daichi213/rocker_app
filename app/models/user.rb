@@ -125,9 +125,9 @@ class User < ApplicationRecord
         [state, city, street, house].compact.join('')
     end
 
-    # geocoded_by :address
-    # after_validation :geocode, if: (:state_changed? ||
-    #                                 :city_changed? ||
-    #                                 :street_changed? ||
-    #                                 :house_changed?)
+    geocoded_by :address
+    after_validation :geocode, if: (:state_changed? ||
+                                    :city_changed? ||
+                                    :street_changed? ||
+                                    :house_changed?)
 end

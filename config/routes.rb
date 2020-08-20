@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    get 'search/search'
+  end
+
   # home page
   root 'static_pages#home'
   get '/about', to: 'static_pages#about', as: 'about'
