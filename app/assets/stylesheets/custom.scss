@@ -13,9 +13,10 @@ $gray-medium-light: #eaeaea;
 
 body{
     padding-top:60px;
-    font-family: 'Comic Sans MS', 'Wawati SC';
+    font-family: 'Noto Sans JP', sans-serif;
+    // font-family: 'Permanent Marker', cursive;
     color: black;
-    background-color: rgb(255, 245, 155);
+    background-color: rgb(252, 227, 115);
 }
 
 section{
@@ -50,16 +51,15 @@ img {
 /* header */
 
 header{
-  font-family: 'Comic Sans MS';
   a {
     color: black;
   }
 }
 
 #logo{
+    font-family: 'IM Fell DW Pica SC', serif;
     float: left;
     margin-right: 10px;
-    font-family: 'Comic Sans MS';
     color: black;
 
     /* em(えむ)は文字の大きさを基準にしている単位で、文字の大きさを20pxとしている場合は
@@ -121,25 +121,24 @@ footer{
 /* sidebar */
 
   .slidebar{
-    background-color: rgb(255, 184, 102);
-    border-radius: 20px;
+    background-color: rgb(148, 148, 148);
     nav {
       section.user_info {
+        color: white;
         margin-top: 20px;
         margin-bottom: 0;
         padding-bottom: 0;
-        div {
-          display: block;
-          h1.user-image{
-            color: white;
-            display: block;
-            overflow: none;
-            img {
-              border-radius: 80%;
-            }
+        h1.user-image{
+          color: white;
+          overflow: visible;
+          img {
+            border-radius: 80%;
           }
-          span{
-            text-align: right;
+        }
+        span{
+          text-align: right;
+          a {
+            color: white;
           }
         }
       }
