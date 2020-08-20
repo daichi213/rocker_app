@@ -28,6 +28,7 @@
     <%= f.text_field :postcode, placeholder: '1000014' %>
 
     <%= f.label :prefecture_code, '都道府県' %>
+    <!-- User.prefecture_code = nil,stateからprefecture_codeに格納する -->
     <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {selected: group.prefecture_code} %>
 
     <%= f.label :city, '市区町村' %>

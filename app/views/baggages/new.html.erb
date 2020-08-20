@@ -42,7 +42,7 @@
                     <div class="request-time">
                         <div class='from_time'>
                             <h5>From</h5>
-                            <%= f.datetime_field :from_time, class: "from_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1 %>
+                            <%= f.datetime_field :from_time, class: "from_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1, min: Time.zone.now.strftime("%Y/%m/%d %H:%m") %>
                         </div>
                         <div class='from_time'>
                             <h5>To</h5>
