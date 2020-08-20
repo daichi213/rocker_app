@@ -11,11 +11,12 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require_tree .
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+
+// TODO turbolinks削除済み　使用する場合はbundle install 後に読み込み設定
 
 // Google_GeolocationAPI
 function getLocation() {
@@ -46,6 +47,7 @@ function getLocationByHtml5() {
     }
 }
 
+// TODO 現在地周辺の絞り込み検索の実装
 function showPositionByHtml5(position) {
     alert(`${position.coords.latitude},${position.coords.longitude}`);
 }
