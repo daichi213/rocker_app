@@ -22,9 +22,9 @@
 </div>
 <div>
     <h4>預り希望時間帯</h4>
-    <%= @baggage_request.from_time %>
+    <%= @baggage_request.from_time.strftime("%m/%d %H:%M") %>
     <br>
-    <%= @baggage_request.to_time %>
+    <%= @baggage_request.to_time.strftime("%m/%d %H:%M") %>
 </div>
 
 <%= button_to "リクエスト送信", approval_path, {method: :patch} %>

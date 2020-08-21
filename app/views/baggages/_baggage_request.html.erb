@@ -20,9 +20,9 @@
     </div>
     <div>
         <h4>預り希望時間帯</h4>
-        <%= baggage_request.from_time %>
+        <%= baggage_request.from_time.strftime("%m/%d %H:%m") %>
         <br>
-        <%= baggage_request.to_time %>
+        <%= baggage_request.to_time.strftime("%m/%d %H:%m") %>
     </div>
     <div class="request_index_link_row">
         <% if request.fullpath == request_list_path(current_user) %>

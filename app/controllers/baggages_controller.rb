@@ -43,6 +43,7 @@ class BaggagesController < ApplicationController
   # リクエストの詳細・承認ページgit
   def receives
     @baggage_request = BaggageRequest.find_by(id: params[:baggage_request_id])
+    @user = @baggage_request.user
   end
 
   # updateですがリクエストの受け手側の承認時に使用するアクションになります。
