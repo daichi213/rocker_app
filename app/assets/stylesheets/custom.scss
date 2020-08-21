@@ -14,6 +14,7 @@ $gray-medium-light: #eaeaea;
 body{
     padding-top:60px;
     font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.6em;
     // font-family: 'Permanent Marker', cursive;
     color: black;
     background-color: rgb(252, 227, 115);
@@ -66,7 +67,7 @@ header{
     1emは20pxとなる。
     これは相対単位と呼ばれ、ブラウザから文字の大きさの要求があった場合にそれに合わせて文字
     の大きさが変化するため、一般的に使用が推奨されている。 */
-    font-size: 1.7em;
+    font-size: 2.0em;
 
     /* 大文字表記 */
     text-transform: uppercase;
