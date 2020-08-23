@@ -24,7 +24,8 @@
                 var map;
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: 35.681, lng: 139.765},
+                        // TODO 中心位置を現在位置へと変更する。getLocationの返却値を設定する。
+                    center: {lat: gon.current_user.latitude, lng: gon.current_user.longitude},
                     zoom: 17
                     });
                 }
