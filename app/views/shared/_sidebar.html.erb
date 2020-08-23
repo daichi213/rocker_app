@@ -5,9 +5,9 @@
                 <h1 class="user-image">
                     <%= link_to current_user do %>
                         <% if current_user.picture? %>
-                            <%= image_tag current_user.picture.thumb50.url %>
+                            <%= image_tag current_user.picture.thumb.url %>
                         <% else %>
-                            <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+                            <%= image_tag "/uploads/user/picture/thumb_default.jpg" %>
                         <% end %>
                     <% end %>
                     <%= current_user.name %>
@@ -23,40 +23,13 @@
                 <ul>
                     <li><%= link_to "Map", root_path if request.fullpath != root_path %></li>
                     <li><%= link_to "Request Form", request_form_path(current_user) if request.fullpath != request_form_path(current_user) %></li>
-                    <li><%= link_to "Request List", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
-                    <li><%= link_to "Request From", approval_requests_path(current_user) if request.fullpath != approval_requests_path(current_user) %></li>
-                    <li><%= link_to "Request For", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
+                    <li><%= link_to "Receives Request List", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
+                    <li><%= link_to "Received Request List", approval_requests_path(current_user) if request.fullpath != approval_requests_path(current_user) %></li>
+                    <li><%= link_to "Sent Request List", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
                     
                     <input id='search_range'>
                     <button onclick=getLocationByHtml5()>現在地の取得</button>
 
-                    <% if (request.fullpath == users_path) || (request.fullpath == (users_path + "?page=#{params[:page]}")) %>
-                        <%#= form_with(scope: :search, users_path, method: "get", local: true) do |f| %>
-                            <%#= f.label :name, 'ユーザーを絞り込む' %>
-                            <%#= f.text_field :name, value: @search_params[:name] %>
-
-                            <%#= f.label :sex,  %>
-                            <%#= submit_tag "探す" %>
-                        <%# end %>
-
-                        <div class="btn-group dropright">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            ユーザーの絞込み
-                            </button>
-                            <div class="dropdown-menu">
-                                <!-- JpPferecture使用、県名全表示 -->
-                                <%# @prefecture_names.each do |pre| %>
-                                    <%#= button_tag pre.name, class: "dropdown-item search_item", data: {state: pre.name} %>
-                                <%# end %>
-                                <% @prefecture_names.each do |pre| %>
-                                    <%= button_tag pre, class: "dropdown-item search_item", data: {state: pre} %>
-                                <% end %>
-                                <%= link_to "都道府県一覧", "#", class: "dropdown-item" %>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">その他リンク</a>
-                            </div><!-- /.dropdown-menu -->
-                        </div><!-- /.btn-group -->
-                    <% end %>
                 </ul>
             </section>
         </nav>
@@ -74,16 +47,9 @@
     $(function () {
         // stateレベルでの絞り込み検索
         $(searchItem).on('click', function(){
-            // $(searchItem).removeClass(activeClass);
-            // $(".search_item_detail").remove();
+            $(searchItem).removeClass(activeClass);
             var area = $(this).addClass(activeClass).data('state');
-            city_areas = search_filter('state', area, 'city');
-            city_areas = city_areas.filter(function (x, i, self) {
-                return self.indexOf(x) === i;
-            });
-            for (var i=0; i<city_areas.length; i++) {
-                $('div.dropdown-menu').append(`<button class="search_item_detail" data-city=${city_areas[i]}>${city_areas[i]}</button>`);
-            }
+            search_filter('state', area);
         });
 
         // cityレベルでの絞り込み検索実装
@@ -94,24 +60,16 @@
         });
     });
 
-    function search_filter(area_type, area, detail_area_type) {
+    function search_filter(area_type, area) {
         $(listItem).removeClass(hideClass);
         if(area == ''){
             return;
         }
-        var detail_areas = [];
         for (var i=0; i< $(listItem).length; i++) {
             var itemData = $(listItem).eq(i).data(area_type);
-            
             if (itemData !== area) {
                 $(listItem).eq(i).addClass(hideClass);
-            }else{
-                if(detail_area_type){
-                    var detail_area = $(listItem).eq(i).data(detail_area_type);
-                    detail_areas.push(detail_area);
-                }
             }
         }
-        if(detail_areas) return detail_areas;
     }
 </script>

@@ -1,5 +1,11 @@
 module UsersHelper
 
+    def combination_city_and_state(users)
+        @area = {}
+        users.map{|user| @area[user.city] = user.state}
+        return @area
+    end
+
     def search_circumference(range, lat, lng)
         # User model 側で記述
         User.within(range, origin: [lng, lat])

@@ -134,6 +134,7 @@ footer{
           overflow: visible;
           img {
             border-radius: 80%;
+            width: 50px;
           }
         }
         span{
@@ -243,14 +244,11 @@ footer{
         display: flex;
         margin-right: auto;
         margin-left: auto;
-        .user-show-image {
-          display: block;
-          margin: 0 auto;
           img {
+            width: 70px;
             border-radius: 80%;
             padding: 0 auto;
           }
-        }
         ul {
           display: block;
           list-style-type: none;
@@ -312,6 +310,10 @@ footer{
 
   /* Users index */ 
 
+  .is-hide {
+    display: none;
+  }
+
   .users{
     z-index: 0;
     list-style:none;
@@ -323,12 +325,9 @@ footer{
       padding: 10px 0;
       border-bottom:1px solid $gray-lighter;
     }
-    .is-hide {
-      display: none;
-    }
   }
 
-  /* request page */
+  /* request form */
 
   .request-form {
     background-color: blue($color: #000000);
@@ -347,6 +346,14 @@ footer{
       div.to_time {
         display: flex;
         flex-direction: column;
+      }
+    }
+    .users {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      label {
+        width: 12em;
       }
     }
     .btn {
@@ -374,8 +381,5 @@ footer{
           display: flex;
           justify-content: start;
         }
-      }
-      .is-hide {
-        display: none;
       }
     }

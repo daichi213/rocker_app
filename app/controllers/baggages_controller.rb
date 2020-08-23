@@ -1,4 +1,5 @@
 class BaggagesController < ApplicationController
+  include UsersHelper
   before_action :logged_in_user
   before_action :correct_user
 
@@ -7,6 +8,8 @@ class BaggagesController < ApplicationController
   def new
     @request = BaggageRequest.new
     @users = User.all
+    @prefecture_names = combination_city_and_state(@users).values.uniq
+    @city_names = combination_city_and_state(@users).to_a
   end
 
   # フォームの作成アクション
@@ -57,6 +60,16 @@ class BaggagesController < ApplicationController
     @request_to_transaction.update_attribute(:del_flag, 0)
     # debugger
     if @baggage_request_flag && @to_users_flag
+      redirect_to user_path current_user
+    else
+      render 'receives'
+    end
+  end
+
+  def refuse
+    @baggage_request = BaggageRequest.find_by(id: params[:baggage_request_id])
+    @to_users_flag = @baggage_request.to_users.find_by(required_id: current_user.id).update(del_flag: 1)
+    if @to_users_flag
       redirect_to user_path current_user
     else
       render 'receives'

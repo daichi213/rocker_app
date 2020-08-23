@@ -54,19 +54,33 @@
                     <%= f.text_area :transaction_message, value: "こんにちは、荷物預かって頂けませんか？" %>
 
                     <h3>リクエストするユーザー</h3>
-                        <ul class='users'>
-                            <%= f.collection_check_boxes(:required_id, User.all, :id, :name, 
-                                                        {checked:@request.to_user_ids, include_hidden: false}) do |c|%>
-                                <% if c.object.id != current_user.id %>
-                                    <%= c.label(data: {state: c.object.state,
-                                                    city: c.object.city,
-                                                    street: c.object.street}) do %>
-                                        <%= c.check_box %>
-                                        <%= c.object.name %>
-                                    <% end %>
+                    <div class="btn-group dropright">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ユーザーの絞込み
+                        </button>
+                        <div class="dropdown-menu">
+                            <% @prefecture_names.each do |pre| %>
+                                <%= button_tag pre, type: "button", class: "dropdown-item search_item", data: {state: pre} %>
+                            <% end %>
+                            <% @city_names.each do |city| %>
+                                <%= button_tag city[0], type: "button", class: "dropdown-item search_item_detail list_item is-hide", data: {state: city[1], city: city[0]} %>
+                            <% end %>
+                            <div class="dropdown-divider"></div>
+                        </div><!-- /.dropdown-menu -->
+                    </div><!-- /.btn-group -->
+                    <ul class='users'>
+                        <%= f.collection_check_boxes(:required_id, User.all, :id, :name, 
+                                                    {checked:@request.to_user_ids, include_hidden: false}) do |c|%>
+                            <% if c.object.id != current_user.id %>
+                                <%= c.label(data: {state: c.object.state,
+                                                city: c.object.city,
+                                                street: c.object.street}, class: "list_item") do %>
+                                    <%= c.check_box %>
+                                    <%= c.object.name %>
                                 <% end %>
                             <% end %>
-                        </ul>
+                        <% end %>
+                    </ul>
 
                     <!-- ここにjQueryを利用して依頼先ユーザー入力欄の追加を行う -->
                     <%= f.submit '送信', class: "btn btn-primary" %>

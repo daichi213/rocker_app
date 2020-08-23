@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersHelper
+
   before_action :logged_in_user, only:[:index, :edit, :update, :destroy,
                                       :following, :followers]
   before_action :correct_user, only:[:edit, :update]
@@ -6,15 +8,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
-    # 絞り込み検索
-    # @prefecture_names = JpPrefecture::Prefecture.all
-    # side_bar用の県名表示
-    @prefecture_names = []
-    @users.each do |user|
-      @prefecture_names.push user.state
-    end
-    @prefecture_names = @prefecture_names.uniq
-    # debugger
+    # @usersのstateを抽出
+    @prefecture_names = combination_city_and_state(@users).map{|city_and_state| city_and_state[1]}.uniq
+    @city_names = combination_city_and_state(@users).to_a
   end
 
   def show
@@ -25,6 +21,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # TODO POSTCODEからの住所自動入力機能実装
   def create
     @user = User.new(user_params)
     if @user.save
