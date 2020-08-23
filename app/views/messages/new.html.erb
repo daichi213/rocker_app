@@ -1,4 +1,18 @@
 <div class='_main_chat'>
+    <div class="group-info">
+      <div class="group-info__group">
+        <div class="group-info__group-name">
+          <%= link_to @user do %>
+              <% if @user.picture? %>
+                  <%= image_tag @user.picture.thumb50.url %>
+              <% else %>
+                  <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+              <% end %>
+          <% end %>
+          <%= @user.name %>
+        </div>
+      </div>
+    </div>
     <div class='message-lists'>
         <!-- メッセージ一覧の表示 -->
         <%= render @messages %>

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get '/:id/baggages/request_list', to: 'baggages#index', as: 'request_list'
   get '/:id/baggages/:baggage_request_id/request_content', to: 'baggages#receives', as: 'request_content'
   patch '/:id/baggages/:baggage_request_id/update', to: 'baggages#update', as: 'approval'
+  patch '/:id/baggages/:baggage_request_id/refuse', to: 'baggages#refuse', as: 'refuse'
   get '/:id/baggages/approval_requests', to: 'baggages#approval_requests', as: 'approval_requests'
   get '/:id/baggages/intend_to_requests', to: 'baggages#intend_to_requests', as: 'intend_to_requests'
   get '/:id/baggages/transaction_history', to: 'baggages#transaction_history', as: 'transaction_history'

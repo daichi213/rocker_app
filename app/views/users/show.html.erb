@@ -3,13 +3,11 @@
     <aside class="col-md-8">
         <section class="user-show col-md-offset-5">
             <div class='user-show-top'>
-                <h1 class='user-show-image'>
-                    <% if current_user.picture? %>
-                        <%= image_tag current_user.picture.thumb50.url %>
-                    <% else %>
-                        <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
-                    <% end %>
-                </h1>
+                <% if @user.picture? %>
+                    <%= image_tag @user.picture.thumb.url %>
+                <% else %>
+                    <%= image_tag "/uploads/user/picture/thumb_default.jpg" %>
+                <% end %>
                 <ul>
                     <li><%= @user.name %></li>
                     <li><%= @user.email %></li>

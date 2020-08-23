@@ -1,7 +1,7 @@
 <div class='user-show-top'>
     <h1 class='user-show-image'>
-        <% if current_user.picture? %>
-            <%= image_tag current_user.picture.thumb50.url %>
+        <% if @user.picture? %>
+            <%= image_tag @user.picture.thumb50.url %>
         <% else %>
             <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
         <% end %>
@@ -27,4 +27,5 @@
     <%= @baggage_request.to_time.strftime("%m/%d %H:%M") %>
 </div>
 
-<%= button_to "リクエスト送信", approval_path, {method: :patch} %>
+<%= button_to "リクエストを受ける", approval_path, {method: :patch} %>
+<%= button_to "リクエストを拒否する", refuse_path, {method: :patch} %>

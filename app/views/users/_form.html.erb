@@ -25,7 +25,7 @@
     <%= f.file_field :picture, class:"form-control" %>
 
     <%= f.label :postcode, '郵便番号(ハイフンなしで連番で記入して下さい)' %>
-    <%= f.text_field :postcode, placeholder: '1000014' %>
+    <%= f.text_field :postcode, value: group.postcode %>
 
     <%= f.label :prefecture_code, '都道府県' %>
     <!-- User.prefecture_code = nil,stateからprefecture_codeに格納する -->
