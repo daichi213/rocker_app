@@ -26,7 +26,7 @@
                     <li><%= link_to "Receives Request List", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
                     <li><%= link_to "Received Request List", approval_requests_path(current_user) if request.fullpath != approval_requests_path(current_user) %></li>
                     <li><%= link_to "Sent Request List", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
-                    
+                    <!-- TODO 以下ボタンをクリック時に別ページに現在地周辺のユーザを表示するようにする -->
                     <input id='search_range'>
                     <button onclick=getLocationByHtml5()>現在地の取得</button>
 
