@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  inquiry_id: 1
+  del_flag: 1
+
+two:
+  content: MyText
+  inquiry_id: 1
+  del_flag: 1

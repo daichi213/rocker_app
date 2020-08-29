@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200805090531) do
+ActiveRecord::Schema.define(version: 20200825082823) do
 
   create_table "baggage_request_to_users", force: :cascade do |t|
     t.integer "required_id"
@@ -47,10 +47,32 @@ ActiveRecord::Schema.define(version: 20200805090531) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "inquiries", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "user_id"
+    t.integer "solved_flag"
+    t.integer "read_flag"
+    t.integer "del_flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
     t.integer "baggage_request_to_user_id"
+    t.integer "read_flag"
+    t.integer "del_flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solutions", force: :cascade do |t|
+    t.text "content"
+    t.integer "inquiry_id"
+    t.integer "read_flag"
+    t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,12 @@
+<% provide(:title, "問い合わせ") %>
+
+<h1>問い合わせ</h1>
+<%= form_for @inquiry, url: send_help_path do |f| %>
+    <%= f.label :title %>
+    <%= f.select :title, Inquiry.list_of_title %>
+
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+
+    <%= f.submit "Send" %>
+<% end %>

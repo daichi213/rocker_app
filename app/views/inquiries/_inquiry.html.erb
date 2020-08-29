@@ -1,0 +1,10 @@
+<div class='inquiry-show'>
+    <%= link_to get_solution_path(current_user, inquiry.id) do %>
+        <div class='inquiry-show__inquiry-title'>
+            <%= "○#{inquiry.title}" %>
+        </div>
+        <div class='inquiry-show__inquiry-content'>
+            <%= inquiry.content %>
+        </div>
+    <% end %>
+</div>

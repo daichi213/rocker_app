@@ -23,6 +23,7 @@
             <script>
                 var map;
                 function initMap() {
+                    var position = getLocation();
                     map = new google.maps.Map(document.getElementById('map'), {
                         // TODO 中心位置を現在位置へと変更する。getLocationの返却値を設定する。
                     center: {lat: gon.current_user.latitude, lng: gon.current_user.longitude},

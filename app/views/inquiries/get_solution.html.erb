@@ -1,0 +1,32 @@
+<div>
+    <% if current_user.admin? %>
+        <h2>問い合わせ内容</h2>
+        <h5>質問者</h5>
+        <%= @inquiry.user.name %>
+    <% else %>
+        <h2>回答結果</h2>
+    <% end %>
+
+    <div>
+        <h5>タイトル</h5>
+        <%= @inquiry.title %>
+    </div>
+    <div>
+        <h5>問い合わせ内容</h5>
+        <%= @inquiry.content %>
+    </div>
+
+    <div>
+        <h5>回答内容</h5>
+        <%= @solution.content %>
+    </div>
+
+    <% if current_user.admin? %>
+        <%= form_for @solution, url: solution_path do |f| %>
+            <%= f.label :content, "回答" %>
+            <%= f.text_area :content %>
+
+            <%= f.submit "Send" %>
+        <% end %>
+    <% end %>
+</div>
