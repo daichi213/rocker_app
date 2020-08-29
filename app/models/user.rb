@@ -25,6 +25,7 @@ class User < ApplicationRecord
     has_many :required, through: :passive_request, source: :requires
     has_many :messages_in_requires, through: :active_request, source: :messages
     has_many :messages_in_required, through: :passive_request, source: :messages
+    has_many :inquiries
 
     # def requires
     #     if !self.active_requires.blank?
@@ -67,6 +68,19 @@ class User < ApplicationRecord
 
     def intend_to_requests
         BaggageRequest.get_intend_to_request(self.id)
+    end
+
+    # TODO includesを使用する、全ユーザーのmessagesを取得してしまっている
+    def dont_read_message
+        Message.where(
+            "user_id LIKE ?", self.id,
+        )
+    end
+
+    def dont_read_inquiry
+        Inquiry.where(
+            "user_id LIKE ? AND solved_flag LIKE ?", self.id, 1
+        )
     end
 
     accepts_nested_attributes_for :receivable_baggages

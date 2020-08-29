@@ -40,4 +40,11 @@ Rails.application.routes.draw do
   post '/:id/messages/:baggage_request_to_id/post', to: 'messages#create', as: 'message_post'
   get '/:id/messages/:baggage_request_to_id/api/messages', to: 'api/messages#index'
 
+  # Inquiry page
+  get '/:id/help', to: 'inquiries#new', as: 'help'
+  get '/:id/index', to: 'inquiries#index', as: 'index'
+  get '/:id/get_solution/:inquiry_id', to: 'inquiries#get_solution', as: 'get_solution'
+  post '/:id/help', to: 'inquiries#create', as: 'send_help'
+  post '/:id/solutions/:inquiry_id', to: 'inquiries#solution', as: 'solution'
+
 end

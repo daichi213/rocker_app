@@ -352,3 +352,28 @@ end
 #     content = Faker::Lorem.sentence(5)
 #     users.each{ |user| user.microposts.create!(content: content)}
 # end
+
+# Message
+message_list = [
+    ["こんにちは、リクエスト頂きありがとうございます。",
+    "こんにちは、こちらこそリクエスト受けて頂きありがとうございます。",
+    "非常に申し訳ないのですが、リクエスト時間より少し早めに到着するかもしれないのですが、対応いただけますでしょうか？",
+    "はい！30分前後であれば問題ないので、リクエスト頂いた時間の±30分で荷物をお預け頂ければ幸いです。",
+    "了解致しました。よろしくお願いいたします。",
+    "とんどもありません。お待ちしています！"],
+    [1,2,2,1,2,1]
+]
+
+user1 = User.first
+user2 = User.second
+
+message_list[0].each_with_index do |message, idx|
+    user2.active_request.find_by(
+        required_id: user1.id
+    ).messages.create(
+        content: message,
+        user_id: message_list[1][idx],
+        read_flag: 0,
+        del_flag: 0,
+    )
+end
