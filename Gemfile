@@ -13,7 +13,9 @@ gem 'bootstrap-sass', '3.3.7'
 # jQuery(Rails 5.1.1以上ではjQueryがデフォルトで同梱されていないためインストールする必要がある)
 gem 'jquery-rails'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+# Use mysql as the database for Active Record
+gem 'mysql2', '>= 0.3.18', '< 0.6.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
