@@ -7,6 +7,7 @@ class InquiriesController < ApplicationController
     @inquiry = Inquiry.new
   end
 
+  # TODO 回答を投稿した後に投稿時に例外発生、httpメソッドを分ける
   def create
     @inquiry = current_user.inquiries.new(inquiry_params)
     if @inquiry.save
@@ -27,13 +28,13 @@ class InquiriesController < ApplicationController
 
   def get_solution
     @inquiry = Inquiry.find_by id: params[:inquiry_id]
-    @solution = @inquiry.build_solution unless @inquiry.solution
-    @solution = @inquiry.solution if @inquiry.solution
+    @solution = @inquiry.solutions unless @inquiry.solutions
+    @solution = @inquiry.solutions if @inquiry.solutions
   end
 
   def solution
     @inquiry = Inquiry.find_by(id: params[:inquiry_id])
-    @solution = @inquiry.build_solution(solution_params)
+    @solution = @inquiry.solutions(solution_params)
     if @solution.save
       @inquiry_up = @inquiry.update(solved_flag:1)
       # TODO TEST

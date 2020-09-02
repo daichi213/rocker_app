@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # home page
   root 'static_pages#home'
+  post '/get_location', to: 'static_page#create'
   get '/about', to: 'static_pages#about', as: 'about'
 
   # user
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
 
   # user_search
   get 'searches/user_search'
-  get 'searches/aea_search'
+  get 'searches/area_search'
 
   # log in
   get '/login', to: 'sessions#new'

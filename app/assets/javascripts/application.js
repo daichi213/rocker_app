@@ -49,7 +49,9 @@ function getLocationByHtml5() {
 
 // TODO 現在地周辺の絞り込み検索の実装
 function showPositionByHtml5(position) {
-    alert(`${position.coords.latitude},${position.coords.longitude}`);
+    let lat = position.coords.latitude;
+    let lng = position.coords.longitude;
+    return {lat, lng};
 }
 
 function errorCallbackByHtml5(error) {

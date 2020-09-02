@@ -39,8 +39,13 @@
                     </div><!-- /.btn-group -->
 
                     <!-- TODO 以下ボタンをクリック時に別ページに現在地周辺のユーザを表示するようにする -->
-                    <input id='search_range'>
-                    <button onclick=getLocationByHtml5()>現在地の取得</button>
+                    <%= form_tag(searches_area_search_path, method: 'get') do %>
+                        <%= hidden_field_tag :latitude, id: 'current_latitude' %>
+                        <%= hidden_field_tag :longitude, id: 'current_longitude' %>
+                        <%= text_field_tag :range %>
+
+                        <%= submit_tag 'Search', class: 'current_position_button' %>
+                    <% end %>
 
                 </ul>
             </section>
@@ -69,6 +74,13 @@
             $(".search_item_detail").removeClass(activeClass);
             var area = $(this).addClass(activeClass).data('city');
             search_filter('city', area);
+        });
+
+        // 現在地周辺のユーザーの検索
+        $(".current_position_around").on('click', function(){
+            let {lat, lng} = getLocationByHtml5();
+            document.getElementById("current_latitude").value = lat;
+            document.getElementById("current_longitude").value = lng;
         });
     });
 

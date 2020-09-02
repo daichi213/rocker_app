@@ -2,6 +2,13 @@ class User < ApplicationRecord
     include JpPrefecture
     jp_prefecture :prefecture_code
 
+    acts_as_mappable
+    acts_as_mappable :default_units => :kms,
+    :default_formula => :sphere,
+    :distance_field_name => :distance,
+    :lat_column_name => :latitude,
+    :lng_column_name => :longitude
+
     # include Geocoder::Model::Mongoid
     # include Geocoder::Model::MongoMapper
 
@@ -26,6 +33,7 @@ class User < ApplicationRecord
     has_many :messages_in_requires, through: :active_request, source: :messages
     has_many :messages_in_required, through: :passive_request, source: :messages
     has_many :inquiries
+    has_many :positions
 
     # def requires
     #     if !self.active_requires.blank?

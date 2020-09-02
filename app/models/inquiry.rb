@@ -1,6 +1,7 @@
 class Inquiry < ApplicationRecord
     belongs_to :user
-    has_one :solution
+    has_many :inquiry_solution_contents, class_name: 'InquirySolutionContent'
+    has_many :solutions, through: :inquiry_solution_contents, source: :solution
     validates :title, presence: true
 
     def Inquiry.list_of_title

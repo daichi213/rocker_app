@@ -18,17 +18,107 @@
                 </h1>
             </div>
 
+            <!-- TODO Geolonia Mapへの変更（ただし、現在地の取得誤差を考慮） -->
             <!-- Google map -->
             <div id="map"></div>
             <script>
-                var map;
+                // var map;
+                // function initMap(lat, lng) {
+                //     var position = getLocation();
+                //     map = new google.maps.Map(document.getElementById('map'), {
+                //         // TODO 中心位置を現在位置へと変更する。getLocationの返却値を設定する。
+                //     center: {lat: lat, lng: lng},
+                //     zoom: 17
+                //     });
+                // }
+                // $(function(){
+                //     let {lat, lng} = getLocationByHtml5;
+                //     $.ajax({
+                //         url: /get_location,
+                //         type: 'POST',
+                //         data: {lat: lat,
+                //                 lng: lng}
+                //         dataType: 'json',
+                //         processData: false,
+                //         contentType: false
+                //     })
+                //     .done(function(data){
+                //         initMap(data.lat, data.lng);
+                //     })
+                //     .fail(function{
+                //         alert('エラーが発生したため現在地を取得できませんでした');
+                //     })
+                //     .always(function(data){
+                //         $('.send-btn').prop('disabled', false);
+                //     });
+                //     return false;
+                // })
+
+                // 現在地取得処理
                 function initMap() {
-                    var position = getLocation();
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        // TODO 中心位置を現在位置へと変更する。getLocationの返却値を設定する。
-                    center: {lat: gon.current_user.latitude, lng: gon.current_user.longitude},
-                    zoom: 17
-                    });
+                    // Geolocation APIに対応している
+                    if (navigator.geolocation) {
+                        // 現在地を取得
+                        navigator.geolocation.getCurrentPosition(
+                            // 取得成功した場合
+                            function(position) {
+                                // 緯度・経度を変数に格納
+                                var mapLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                                // 登録ユーザーの所在地を変数に格納
+                                var locations = gon.users_positions;
+                                locations.unshift(["現在地", position.coords.latitude, position.coords.longitude]);
+                                // マップオプションを変数に格納
+                                var mapOptions = {
+                                    zoom : 15,          // 拡大倍率
+                                    center : mapLatLng  // 緯度・経度
+                                };
+                                // マップオブジェクト作成
+                                var map = new google.maps.Map(
+                                    document.getElementById("map"), // マップを表示する要素
+                                    mapOptions         // マップオプション
+                                );
+                                //　マップにマーカーを表示する
+
+                                var infowindow = new google.maps.InfoWindow();
+                                // TODO 表示部の氏名を詳細ページへのリンクにする
+                                var marker, i;
+                                for (i = 0; i < locations.length; i++) {  
+                                    marker = new google.maps.Marker({
+                                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                        map: map
+                                    });
+
+                                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                        return function() {
+                                        infowindow.setContent(locations[i][0]);
+                                        infowindow.open(map, marker);
+                                        }
+                                    })(marker, i));
+                                }
+                            },
+                            // 取得失敗した場合
+                            function(error) {
+                                // エラーメッセージを表示
+                                switch(error.code) {
+                                case 1: // PERMISSION_DENIED
+                                    alert("位置情報の利用が許可されていません");
+                                    break;
+                                case 2: // POSITION_UNAVAILABLE
+                                    alert("現在位置が取得できませんでした");
+                                    break;
+                                case 3: // TIMEOUT
+                                    alert("タイムアウトになりました");
+                                    break;
+                                default:
+                                    alert("その他のエラー(エラーコード:"+error.code+")");
+                                    break;
+                                }
+                            }
+                        );
+                    // Geolocation APIに対応していない
+                    } else {
+                        alert("この端末では位置情報が取得できません");
+                    }
                 }
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCf-kPe1Xxxn8dUeYWJ8i2BpTpHVwN1AM&callback=initMap"
