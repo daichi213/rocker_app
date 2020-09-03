@@ -13,9 +13,9 @@ class SearchesController < ApplicationController
 
   private
 
-    def user_search_params
-      # permit内にデータが内場合に例外を発生させないための記法
-      params.fetch(:search, {}).permit(:name, :sex, :state, 
-                                      :city, :street, :house)
-    end
+  def user_search_params
+    # permit内にデータが内場合に例外を発生させないための記法
+    params.fetch(:search, {}).permit(:name, :sex, :state,
+                                     :city, :street, :house)
+  end
 end

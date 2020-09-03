@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
   include UsersHelper
 
-  before_action :logged_in_user, only:[:index, :show, :edit, :update, :destroy,
-                                      :following, :followers]
-  before_action :correct_user, only:[:edit, :update]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy,
+                                        :following, :followers]
+  before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
   def index
     @users = User.paginate(page: params[:page])
     # @usersのstateを抽出
-    @prefecture_names = combination_city_and_state(@users).map{|city_and_state| city_and_state[1]}.uniq
+    @prefecture_names = combination_city_and_state(@users).map { |city_and_state| city_and_state[1]}.uniq
     @city_names = combination_city_and_state(@users).to_a
   end
 
@@ -57,25 +57,26 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :sex, :birthday,
-                                  :occupation,
-                                  :postcode, :prefecture_code,
-                                  :city, :street, :house,
-                                  :email, :password,
-                                  :password_confirmation,
-                                  :picture,
-                                  receivable_baggages_attributes: [
-                                  # :large_scale_baggage,
-                                  # :heavy_weight_baggage,
-                                  # :precision_machine_baggage,
-                                  # :dont_reverse_baggage,
-                                  # :broken_article,
-                                  # :refrigerated_baggage,
-                                  # :feezed_baggage,
-                                  :about_baggage_size_w,
-                                  :about_baggage_size_l,
-                                  :about_baggage_size_h])
-    end
 
+  def user_params
+    params.require(:user).permit(:name, :sex, :birthday,
+                                 :occupation,
+                                 :postcode, :prefecture_code,
+                                 :city, :street, :house,
+                                 :email, :password,
+                                 :password_confirmation,
+                                 :picture,
+                                 receivable_baggages_attributes: [
+                                   # :large_scale_baggage,
+                                   # :heavy_weight_baggage,
+                                   # :precision_machine_baggage,
+                                   # :dont_reverse_baggage,
+                                   # :broken_article,
+                                   # :refrigerated_baggage,
+                                   # :feezed_baggage,
+                                   :about_baggage_size_w,
+                                   :about_baggage_size_l,
+                                   :about_baggage_size_h
+                                 ])
+  end
 end

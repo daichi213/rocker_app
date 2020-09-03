@@ -20,5 +20,4 @@ class BaggagesControllerTest < ActionDispatch::IntegrationTest
     get baggages_received_url
     assert_response :success
   end
-
 end

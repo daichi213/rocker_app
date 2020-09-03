@@ -4,7 +4,7 @@ class BaggagesController < ApplicationController
   before_action :correct_user
 
   # TODO BAGGAGE SIZEを受け入れ可能サイズへ変更
-  
+
   def new
     @request = BaggageRequest.new
     @users = User.all
@@ -20,8 +20,8 @@ class BaggagesController < ApplicationController
       # TODO strong parameterに書き換え
       params[:baggage_request][:required_id].each do |required_id|
         @request_to = @request.to_users.create(required_id: required_id,
-                                            requires_id: current_user.id,
-                                            del_flag: 0)
+                                               requires_id: current_user.id,
+                                               del_flag: 0)
         # debugger
         if !@request_to.valid?
           @error_user = "#{User.find_by id: required_id},"
@@ -86,21 +86,18 @@ class BaggagesController < ApplicationController
 
   # 過去に受けたリクエストの履歴
   def transaction_history
-    
   end
 
   private
 
-    def request_params
-      params.require(:baggage_request).permit(:request_content,
-                                      :baggage_content,
-                                      :from_time,
-                                      :to_time,
-                                      :transaction_message,
-                                      {:to_users => []}
-                                      ).merge(
-                                        approval_flag: 0
-                                      )
-    end
-    
+  def request_params
+    params.require(:baggage_request).permit(:request_content,
+                                            :baggage_content,
+                                            :from_time,
+                                            :to_time,
+                                            :transaction_message,
+                                            { :to_users => [] }).merge(
+                                              approval_flag: 0
+                                            )
+  end
 end

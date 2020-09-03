@@ -21,6 +21,7 @@
             </section>
             <section class='menu-content'>
                 <ul>
+                    <!-- TODO リンクの表示部分if文削除 -->
                     <li><%= link_to "Map", root_path if request.fullpath != root_path %></li>
                     <li><%= link_to "Request Form", request_form_path(current_user) if request.fullpath != request_form_path(current_user) %></li>
                     <li><%= link_to "Receives Request List", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>

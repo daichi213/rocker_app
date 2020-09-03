@@ -36,10 +36,10 @@ class InquiriesController < ApplicationController
     @inquiry = Inquiry.find_by(id: params[:inquiry_id])
     @solution = @inquiry.solutions(solution_params)
     if @solution.save
-      @inquiry_up = @inquiry.update(solved_flag:1)
+      @inquiry_up = @inquiry.update(solved_flag: 1)
       # TODO TEST
       unless @inquiry_up
-        render 'get_solution' 
+        render 'get_solution'
         return
       end
       redirect_to index_path current_user
@@ -50,22 +50,23 @@ class InquiriesController < ApplicationController
   end
 
   private
-    def inquiry_params
-      params.require(:inquiry).permit(
-                                      :title, 
-                                      :content
-                                    ).merge(
-                                      solved_flag: 0,
-                                      read_flag: 0,
-                                      del_flag: 0
-                                    )
-    end
 
-    def solution_params
-      params.require(:solution).permit(:content)
-                                    .merge(
-                                      read_flag: 0,
-                                      del_flag: 0
-                                    )
-    end
+  def inquiry_params
+    params.require(:inquiry).permit(
+      :title,
+      :content
+    ).merge(
+      solved_flag: 0,
+      read_flag: 0,
+      del_flag: 0
+    )
+  end
+
+  def solution_params
+    params.require(:solution).permit(:content)
+          .merge(
+            read_flag: 0,
+            del_flag: 0
+          )
+  end
 end

@@ -5,5 +5,4 @@ class Api::MessagesControllerTest < ActionDispatch::IntegrationTest
     get api_messages_index_url
     assert_response :success
   end
-
 end

@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-
   def setup
     @user = users(:michael)
     @other_user = users(:archer)
@@ -24,8 +23,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "ログインなしでのユーザー編集(patchメソッド)へのアクセス" do
-    patch user_path(@user), params:{user:{name:@user.name,
-                                          email:@user.email}}
+    patch user_path(@user), params: {user: {name: @user.name,
+                                            email: @user.email}}
     assert_not flash.empty?
     assert_redirected_to login_url
   end
@@ -33,9 +32,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "管理者権限管理機能テスト" do
     log_in_as(@other_user)
     assert_not @other_user.admin?
-    patch user_path(@other_user), params:{user:{password: 'password',
-                                                password_confirmation: 'password',
-                                                admin: true}}
+    patch user_path(@other_user), params: {user: {password: 'password',
+                                                  password_confirmation: 'password',
+                                                  admin: true}}
     assert_not @other_user.admin?
   end
 
@@ -48,8 +47,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "他ユーザーによるユーザー情報編集禁止(patchメソッド側)" do
     log_in_as @other_user
-    patch user_path(@user), params:{user:{name:@user.name,
-                                          email:@user.email}}
+    patch user_path(@user), params: {user: {name: @user.name,
+                                            email: @user.email}}
     assert flash.empty?
     assert_redirected_to root_url
   end
@@ -76,6 +75,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "ログインなしでのフォロワーユーザー一覧ページへのアクセス" do
     get followers_user_path(@user)
-    assert_redirected_to login_url 
+    assert_redirected_to login_url
   end
 end

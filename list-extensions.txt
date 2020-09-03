@@ -1,9 +1,0 @@
-bbenoist.shell
-CraigMaslowski.erb
-dbaeumer.vscode-eslint
-Gruntfuggly.todo-tree
-MashDuek.jbuilder-highlight
-mosapride.zenkaku
-MS-CEINTL.vscode-language-pack-ja
-ms-python.python
-vayan.haml
