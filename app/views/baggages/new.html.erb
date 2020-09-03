@@ -1,91 +1,89 @@
 <% provide(:title, "リクエスト依頼") %>
 
 <!-- ユーザー一覧ページからこのフォームにリダイレクトする -->
-<div class='row'>
-    <section class='col-md-8'>
-        <div class='request-form'>
-            <% if logged_in? %>
-                <!-- TODO すべてのform_forに対してlocal: trueをつける -->
-                <%= form_for @request, url: request_path, local: true do |f| %>
-                    <%= render "shared/error_messages", object: f.object %>
-                    <h3>荷物タイプ</h3>
-                    <%#= f.check_box :large_scale_baggage, class: "baggage-type" %>
-                    <%#= f.label :large_scale_baggage, "大物" %>
+<div class='container'>
+    <div class='request-form'>
+        <% if logged_in? %>
+            <!-- TODO すべてのform_forに対してlocal: trueをつける -->
+            <%= form_for @request, url: request_path, local: true do |f| %>
+                <%= render "shared/error_messages", object: f.object %>
+                <h3>荷物タイプ</h3>
+                <%#= f.check_box :large_scale_baggage, class: "baggage-type" %>
+                <%#= f.label :large_scale_baggage, "大物" %>
 
-                    <%#= f.check_box :heavy_weight_baggage, class: "baggage-type" %>
-                    <%#= f.label :heavy_weight_baggage, "重量物" %>
+                <%#= f.check_box :heavy_weight_baggage, class: "baggage-type" %>
+                <%#= f.label :heavy_weight_baggage, "重量物" %>
 
-                    <%#= f.check_box :precision_machine_baggage, class: "baggage-type" %>
-                    <%#= f.label :precision_machine_baggage, "精密機械" %>
+                <%#= f.check_box :precision_machine_baggage, class: "baggage-type" %>
+                <%#= f.label :precision_machine_baggage, "精密機械" %>
 
-                    <%#= f.check_box :dont_reverse_baggage, class: "baggage-type" %>
-                    <%#= f.label :dont_reverse_baggage, "天地無用荷物" %>
+                <%#= f.check_box :dont_reverse_baggage, class: "baggage-type" %>
+                <%#= f.label :dont_reverse_baggage, "天地無用荷物" %>
 
-                    <%#= f.check_box :broken_article, class: "baggage-type" %>
-                    <%#= f.label :broken_article, "割れ物" %>
+                <%#= f.check_box :broken_article, class: "baggage-type" %>
+                <%#= f.label :broken_article, "割れ物" %>
 
-                    <%#= f.check_box :refrigerated_baggage, class: "baggage-type" %>
-                    <%#= f.label :refrigerated_baggage, "冷蔵必須品" %>
+                <%#= f.check_box :refrigerated_baggage, class: "baggage-type" %>
+                <%#= f.label :refrigerated_baggage, "冷蔵必須品" %>
 
-                    <%#= f.check_box :feezed_baggage, class: "baggage-type" %>
-                    <%#= f.label :feezed_baggage, "冷凍必須品" %>
+                <%#= f.check_box :feezed_baggage, class: "baggage-type" %>
+                <%#= f.label :feezed_baggage, "冷凍必須品" %>
 
-                    <%= f.label :request_content, "その他取扱注意事項があれば記入して下さい。", class: "baggage-notice" %>
-                    <%= f.text_area :request_content, class: "baggage-notice", value: "傷が入りやすい品物が中に入っておりますので、できれば棚などの上において頂けると助かります。" %>
+                <%= f.label :request_content, "その他取扱注意事項があれば記入して下さい。", class: "baggage-notice" %>
+                <%= f.text_area :request_content, class: "baggage-notice", value: "傷が入りやすい品物が中に入っておりますので、できれば棚などの上において頂けると助かります。" %>
 
-                    <%= f.label :baggage_content, "簡単に荷物の内容を記入して下さい。", class: "baggage-content" %>
-                    <%= f.text_area :baggage_content, class: "baggage-content" %>
+                <%= f.label :baggage_content, "簡単に荷物の内容を記入して下さい。", class: "baggage-content" %>
+                <%= f.text_area :baggage_content, class: "baggage-content" %>
 
-                    <!-- TODO 荷物サイズの入力フォーム -->
+                <!-- TODO 荷物サイズの入力フォーム -->
 
-                    <h3>希望取引日時</h3>
-                    <div class="request-time">
-                        <div class='from_time'>
-                            <h5>From</h5>
-                            <%= f.datetime_field :from_time, class: "from_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1 %>
-                        </div>
-                        <div class='from_time'>
-                            <h5>To</h5>
-                            <%= f.datetime_field :to_time, class: "to_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1 %>
-                        </div>
+                <h3>希望取引日時</h3>
+                <div class="request-time">
+                    <div class='from_time'>
+                        <h5>From</h5>
+                        <%= f.datetime_field :from_time, class: "from_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1 %>
                     </div>
+                    <div class='from_time'>
+                        <h5>To</h5>
+                        <%= f.datetime_field :to_time, class: "to_time", start_year: Time.zone.now.year, end_year: Time.zone.now.year+1 %>
+                    </div>
+                </div>
 
-                    <h3>取引メッセージ</h3>
-                    <%= f.text_area :transaction_message, value: "こんにちは、荷物預かって頂けませんか？" %>
+                <h3>取引メッセージ</h3>
+                <%= f.text_area :transaction_message, value: "こんにちは、荷物預かって頂けませんか？" %>
 
-                    <h3>リクエストするユーザー</h3>
-                    <div class="btn-group dropright">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            ユーザーの絞込み
-                        </button>
-                        <div class="dropdown-menu">
-                            <% @prefecture_names.each do |pre| %>
-                                <%= button_tag pre, type: "button", class: "dropdown-item search_item", data: {state: pre} %>
-                            <% end %>
-                            <% @city_names.each do |city| %>
-                                <%= button_tag city[0], type: "button", class: "dropdown-item search_item_detail list_item is-hide", data: {state: city[1], city: city[0]} %>
-                            <% end %>
-                            <div class="dropdown-divider"></div>
-                        </div><!-- /.dropdown-menu -->
-                    </div><!-- /.btn-group -->
-                    <ul class='users'>
-                        <%= f.collection_check_boxes(:required_id, User.all, :id, :name, 
-                                                    {checked:@request.to_user_ids, include_hidden: false}) do |c|%>
-                            <% if c.object.id != current_user.id %>
-                                <%= c.label(data: {state: c.object.state,
-                                                city: c.object.city,
-                                                street: c.object.street}, class: "list_item") do %>
-                                    <%= c.check_box %>
-                                    <%= c.object.name %>
-                                <% end %>
+                <h3>リクエストするユーザー</h3>
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ユーザーの絞込み
+                    </button>
+                    <div class="dropdown-menu">
+                        <% @prefecture_names.each do |pre| %>
+                            <%= button_tag pre, type: "button", class: "dropdown-item search_item", data: {state: pre} %>
+                        <% end %>
+                        <% @city_names.each do |city| %>
+                            <%= button_tag city[0], type: "button", class: "dropdown-item search_item_detail list_item is-hide", data: {state: city[1], city: city[0]} %>
+                        <% end %>
+                        <div class="dropdown-divider"></div>
+                    </div><!-- /.dropdown-menu -->
+                </div><!-- /.btn-group -->
+                <ul class='users'>
+                    <%= f.collection_check_boxes(:required_id, User.all, :id, :name, 
+                                                {checked:@request.to_user_ids, include_hidden: false}) do |c|%>
+                        <% if c.object.id != current_user.id %>
+                            <%= c.label(data: {state: c.object.state,
+                                            city: c.object.city,
+                                            street: c.object.street}, class: "list_item") do %>
+                                <%= c.check_box %>
+                                <%= c.object.name %>
                             <% end %>
                         <% end %>
-                    </ul>
+                    <% end %>
+                </ul>
 
-                    <!-- ここにjQueryを利用して依頼先ユーザー入力欄の追加を行う -->
-                    <%= f.submit '送信', class: "btn btn-primary" %>
-                <% end %>
+                <!-- ここにjQueryを利用して依頼先ユーザー入力欄の追加を行う -->
+                <%= f.submit '送信', class: "btn btn-primary" %>
             <% end %>
-        </div>
-    </section>
+        <% end %>
+    </div>
 </div>

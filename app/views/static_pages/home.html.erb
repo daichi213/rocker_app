@@ -1,12 +1,12 @@
 <% provide(:title, "Home") %>
 
 <div class='row'>
-    <div class='container'>
-        <% if logged_in? %>
-            <% if flash[:request] %>
-                <h1 class='receive_message'><%= flash[:receive_message] %></h1>
-            <% end %>
+    <% if logged_in? %>
+        <% if flash[:request] %>
+            <h1 class='receive_message'><%= flash[:receive_message] %></h1>
+        <% end %>
 
+        <div class='container'>
             <div class='request-message'>
                 <h1>
                     <% if current_user.picture? %>
@@ -123,8 +123,8 @@
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCf-kPe1Xxxn8dUeYWJ8i2BpTpHVwN1AM&callback=initMap"
             async defer></script>
-        <% else %>
+        </div>
+    <% else %>
 
-        <% end %>
-    </div>
+    <% end %>
 </div>

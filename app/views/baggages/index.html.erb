@@ -2,13 +2,15 @@
 
 <h1>Request List</h1>
 
-<ul class="baggage_requests">
-    <% @baggage_requests.each do |baggage_request| %>
-        <% if baggage_request.approval_flag == 0 %>
-            <%= render "baggage_request", baggage_request: baggage_request %>
+<div class='container'>
+    <ul class="baggage_requests">
+        <% @baggage_requests.each do |baggage_request| %>
+            <% if baggage_request.approval_flag == 0 %>
+                <%= render "baggage_request", baggage_request: baggage_request %>
+            <% end %>
         <% end %>
-    <% end %>
-</ul>
+    </ul>
+</div>
 
 <!-- TODO jsファイルに移す -->
 <script>

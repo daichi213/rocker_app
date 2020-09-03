@@ -1,9 +1,10 @@
 <% provide(:title, '荷物預け予定一覧') %>
 
 <h1>Intend to Request List</h1>
-
-<ul class="baggage_requests">
-    <% @intend_to_requests.each do |baggage_request| %>
-        <%= render "baggage_request", baggage_request: baggage_request %>
-    <% end %>
-</ul>
+<div class='container'>
+    <ul class="baggage_requests">
+        <% @intend_to_requests.each do |baggage_request| %>
+            <%= render "baggage_request", baggage_request: baggage_request %>
+        <% end %>
+    </ul>
+</div>

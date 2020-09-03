@@ -3,9 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 ._main_chat {
-    width: calc(100% - 300px);
+    width: 80%;
     height: 100%;
-    display: inline-block;
+    display: block;
+    float: left;
   } 
   
   .group-info {

@@ -20,6 +20,11 @@ body{
     background-color: rgb(252, 227, 115);
 }
 
+.container{
+  margin-left: 35%;
+  width: 60%;
+}
+
 section{
     overflow: auto;
 }
@@ -121,8 +126,9 @@ footer{
 
 /* sidebar */
 
-  .slidebar{
+  .sidebar{
     background-color: rgb(148, 148, 148);
+    width: 20%;
     nav {
       section.user_info {
         color: white;
