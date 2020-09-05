@@ -1,0 +1,37 @@
+<%= content_tag :li, class:"list_item", data: {state: baggage_request.user.state,
+                                                city: baggage_request.user.city,
+                                                street: baggage_request.user.street,
+                                                # user_apparause_point: baggage_request.user.user_apparause_point
+                                                } do %>
+    <!-- ユーザー画像 -->
+    <% if baggage_request.user.picture? %>
+        <%= image_tag baggage_request.user.picture.thumb50.url %>
+    <% else %>
+        <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+    <% end %>
+    <%= link_to baggage_request.user.name, user_path(baggage_request.user), class: "user_show_links" %>
+    <div>
+        <h4>荷物の内容</h4>
+        <%= baggage_request.baggage_content %>
+    </div>
+    <div>
+        <h4>荷物に関する要望</h4>
+        <%= baggage_request.request_content %>
+    </div>
+    <div>
+        <h4>預り希望時間帯</h4>
+        <%= baggage_request.from_time.strftime("%m/%d %H:%m") %>
+        <br>
+        <%= baggage_request.to_time.strftime("%m/%d %H:%m") %>
+    </div>
+    <div class="request_index_link_row">
+        <% if request.fullpath == request_list_path(current_user) %>
+            <%= link_to "リクエストの詳細を確認", request_content_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
+            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_passive_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
+        <% elsif request.fullpath == approval_requests_path(current_user) %>
+            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_passive_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
+        <% elsif request.fullpath == intend_to_requests_path(current_user) %>
+            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_active_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
+        <% end %>
+    </div>
+<% end %>

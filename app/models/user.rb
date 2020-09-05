@@ -11,15 +11,8 @@ class User < ApplicationRecord
 
   # include Geocoder::Model::Mongoid
   # include Geocoder::Model::MongoMapper
-
-  # has_many :active_relationships, class_name: "Relationship",
-  #                                 foreign_key: "follower_id",
-  #                                 dependent: :destroy
-  # has_many :passive_relationships, class_name: "Relationship",
-  #                                 foreign_key: "followed_id",
-  #                                 dependent: :destroy
-  # has_many :following, through: :active_relationships, source: :followed
-  # has_many :followers, through: :passive_relationships, source: :follower
+  
+  # TODO TRANSACTION_TABLEへの紐付け追加
   has_one :receivable_baggages, class_name: "Baggage",
                                 foreign_key: "user_id"
   has_many :active_requires, class_name: "BaggageRequest",
@@ -34,14 +27,6 @@ class User < ApplicationRecord
   has_many :messages_in_required, through: :passive_request, source: :messages
   has_many :inquiries
   has_many :positions
-
-  # def requires
-  #     if !self.active_requires.blank?
-  #         self.active_requires.last.to_users.map{|i| i.required_id}
-  #     else
-  #         0
-  #     end
-  # end
 
   def get_activation_request_to
     self.active_request

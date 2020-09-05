@@ -1,4 +1,4 @@
 class Transaction < ApplicationRecord
-  has_one :require, class_name: "BaggageRequestToUser"
+  belongs_to :baggage_request, class_name: "BaggageRequest"
   # TODO VALIDATION追加
 end

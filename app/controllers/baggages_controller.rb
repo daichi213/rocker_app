@@ -16,6 +16,11 @@ class BaggagesController < ApplicationController
   def create
     @request = current_user.active_requires.build(request_params)
     if @request.save
+      @request.create_in_transaction(leaver_authenticate: 0,
+                                    receiver_authenticate: 0,
+                                    leaver_point: 0,
+                                    receiver_point: 0,
+                                    del_flag: 0)
       # リクエスト先の処理
       # TODO strong parameterに書き換え
       params[:baggage_request][:required_id].each do |required_id|
@@ -82,10 +87,6 @@ class BaggagesController < ApplicationController
 
   def intend_to_requests
     @intend_to_requests = current_user.intend_to_requests
-  end
-
-  # 過去に受けたリクエストの履歴
-  def transaction_history
   end
 
   private

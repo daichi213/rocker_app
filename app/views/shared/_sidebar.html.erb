@@ -27,14 +27,25 @@
                     <li><%= link_to "Receives Request List", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
                     <li><%= link_to "Received Request List", approval_requests_path(current_user) if request.fullpath != approval_requests_path(current_user) %></li>
                     <li><%= link_to "Sent Request List", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
+                    <!-- TODO 条件分岐 -->
+                    <div class="btn-group">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        取引関係
+                        </a>
+                        <div class="dropdown-menu">
+                            <li><%= link_to "預り予定", "#" %></li>
+                            <li><%= link_to "預り中", "#" %></li>
+                            <li><%= link_to "預け予定", "#" %></li>
+                            <li><%= link_to "預け中", "#" %></li>
+                        </div><!-- /.dropdown-menu -->
+                    </div><!-- /.btn-group -->
                     <div class="btn-group">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Help
                         </a>
                         <div class="dropdown-menu">
                             <li><%= link_to "Help Form", help_path(current_user) %></li>
-                            <!-- TODO 未読数の表示機能はSESSION変数を使用してみる
-                                        (session[:message_id:last] - current_user.messages_in_required.count) -->
+                            <!-- TODO 回答件数が0のときは表示しない -->
                             <li><%= link_to "Help List", index_path(current_user) %></li>
                         </div><!-- /.dropdown-menu -->
                     </div><!-- /.btn-group -->

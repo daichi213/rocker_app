@@ -3,6 +3,7 @@ class BaggageRequest < ApplicationRecord
   #  optional: true
   has_many :to_users, class_name: "BaggageRequestToUser"
   # TODO BaggageRequestとTransactionへの紐付けが難しいため、includesを使用したメソッドを作成する
+  has_one :in_transaction, class_name: 'Transaction'
 
   accepts_nested_attributes_for :to_users
 
@@ -34,6 +35,16 @@ class BaggageRequest < ApplicationRecord
   def BaggageRequest.get_intend_to_request(user_id)
     BaggageRequest.where(
       "(user_id = ?) AND (approval_flag = ?)", user_id, 1
+    )
+  end
+
+  def BaggageRequest.get_receiving_in_transaction(user_id)
+    BaggageRequest.includes(
+      :to_users
+    ).where(
+      required_id: user_id
+    ).references(
+      :to_users
     )
   end
 end
