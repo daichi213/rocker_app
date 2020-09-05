@@ -42,17 +42,25 @@ class BaggageRequest < ApplicationRecord
     BaggageRequest.includes(
       :to_users
     ).where(
-      required_id: user_id
+      "required_id LIKE ?", user_id
     ).references(
       :to_users
+    ).includes(
+      :in_transaction
+    ).where(
+      "leaver_start_authenticate LIKE ? AND
+       receiver_start_authenticate LIKE ? AND
+       leaver_end_authenticate LIKE ? AND
+       receiver_end_authenticate LIKE ?",
+       1, 1, 0, 0
     )
   end
 
-  def BaggageRequest.get_receiving_in_transaction(user_id)
+  def BaggageRequest.get_leaving_in_transaction(user_id)
     BaggageRequest.includes(
       :to_users
     ).where(
-      "required_id LIKE ?", user_id
+      "requires_id LIKE ?", user_id
     ).references(
       :to_users
     ).includes(
