@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :messages_in_required, through: :passive_request, source: :messages
   has_many :inquiries
   has_many :positions
+  has_many :in_transaction, through: :active_requires, source: :in_transaction
 
   def get_activation_request_to
     self.active_request
@@ -73,6 +74,20 @@ class User < ApplicationRecord
   def dont_read_inquiry
     Inquiry.where(
       "user_id LIKE ? AND solved_flag LIKE ?", self.id, 1
+    )
+  end
+
+  def receiving_in_transaction
+    BaggageRequest.get_receiving_in_transaction(self.id)
+  end
+
+  def constracted_transaction
+    self.in_transaction.where(
+      "leaver_start_authenticate LIKE ? AND
+       receiver_start_authenticate LIKE ? AND
+       leaver_end_authenticate LIKE ? AND
+       receiver_end_authenticate LIKE ?",
+       1, 1, 1, 1
     )
   end
 
