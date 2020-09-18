@@ -33,12 +33,13 @@
                         取引関係
                         </a>
                         <div class="dropdown-menu">
-                            <li><%= link_to "預り予定", "#" %></li>
-                            <li><%= link_to "預り中", "#" %></li>
-                            <li><%= link_to "預け予定", "#" %></li>
-                            <li><%= link_to "預け中", "#" %></li>
+                            <li><%= link_to "預り予定", receives_index_path(current_user) %></li>
+                            <li><%= link_to "預り中", receiving_index_path(current_user) %></li>
+                            <li><%= link_to "預け予定", leaves_index_path(current_user) %></li>
+                            <li><%= link_to "預け中", leaving_index_path(current_user) %></li>
                         </div><!-- /.dropdown-menu -->
                     </div><!-- /.btn-group -->
+                    <br>
                     <div class="btn-group">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Help

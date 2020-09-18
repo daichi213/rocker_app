@@ -16,24 +16,20 @@ class BaggagesController < ApplicationController
   def create
     @request = current_user.active_requires.build(request_params)
     if @request.save
-      @request.create_in_transaction(leaver_authenticate: 0,
-                                    receiver_authenticate: 0,
-                                    leaver_point: 0,
-                                    receiver_point: 0,
-                                    del_flag: 0)
       # リクエスト先の処理
       # TODO strong parameterに書き換え
+      @error_user_name = []
       params[:baggage_request][:required_id].each do |required_id|
         @request_to = @request.to_users.create(required_id: required_id,
                                                requires_id: current_user.id,
                                                del_flag: 0)
         # debugger
         if !@request_to.valid?
-          @error_user = "#{User.find_by id: required_id},"
+          @error_user_name.push("#{User.find_by(id: required_id).name},")
         end
       end
-      if @error_user
-        flash[:error] = "#{@error_user}さんへの送信に失敗しました"
+      if !@error_user_name.empty?
+        flash[:error] = "#{@error_user_name}さんへの送信に失敗しました"
       end
       flash[:success] = "送信に成功しました"
       redirect_to current_user
@@ -98,7 +94,14 @@ class BaggagesController < ApplicationController
                                             :to_time,
                                             :transaction_message,
                                             { :to_users => [] }).merge(
-                                              approval_flag: 0
+                                              approval_flag: 0,
+                                              leaver_start_authenticate: 0,
+                                              receiver_start_authenticate: 0,
+                                              leaver_end_authenticate: 0,
+                                              receiver_end_authenticate: 0,
+                                              leaver_point: 0,
+                                              receiver_point: 0,
+                                              cancelled_flag: 0
                                             )
   end
 end

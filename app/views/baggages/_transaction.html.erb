@@ -31,7 +31,7 @@
         <% elsif request.fullpath == approval_requests_path(current_user) %>
             <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_passive_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
         <% elsif request.fullpath == intend_to_requests_path(current_user) %>
-            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_active_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
+            <%= link_to "メッセージを送る", message_page_path(current_user, baggage_request.get_to_user), class: "to_request_show btn btn-primary" %>
         <% end %>
     </div>
 <% end %>

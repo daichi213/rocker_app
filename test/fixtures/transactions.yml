@@ -1,55 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
-  item_name: MyString
-  item_num: 1
-  leaver_id: 1
-  receiver_id: 1
-  leaver_authenticate: false
-  receiver_authenticate: false
-  terminated_at: 2020-06-03
-  leaver_point: 
-  receiver_point: 
-  request_content: MyText
-  baggage_content: MyText
-  transaction_message: MyText
-  large_scale_baggage: false
-  heavy_weight_baggage: false
-  precision_machine_baggage: false
-  dont_reverse_baggage: false
-  broken_article: false
-  refrigerated_baggage: false
-  feezed_baggage: false
-  from_day: 2020-06-03
-  from_time: 2020-06-03 09:05:48
-  to_day: 2020-06-03
-  to_time: 2020-06-03 09:05:48
-  amount_billed: 1
+  user_id: 1
+  baggage_request_id: 1
+  leaver_flag: 1
+  del_flag: 1
 
 two:
-  id: 1
-  item_name: MyString
-  item_num: 1
-  leaver_id: 1
-  receiver_id: 1
-  leaver_authenticate: false
-  receiver_authenticate: false
-  terminated_at: 2020-06-03
-  leaver_point: 
-  receiver_point: 
-  request_content: MyText
-  baggage_content: MyText
-  transaction_message: MyText
-  large_scale_baggage: false
-  heavy_weight_baggage: false
-  precision_machine_baggage: false
-  dont_reverse_baggage: false
-  broken_article: false
-  refrigerated_baggage: false
-  feezed_baggage: false
-  from_day: 2020-06-03
-  from_time: 2020-06-03 09:05:48
-  to_day: 2020-06-03
-  to_time: 2020-06-03 09:05:48
-  amount_billed: 1
+  user_id: 1
+  baggage_request_id: 1
+  leaver_flag: 1
+  del_flag: 1

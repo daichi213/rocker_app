@@ -18,7 +18,16 @@ class CreateBaggageRequests < ActiveRecord::Migration[5.1]
       t.integer :about_baggage_size_w
       t.integer :about_baggage_size_l
       t.integer :about_baggage_size_h
+      t.integer :leaver_start_authenticate
+      t.integer :receiver_start_authenticate
+      t.integer :leaver_end_authenticate
+      t.integer :receiver_end_authenticate
+      t.datetime :transaction_started_at
+      t.datetime :transaction_terminated_at
+      t.decimal :leaver_point
+      t.decimal :receiver_point
       t.integer :approval_flag
+      t.integer :cancelled_flag
 
       t.timestamps
     end

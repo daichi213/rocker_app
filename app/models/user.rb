@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   # include Geocoder::Model::Mongoid
   # include Geocoder::Model::MongoMapper
-  
+
   # TODO TRANSACTION_TABLEへの紐付け追加
   has_one :receivable_baggages, class_name: "Baggage",
                                 foreign_key: "user_id"
@@ -21,30 +21,19 @@ class User < ApplicationRecord
                             foreign_key: "requires_id"
   has_many :passive_request, class_name: "BaggageRequestToUser",
                              foreign_key: "required_id"
+  has_many :active_required, through: :passive_request, source: :baggage_request_to
   has_many :requires, through: :active_request, source: :required
   has_many :required, through: :passive_request, source: :requires
   has_many :messages_in_requires, through: :active_request, source: :messages
   has_many :messages_in_required, through: :passive_request, source: :messages
   has_many :inquiries
   has_many :positions
-  has_many :in_transaction, through: :active_requires, source: :in_transaction
-
-  def get_activation_request_to
-    self.active_request
-        .where(
-          'del_flag LIKE ?', 0
-        )
-  end
 
   def get_activation_request_from
     self.passive_request.
       where(
         'del_flag LIKE ?', 0
       )
-  end
-
-  def get_active_request_id(baggage_request_id)
-    self.get_activation_request_to.find_by(baggage_request_id: baggage_request_id)
   end
 
   def get_passive_request_id(baggage_request_id)
@@ -57,11 +46,17 @@ class User < ApplicationRecord
   end
 
   def approval_requests
-    self.required_baggage.where(approval_flag: 1)
+    self.required_baggage.where(approval_flag: 1,
+                                leaver_start_authenticate: 0,
+                                receiver_start_authenticate: 0)
   end
 
   def intend_to_requests
     BaggageRequest.get_intend_to_request(self.id)
+  end
+
+  def contracted_transaction
+    BaggageRequest.get_request_in_transaction(self.id)
   end
 
   # TODO includesを使用する、全ユーザーのmessagesを取得してしまっている
@@ -81,13 +76,22 @@ class User < ApplicationRecord
     BaggageRequest.get_receiving_in_transaction(self.id)
   end
 
-  def constracted_transaction
-    self.in_transaction.where(
+  def leaving_in_transaction
+    BaggageRequest.get_leaving_in_transaction(self.id)
+  end
+
+  # TODO 要チェック
+  def contracted_in_transaction
+    self.includes(
+      :active_requires
+    ).where(
       "leaver_start_authenticate LIKE ? AND
        receiver_start_authenticate LIKE ? AND
        leaver_end_authenticate LIKE ? AND
        receiver_end_authenticate LIKE ?",
        1, 1, 1, 1
+    ).references(
+      :active_requries
     )
   end
 

@@ -42,10 +42,10 @@ Rails.application.routes.draw do
   get '/:id/transactions/leaving_index', to: 'transactions#leaving_index', as: 'leaving_index'
   get '/:id/transactions/:baggage_request_id/receives_show', to: 'transactions#receives_show', as: 'receives_show'
   get '/:id/transactions/:baggage_request_id/leaves_show', to: 'transactions#leaves_show', as: 'leaves_show'
-  patch '/:id/baggages/transaction_start/:baggage_request_id', to: 'baggages#transaction_start', as: 'transaction_start'
+  patch '/:id/transactions/transaction_start/:baggage_request_id', to: 'transactions#transaction_start', as: 'transaction_start'
   get '/:id/transactions/:baggage_request_id/receiving_show', to: 'transactions#receiving_show', as: 'receiving_show'
   get '/:id/transactions/:baggage_request_id/leaving_show', to: 'transactions#leaving_show', as: 'leaving_show'
-  patch '/:id/baggages/transaction_terminate/:baggage_request_id', to: 'baggages#transaction_terminate',
+  patch '/:id/transactions/transaction_terminate/:baggage_request_id', to: 'transactions#transaction_terminate',
                                                                    as: 'transaction_terminate'
   get '/:id/transactions/transaction_history', to: 'transactions#transaction_history', as: 'transaction_history'
 

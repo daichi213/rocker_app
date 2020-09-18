@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200902123738) do
+ActiveRecord::Schema.define(version: 20200916134638) do
 
   create_table "baggage_request_to_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "required_id"
@@ -32,7 +32,16 @@ ActiveRecord::Schema.define(version: 20200902123738) do
     t.integer "about_baggage_size_w"
     t.integer "about_baggage_size_l"
     t.integer "about_baggage_size_h"
+    t.integer "leaver_start_authenticate"
+    t.integer "receiver_start_authenticate"
+    t.integer "leaver_end_authenticate"
+    t.integer "receiver_end_authenticate"
+    t.datetime "transaction_started_at"
+    t.datetime "transaction_terminated_at"
+    t.decimal "leaver_point", precision: 10
+    t.decimal "receiver_point", precision: 10
     t.integer "approval_flag"
+    t.integer "cancelled_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -94,13 +103,9 @@ ActiveRecord::Schema.define(version: 20200902123738) do
   end
 
   create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "leaver_authenticate"
-    t.integer "receiver_authenticate"
-    t.datetime "started_at"
-    t.datetime "terminated_at"
-    t.decimal "leaver_point", precision: 10
-    t.decimal "receiver_point", precision: 10
+    t.integer "user_id"
     t.integer "baggage_request_id"
+    t.integer "leaver_flag"
     t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -27,11 +27,15 @@
     <div class="request_index_link_row">
         <% if request.fullpath == request_list_path(current_user) %>
             <%= link_to "リクエストの詳細を確認", request_content_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
-            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_passive_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
-        <% elsif request.fullpath == approval_requests_path(current_user) %>
-            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_passive_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
-        <% elsif request.fullpath == intend_to_requests_path(current_user) %>
-            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_active_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
+        <% elsif request.fullpath == receives_index_path(current_user) %>
+            <%= link_to "リクエストの詳細を確認", receives_show_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
+        <% elsif request.fullpath == leaves_index_path(current_user) %>
+            <%= link_to "リクエストの詳細を確認", leaves_show_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
+        <% elsif request.fullpath == receiving_index_path(current_user) %>
+            <%= link_to "リクエストの詳細を確認", receiving_show_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
+        <% elsif request.fullpath == leaving_index_path(current_user) %>
+            <%= link_to "リクエストの詳細を確認", leaving_show_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
         <% end %>
+        <%= link_to "メッセージを送る", message_page_path(current_user, baggage_request.get_to_user.id), class: "to_request_show btn btn-primary" %>
     </div>
 <% end %>

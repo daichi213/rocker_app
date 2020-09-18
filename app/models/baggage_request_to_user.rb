@@ -1,4 +1,5 @@
 class BaggageRequestToUser < ApplicationRecord
+  # 以下のBaggageRequestテーブルへはrailsの仕様の関係上アクセスできない
   belongs_to :baggage_request_to, class_name: "BaggageRequest", optional: true
   has_many :messages, class_name: "Message"
   belongs_to :requires, class_name: "User"

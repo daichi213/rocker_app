@@ -327,6 +327,8 @@ size = [30, 60, 100, 150]
 
 users.each do |user|
   rand_time = Time.at(rand(at_now..at_now_plus_1_month))
+  point = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5,
+           3.0, 3.5, 4.0, 4.5, 5.0]
   request =
     user.active_requires.create!(
       from_time: rand_time,
@@ -337,7 +339,16 @@ users.each do |user|
       about_baggage_size_w: size.sample,
       about_baggage_size_l: size.sample,
       about_baggage_size_h: size.sample,
-      approval_flag: 0
+      leaver_start_authenticate: 0,
+      receiver_start_authenticate: 0,
+      leaver_end_authenticate: 0,
+      receiver_end_authenticate: 0,
+      transaction_started_at: rand_time,
+      transaction_terminated_at: rand_time + 3.hour,
+      leaver_point: point.sample,
+      receiver_point: point.sample,
+      approval_flag: 0,
+      cancelled_flag: 0
     )
   10.times do |n|
     request.to_users.create!(required_id: n + 1,
