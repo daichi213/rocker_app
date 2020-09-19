@@ -322,13 +322,13 @@ request_contents = ["傷が入りやすい品物もありますので、棚の�
                     "振動に弱い品物がありますので、振動する機械のそばに置かないよう願います。"]
 transaction_messages = ["こんにちは、取引よろしくお願いします。",
                         "荷物を取りに行く時間がはっきりと確定していないので、取引時間にある程度融通のきく方歓迎致します。",
-                        "品物への匂い移りのため、荷物に匂いがつく範囲での喫煙はご遠慮下さい"]
+                        "品物への匂い移りのため、荷物に匂いがつく範囲での喫煙はご遠慮下さい。"]
 size = [30, 60, 100, 150]
 
 users.each do |user|
   rand_time = Time.at(rand(at_now..at_now_plus_1_month))
-  point = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5,
-           3.0, 3.5, 4.0, 4.5, 5.0]
+  # point = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5,
+  #          3.0, 3.5, 4.0, 4.5, 5.0]
   request =
     user.active_requires.create!(
       from_time: rand_time,
@@ -343,10 +343,8 @@ users.each do |user|
       receiver_start_authenticate: 0,
       leaver_end_authenticate: 0,
       receiver_end_authenticate: 0,
-      transaction_started_at: rand_time,
-      transaction_terminated_at: rand_time + 3.hour,
-      leaver_point: point.sample,
-      receiver_point: point.sample,
+      leaver_point: 0.0,
+      receiver_point: 0.0,
       approval_flag: 0,
       cancelled_flag: 0
     )
@@ -377,13 +375,24 @@ message_list = [
 user1 = User.first
 user2 = User.second
 
+request=user2.active_requires.first
+request_to = request.to_users.find_by(
+  required_id: user1.id
+)
+
+request.update!(approval_flag: 1,
+                receiver_start_authenticate: 1,
+                leaver_start_authenticate: 1,
+                transaction_started_at: request.from_time)
+request.to_users.map {
+  |to| to.update!(del_flag: 1) if request_to.required_id != user1.id
+}
+
 message_list[0].each_with_index do |message, idx|
-  user2.active_request.find_by(
-    required_id: user1.id
-  ).messages.create(
+  request_to.messages.create(
     content: message,
     user_id: message_list[1][idx],
     read_flag: 0,
-    del_flag: 0,
+    del_flag: 0
   )
 end

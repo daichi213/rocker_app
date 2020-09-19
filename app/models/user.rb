@@ -28,6 +28,8 @@ class User < ApplicationRecord
   has_many :messages_in_required, through: :passive_request, source: :messages
   has_many :inquiries
   has_many :positions
+  has_many :transactions
+  has_many :constracted_transactions, through: :transactions, source: :baggage_request
 
   def get_activation_request_from
     self.passive_request.
@@ -55,10 +57,6 @@ class User < ApplicationRecord
     BaggageRequest.get_intend_to_request(self.id)
   end
 
-  def contracted_transaction
-    BaggageRequest.get_request_in_transaction(self.id)
-  end
-
   # TODO includesを使用する、全ユーザーのmessagesを取得してしまっている
   def dont_read_message
     Message.where(
@@ -81,18 +79,8 @@ class User < ApplicationRecord
   end
 
   # TODO 要チェック
-  def contracted_in_transaction
-    self.includes(
-      :active_requires
-    ).where(
-      "leaver_start_authenticate LIKE ? AND
-       receiver_start_authenticate LIKE ? AND
-       leaver_end_authenticate LIKE ? AND
-       receiver_end_authenticate LIKE ?",
-       1, 1, 1, 1
-    ).references(
-      :active_requries
-    )
+  def contracted_transaction
+    BaggageRequest.get_contracted_transaction(self.id)
   end
 
   accepts_nested_attributes_for :receivable_baggages

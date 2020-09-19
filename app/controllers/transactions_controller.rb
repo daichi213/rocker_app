@@ -29,6 +29,7 @@ class TransactionsController < ApplicationController
   # 取引開始
   def transaction_start
     @baggage_request = BaggageRequest.find_by(id: params[:baggage_request_id])
+    # 預け側か受取側かの判断
     if @baggage_request.user_id == current_user.id
       @baggage_request_flag = @baggage_request.update(leaver_start_authenticate: 1)
     else
@@ -37,6 +38,7 @@ class TransactionsController < ApplicationController
     if @baggage_request.receiver_start_authenticate == 1 && @baggage_request.leaver_start_authenticate == 1
       @transaction_flag = @baggage_request.update(transaction_started_at: Time.zone.now)
     end
+    # 双方の承認状況に応じてメッセージを切り替える
     if @baggage_request_flag && @transaction_flag
       flash[:success] = "取引は正常に開始されました"
       redirect_to user_path current_user
@@ -63,6 +65,7 @@ class TransactionsController < ApplicationController
   # 取引終了アクション
   def transaction_terminate
     @baggage_request = BaggageRequest.find_by(id: params[:baggage_request_id])
+    # 預け側か受取側かの判断
     if @baggage_request.user_id == current_user.id
       @baggage_request_flag = @baggage_request.update(leaver_end_authenticate: 1)
     else
@@ -71,6 +74,7 @@ class TransactionsController < ApplicationController
     if @baggage_request.receiver_end_authenticate == 1 && @baggage_request.leaver_end_authenticate == 1
       @transaction_flag = @baggage_request.update(transaction_terminated_at: Time.zone.now)
     end
+    # 双方の承認状況に応じてメッセージを切り替える
     if @baggage_request_flag && @transaction_flag
       flash[:success] = "取引は正常に終了しました"
       redirect_to user_path current_user
@@ -87,6 +91,6 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_history
-    @baggage_request = current_user.active_requires
+    @baggage_requests = current_user.contracted_transaction
   end
 end

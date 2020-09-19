@@ -1,9 +1,11 @@
 <h2>荷物詳細</h2>
 
 <div class='container'>
-    <%= render 'baggages/transaction', baggage_request: @baggage_request %>
-    <div class="request_index_link_row">
-        <%= link_to "荷物受取開始", transaction_start_path(current_user, @baggage_request), class: "to_request_show btn btn-primary", method: :patch %>
-        <%= link_to "メッセージを送る", message_page_path(current_user, @baggage_request.get_to_user), class: "to_request_show btn btn-primary" %>
-    </div>
+    <ul class="baggage_requests">
+        <%= render 'baggages/transaction', baggage_request: @baggage_request %>
+        <div class="request_index_link_row">
+            <%= link_to "荷物受取開始", transaction_start_path(current_user, @baggage_request), class: "to_request_show btn btn-primary", method: :patch %>
+            <%= link_to "メッセージを送る", message_page_path(current_user, @baggage_request.get_to_user), class: "to_request_show btn btn-primary" %>
+        </div>
+    </ul>
 </div>

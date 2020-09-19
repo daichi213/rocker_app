@@ -19,19 +19,23 @@
         <%= baggage_request.request_content %>
     </div>
     <div>
-        <h4>預り希望時間帯</h4>
-        <%= baggage_request.from_time.strftime("%m/%d %H:%m") %>
-        <br>
-        <%= baggage_request.to_time.strftime("%m/%d %H:%m") %>
-    </div>
-    <div class="request_index_link_row">
-        <% if request.fullpath == request_list_path(current_user) %>
-            <%= link_to "リクエストの詳細を確認", request_content_path(current_user, baggage_request), class: "to_request_show btn btn-primary" %>
-            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_passive_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
-        <% elsif request.fullpath == approval_requests_path(current_user) %>
-            <%= link_to "メッセージを送る", message_page_path(current_user, current_user.get_passive_request_id(baggage_request.id)), class: "to_request_show btn btn-primary" %>
-        <% elsif request.fullpath == intend_to_requests_path(current_user) %>
-            <%= link_to "メッセージを送る", message_page_path(current_user, baggage_request.get_to_user), class: "to_request_show btn btn-primary" %>
+        <% if baggage_request.transaction_started_at && baggage_request.transaction_terminated_at %>
+            <h4>取引開始時刻</h4>
+            <%= baggage_request.transaction_started_at.strftime("%m/%d %H:%m") %>
+            <br>
+            <h4>取引終了時刻</h4>
+            <%= baggage_request.transaction_terminated_at.strftime("%m/%d %H:%m") %>
+        <% elsif baggage_request.transaction_started_at %>
+            <h4>取引開始時刻</h4>
+            <%= baggage_request.transaction_started_at.strftime("%m/%d %H:%m") %>
+            <br>
+            <h4>終了予定時刻</h4>
+            <%= baggage_request.to_time.strftime("%m/%d %H:%m") %>
+        <% else %>
+            <h4>希望時間帯</h4>
+            <%= baggage_request.from_time.strftime("%m/%d %H:%m") %>
+            <br>
+            <%= baggage_request.to_time.strftime("%m/%d %H:%m") %>
         <% end %>
     </div>
 <% end %>

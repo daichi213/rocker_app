@@ -1,7 +1,9 @@
 <h2>預け中一覧</h2>
 
 <div class='container'>
-    <% @baggage_requests.each do |baggage_request| %>
-        <%= render 'baggages/baggage_request', baggage_request: baggage_request %>
-    <% end %>
+    <ul class="baggage_requests">
+        <% @baggage_requests.each do |baggage_request| %>
+            <%= render 'baggages/baggage_request', baggage_request: baggage_request %>
+        <% end %>
+    </ul>
 </div>

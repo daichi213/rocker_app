@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   # TODO POSTCODEからの住所自動入力機能実装
+  # TODO 利用規約のチェックボックスの条件を組み込む
   def create
     @user = User.new(user_params)
     if @user.save
