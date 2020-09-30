@@ -3,13 +3,24 @@
                                                 street: baggage_request.user.street,
                                                 # user_apparause_point: baggage_request.user.user_apparause_point
                                                 } do %>
-    <!-- ユーザー画像 -->
-    <% if baggage_request.user.picture? %>
-        <%= image_tag baggage_request.user.picture.thumb50.url %>
+    <!-- 受け手側か預け側かでuser_nameを変化させる -->
+    <% if baggage_request.requires?(current_user) %>
+        <h4>預け先</h4>
+        <% if baggage_request.user.picture? %>
+            <%= image_tag baggage_request.get_to_user.required.picture.thumb50.url %>
+        <% else %>
+            <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+        <% end %>
+        <%= link_to baggage_request.get_to_user.required.name, user_path(baggage_request.user), class: "user_show_links" %>
     <% else %>
-        <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+        <!-- ユーザー画像 -->
+        <% if baggage_request.user.picture? %>
+            <%= image_tag baggage_request.user.picture.thumb50.url %>
+        <% else %>
+            <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+        <% end %>
+        <%= link_to baggage_request.user.name, user_path(baggage_request.user), class: "user_show_links" %>
     <% end %>
-    <%= link_to baggage_request.user.name, user_path(baggage_request.user), class: "user_show_links" %>
     <div>
         <h4>荷物の内容</h4>
         <%= baggage_request.baggage_content %>

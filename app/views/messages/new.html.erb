@@ -8,8 +8,8 @@
               <% else %>
                   <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
               <% end %>
-          <% end %>
           <%= @user.name %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -65,8 +65,8 @@
       })
         .done(function(data){
           var html = buildHTML(data);
-          $('.message-lists').append(html);      
-          $('form')[0].reset();
+          $('.message-lists').append(html);
+          $('form')[1].reset();
           $('.message-lists').animate({ scrollTop: $('.message-lists')[0].scrollHeight});
         })
         .fail(function(data){

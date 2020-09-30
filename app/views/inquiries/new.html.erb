@@ -2,12 +2,14 @@
 
 <h2>問い合わせ</h2>
 <div class='container'>
-    <%= form_for @inquiry, url: send_help_path do |f| %>
+    <%= form_for :inquiry, url: send_help_path do |f| %>
         <%= f.label :title %>
         <%= f.select :title, Inquiry.list_of_title %>
 
-        <%= f.label :content %>
-        <%= f.text_area :content %>
+        <%= f.fields_for :inquiry_solution_contents do |b| %>
+            <%= b.label :content %>
+            <%= b.text_area :content %>
+        <% end %>
 
         <%= f.submit "Send" %>
     <% end %>

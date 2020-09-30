@@ -1522,3 +1522,58 @@ Completed 200 OK in 15ms (Views: 9.5ms | ActiveRecord: 0.0ms)
   [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
   [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (14.7ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (3.9ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (147.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS `locker-app_test`[0m
+  [1m[35m (16.2ms)[0m  [1m[35mCREATE DATABASE `locker-app_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (1.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (4.9ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (56.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `baggage_request_to_users` CASCADE[0m
+  [1m[35m (174.8ms)[0m  [1m[35mCREATE TABLE `baggage_request_to_users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `required_id` int, `baggage_request_id` int, `requires_id` int, `transaction_id` int, `del_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (11.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `baggage_requests` CASCADE[0m
+  [1m[35m (92.0ms)[0m  [1m[35mCREATE TABLE `baggage_requests` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` int, `from_time` datetime, `to_time` datetime, `request_content` text, `baggage_content` text, `transaction_message` text, `about_baggage_size_w` int, `about_baggage_size_l` int, `about_baggage_size_h` int, `leaver_start_authenticate` int, `receiver_start_authenticate` int, `leaver_end_authenticate` int, `receiver_end_authenticate` int, `transaction_started_at` datetime, `transaction_terminated_at` datetime, `leaver_point` decimal(10), `receiver_point` decimal(10), `approval_flag` int, `cancelled_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (4.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `baggages` CASCADE[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE TABLE `baggages` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` int, `about_baggage_size_w` int, `about_baggage_size_l` int, `about_baggage_size_h` int, `del_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `inquiries` CASCADE[0m
+  [1m[35m (34.2ms)[0m  [1m[35mCREATE TABLE `inquiries` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `user_id` int, `solved_flag` int, `del_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (3.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `inquiry_solution_contents` CASCADE[0m
+  [1m[35m (24.0ms)[0m  [1m[35mCREATE TABLE `inquiry_solution_contents` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `contentable_id` int, `contentable_type` varchar(255), `read_flag` int, `content` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `messages` CASCADE[0m
+  [1m[35m (27.9ms)[0m  [1m[35mCREATE TABLE `messages` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `content` text, `user_id` int, `baggage_request_to_user_id` int, `read_flag` int, `del_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `positions` CASCADE[0m
+  [1m[35m (35.7ms)[0m  [1m[35mCREATE TABLE `positions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` int, `latitude` decimal(10), `longitude` decimal(10), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `solutions` CASCADE[0m
+  [1m[35m (39.3ms)[0m  [1m[35mCREATE TABLE `solutions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `inquiry_id` int, `read_flag` int, `del_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `transactions` CASCADE[0m
+  [1m[35m (20.8ms)[0m  [1m[35mCREATE TABLE `transactions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` int, `baggage_request_id` int, `leaver_flag` int, `del_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (1.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (36.4ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `sex` int, `birthday` date, `occupation` varchar(255), `postcode` int, `prefecture_code` int, `state` varchar(255), `city` varchar(255), `street` varchar(255), `house` varchar(255), `longitude` float(24), `latitude` float(24), `email` varchar(255), `picture` varchar(255), `admin` int, `password_digest` varchar(255), `remember_digest` varchar(255), `user_apparause_point` decimal(10), `amount_billed` int, `del_flag` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (23.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (9.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (2.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20200916134638)[0m
+  [1m[35m (1.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20200803071258),
+(20200825055635),
+(20200610064726),
+(20200716145520),
+(20200805090531),
+(20200702060338),
+(20200902123738),
+(20200825082823),
+(20200702062151),
+(20200606005916),
+(20200526133550),
+(20200830074324);
+
+[0m
+  [1m[35m (20.5ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (5.2ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2020-09-25 15:02:41', '2020-09-25 15:02:41')[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m

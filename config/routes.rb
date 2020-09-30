@@ -60,4 +60,5 @@ Rails.application.routes.draw do
   get '/:id/get_solution/:inquiry_id', to: 'inquiries#get_solution', as: 'get_solution'
   post '/:id/help', to: 'inquiries#create', as: 'send_help'
   post '/:id/solutions/:inquiry_id', to: 'inquiries#solution', as: 'solution'
+  post '/:id/inquiry_reply/:inquiry_id', to: 'inquiries#inquiry_reply', as: 'inquiry_reply'
 end

@@ -58,18 +58,17 @@ ActiveRecord::Schema.define(version: 20200916134638) do
 
   create_table "inquiries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
-    t.text "content"
     t.integer "user_id"
     t.integer "solved_flag"
-    t.integer "read_flag"
     t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "inquiry_solution_contents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "inquiry_id"
-    t.integer "solution_id"
+    t.integer "contentable_id"
+    t.string "contentable_type"
+    t.integer "read_flag"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,7 +93,6 @@ ActiveRecord::Schema.define(version: 20200916134638) do
   end
 
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "content"
     t.integer "inquiry_id"
     t.integer "read_flag"
     t.integer "del_flag"

@@ -1,4 +1,4 @@
 class InquirySolutionContent < ApplicationRecord
-  belongs_to :inquiry
-  belongs_to :solution
+  # ポリモーフィック関連
+  belongs_to :contentable, polymorphic: true
 end

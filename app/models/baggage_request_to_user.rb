@@ -5,4 +5,7 @@ class BaggageRequestToUser < ApplicationRecord
   belongs_to :requires, class_name: "User"
   belongs_to :required, class_name: "User"
 
+  def required?(user)
+    self.required_id == user.id
+  end
 end

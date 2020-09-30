@@ -4,7 +4,9 @@
             <%= "○#{inquiry.title}" %>
         </div>
         <div class='inquiry-show__inquiry-content'>
-            <%= inquiry.content %>
+            <% inquiry.inquiry_solution_contents.each do |inquiry| %>
+                <%= inquiry.content %>
+            <% end %>
         </div>
     <% end %>
 </div>

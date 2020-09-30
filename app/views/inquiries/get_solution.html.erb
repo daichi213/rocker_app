@@ -13,17 +13,24 @@
     </div>
     <div>
         <h5>問い合わせ内容</h5>
-        <%= @inquiry.content %>
-    </div>
-
-    <div>
-        <h5>回答内容</h5>
-        <%= @solution.content %>
+        <% @contents.each_with_index do |content, idx| %>
+            <%= @names[idx] %>
+            <br>
+            <%= content.content %>
+            <br>
+        <% end %>
     </div>
 
     <% if current_user.admin? %>
-        <%= form_for @solution, url: solution_path do |f| %>
+        <%= form_for @solution_content, url: solution_path do |f| %>
             <%= f.label :content, "回答" %>
+            <%= f.text_area :content %>
+
+            <%= f.submit "Send" %>
+        <% end %>
+    <% else %>
+        <%= form_for @inquiry_content, url: inquiry_reply_path do |f| %>
+            <%= f.label :content, "メッセージ" %>
             <%= f.text_area :content %>
 
             <%= f.submit "Send" %>

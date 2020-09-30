@@ -18,5 +18,7 @@ COPY Gemfile \
 
 RUN bundle install
 
+COPY . /locker_app
+
 # https://github.com/bundler/bundler/issues/6154
 ENV BUNDLE_GEMFILE='/locker_app/Gemfile'

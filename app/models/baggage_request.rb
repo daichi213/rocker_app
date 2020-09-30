@@ -13,6 +13,14 @@ class BaggageRequest < ApplicationRecord
   # TODO VALIDATION追加
   # TODO relationのテスト追加
 
+  def required?(user)
+    self.user_id != user.id && self.approval_flag == 1
+  end
+
+  def requires?(user)
+    self.user_id == user.id && self.approval_flag == 1
+  end
+
   def get_to_user
     self.to_users.find_by(del_flag: 0)
   end
@@ -79,6 +87,16 @@ class BaggageRequest < ApplicationRecord
     ).references(
       :to_users
     )
+  end
+
+  def in_transaction?
+    self.leaver_start_authenticate == 1 && self.receiver_start_authenticate == 1 &&
+    self.leaver_end_authenticate == 0 && self.receiver_end_authenticate == 0
+  end
+
+  def terminated?
+    self.leaver_start_authenticate == 1 && self.receiver_start_authenticate == 1 &&
+    self.leaver_end_authenticate == 1 && self.receiver_end_authenticate == 1
   end
 
   # userの評価ポイントの実装
