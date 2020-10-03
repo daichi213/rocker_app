@@ -5,13 +5,13 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
+  adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   encoding: utf8
   username: root
   password: password
-  # socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
   host: db
 
 development:
@@ -30,4 +30,4 @@ production:
   database: locker-app_production
   username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  socket: /var/lib/mysql/mysql.sock
+  # socket: /var/lib/mysql/mysql.sock

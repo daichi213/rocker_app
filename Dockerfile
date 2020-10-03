@@ -1,5 +1,21 @@
 FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs default-mysql-client
+
+# RUN apt-get update -qq && apt-get install -y nodejs lsb-release\
+#     && apt remove -y libmariadb-dev-compat libmariadb-dev
+
+# RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-common_8.0.18-1debian10_amd64.deb \
+#     https://dev.mysql.com/get/Downloads/MySQL-8.0/libmysqlclient21_8.0.18-1debian10_amd64.deb \
+#     https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-community-client-core_8.0.18-1debian10_amd64.deb \
+#     https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-community-client_8.0.18-1debian10_amd64.deb \
+#     https://dev.mysql.com/get/Downloads/MySQL-8.0/libmysqlclient-dev_8.0.18-1debian10_amd64.deb
+
+# RUN dpkg -i mysql-common_8.0.18-1debian10_amd64.deb \
+#     libmysqlclient21_8.0.18-1debian10_amd64.deb \
+#     mysql-community-client-core_8.0.18-1debian10_amd64.deb \
+#     mysql-community-client_8.0.18-1debian10_amd64.deb \
+#     libmysqlclient-dev_8.0.18-1debian10_amd64.deb
+
 RUN mkdir /locker_app
 WORKDIR /locker_app
 COPY Gemfile /locker_app/Gemfile
