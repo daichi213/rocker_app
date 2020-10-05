@@ -1,0 +1,71 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2
+
+jobs:
+  build:
+    docker:
+      - image: daichi213/locker_app_web
+      - image: daichi213/ruby
+      - image: daichi213/mysql
+        environment:
+          - MYSQL_ROOT_PASSWORD: password
+          - MYSQL_ROOT_HOST: '172.18.0.3'
+
+    working_directory: ~/locker_app
+
+    steps:
+      - checkout
+
+      - run: echo "Set up complete!!"
+      #     name: Which bundler?
+      #     command: bundle -v
+      # - ruby/bundle-install
+# ######################
+    # - restore_cache:
+    #         keys:
+    #         - v1-dependencies-{{ checksum "Gemfile.lock" }}
+    #         - v1-dependencies-
+
+    #     - run:
+    #         name: install dependencies
+    #         command: |
+    #           gem install bundler -v 2.0.2
+    #           bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+    #     - save_cache:
+    #         paths:
+    #         - ./vendor/bundle
+    #         key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+    #     # Database setup
+    #     - run: mv ./config/database.yml.ci ./config/database.yml
+
+    #     # Database setup
+    #     - run:
+    #         name: Databasesetup
+    #         command: |
+    #           bundle exec rake db:create
+    #           bundle exec rake db:schema:load
+
+    #     # run tests!
+    #     - run:
+    #         name: Run rspec
+    #         command: |
+    #           mkdir /tmp/test-results
+    #           TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+    #             circleci tests split --split-by=timings)"
+
+    #           bundle exec rspec \
+    #             --format progress \
+    #             --format RspecJunitFormatter \
+    #             --out /tmp/test-results/rspec.xml \
+    #             --format progress \
+    #             $TEST_FILES
+
+    #     # collect reports
+    #     - store_test_results:
+    #         path: /tmp/test-results
+    #     - store_artifacts:
+    #         path: /tmp/test-results
+    #         destination: test-results

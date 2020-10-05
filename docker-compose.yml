@@ -11,6 +11,7 @@ services:
       # 永続化するときにマウントするdir
       - ./db/mysql_data:/var/lib/mysql
     environment:
+      # TODO .envファイルの導入
       # MYSQL_DATABASE: locker_app
       # MYSQL_USER: developper
       # MYSQL_PASSWORD: password
