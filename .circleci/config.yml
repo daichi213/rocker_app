@@ -6,8 +6,8 @@ jobs:
   build:
     docker:
       - image: daichi213/locker_app_web
-      - image: daichi213/ruby
-      - image: daichi213/mysql
+      - image: circleci/ruby:2.5
+      - image: circleci/mysql:5.7
         environment:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_ROOT_HOST: '172.18.0.3'
