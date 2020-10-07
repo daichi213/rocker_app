@@ -7,6 +7,9 @@ jobs:
     docker:
       - image: daichi213/locker_app_web
       - image: circleci/ruby:2.5
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: 'test'
       - image: circleci/mysql:5.7
         environment:
           - MYSQL_ROOT_PASSWORD: password
