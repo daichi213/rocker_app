@@ -5,21 +5,31 @@ orbs:
 jobs:
   ruby_build:
     docker:
-      - image: circleci/ruby:2.5
-        environment:
-          - BUNDLER_VERSION: 2.1.4
-          - RAILS_ENV: 'test'
+    - image: circleci/ruby:2.5
+      environment:
+        - BUNDLER_VERSION: 2.1.4
+        - RAILS_ENV: 'test'
     steps:
-        - checkout
+      - checkout
 
   mysql_build:
     docker:
-      - image: circleci/mysql:5.7
-        environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-          - MYSQL_ROOT_HOST: '172.18.0.3'
+    - image: circleci/mysql:5.7
+      environment:
+        - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+        - MYSQL_ROOT_HOST: '172.18.0.3'
     steps:
-        - checkout
+      - checkout
+
+      # Database setup
+      - run: mv ./config/database.yml.ci ./config/database.yml
+
+      # Database setup
+      - run:
+          name: Databasesetup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
 
   build:
     docker:
@@ -45,16 +55,6 @@ jobs:
           paths:
           - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      # Database setup
-      - run: mv ./config/database.yml.ci ./config/database.yml
-
-      # Database setup
-      - run:
-          name: Databasesetup
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
 
     #     # run tests!
     #     - run:
