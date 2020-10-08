@@ -6,11 +6,11 @@ jobs:
   build:
     docker:
       - image: daichi213/locker_app_web
-      - image: daichi213/ruby
-        # environment:
-        #   - BUNDLER_VERSION: 2.1.4
-        #   - RAILS_ENV: 'test'
-      - image: daichi213/mysql
+      - image: circleci/ruby:2.5
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: 'test'
+      - image: circleci/mysql:5.7
         environment:
           - MYSQL_ROOT_PASSWORD: password
           - MYSQL_ROOT_HOST: '172.18.0.3'
@@ -20,26 +20,21 @@ jobs:
     steps:
       - checkout
 
-      - run: echo "Set up complete!!"
-      #     name: Which bundler?
-      #     command: bundle -v
-      # - ruby/bundle-install
-# ######################
-    # - restore_cache:
-    #         keys:
-    #         - v1-dependencies-{{ checksum "Gemfile.lock" }}
-    #         - v1-dependencies-
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
 
-    #     - run:
-    #         name: install dependencies
-    #         command: |
-    #           gem install bundler -v 2.0.2
-    #           bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-    #     - save_cache:
-    #         paths:
-    #         - ./vendor/bundle
-    #         key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - save_cache:
+          paths:
+          - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
     #     # Database setup
     #     - run: mv ./config/database.yml.ci ./config/database.yml
