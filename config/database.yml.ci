@@ -5,4 +5,4 @@ test:
   username: 'root'
   port: 3306
   host: '172.18.0.3'
-  database: sample_app_test
+  database: locker-app_test
