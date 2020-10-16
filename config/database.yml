@@ -9,8 +9,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   encoding: utf8
-  username: root
-  password: password
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
   socket: /var/run/mysqld/mysqld.sock
   host: db
 
@@ -28,6 +28,6 @@ test:
 production:
   <<: *default
   database: locker-app_production
-  username: root
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
   # socket: /var/lib/mysql/mysql.sock

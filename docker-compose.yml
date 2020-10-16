@@ -3,6 +3,8 @@ services:
   db:
     image: mysql:5.7
     restart: always
+    env_file:
+      - ./.env
     ports:
       - 3306:3306
     volumes:
@@ -11,23 +13,34 @@ services:
       # 永続化するときにマウントするdir
       - ./db/mysql_data:/var/lib/mysql
     environment:
-      # TODO .envファイルの導入
-      # MYSQL_DATABASE: locker_app
-      # MYSQL_USER: developper
-      # MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
       TZ: 'Asia/Tokyo'
-      # MYSQL_ALLOW_EMPTY_PASSWORD: true
     command: --default-authentication-plugin=mysql_native_password
-  web:
+  app:
     build:
       context: .
     ports:
       - 3000:3000
     depends_on:
       - db
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
+    # command: export SECRET_KEY_BASE=`bundle exec rake secret` && bundle exec puma -t 5:5 -p 3000 -e production -C config/puma.rb
+    command: bash -c "bundle exec rake db:create RAILS_ENV=production &&
+             bundle exec rake db:migrate RAILS_ENV=production &&
+             bundle exec rake assets:precompile RAILS_ENV=production &&
+             rails server -e production &&
+             bash entrypoint.sh && /bin/bash"
     volumes:
       - ./:/locker_app
     stdin_open: true
+    tty: true
+  web:
+    image: nginx:1.15.8
+    build:
+      context: ./containers/nginx
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+    # restart: always
     tty: true
