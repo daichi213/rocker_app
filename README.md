@@ -1,25 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# rocker_app
+# Locker_app
+## どんなアプリか？
+　外出時、アプリの登録ユーザー同士で荷物を預け合うことができるサービスになります。登録したユーザーは荷物を預けることと預かることのどちらも行え、そのマッチングを助けるアプリになります。今の所、金銭取引は当事者同士でしていただくことを想定しています。
+　想定メインユーザーは取引時自宅にいることが可能な方、自営業で事務スペースを有効活用したい方などを想定しています。
+## なぜこのアプリを制作したのか？
+　自宅から少し離れた場所へ外出したときに、荷物が邪魔になりコインロッカーへ預けようとたのですが、その場所はたまたまコインロッカーがない場所だったためどうしようもなくなったことがありました。そのときに誰かに預けられたら楽だと思い、このアプリを制作しました。
+## 工夫した点
+　取引が終了した段階で双方に荷物の確認を行っていただき、お互いが取引に納得して承認ボタンを押した段階で取引が正常に終了する仕組みを導入しています。
+## 苦労した点
+　苦労した箇所はメッセージ機能の実装です。Ajaxの実装はjQueryとRailsのAPI機能を取り入れて実装したのですが、jQueryとRailsのturbolinksが相性悪く想定していた動作をしなかったので、その解決が非常に大変でした。
+## スキルセット
+### 言語
+HTML, CSS, JavaScript, Ruby, SQL, SCSS
+### フレームワーク
+Ruby on Rails
+### TOOL
+git, Docker, circleci, terraform, puma, nginx, MySQL
+### OS
+macOS
