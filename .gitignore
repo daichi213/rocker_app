@@ -436,4 +436,11 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+# tfvars
+*.tfvars
 
+terraform
+
+tf_ecs
+
+.terraform

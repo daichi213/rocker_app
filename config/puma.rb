@@ -17,7 +17,8 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # socket
 bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
-
+daemonize true
+stdout_redirect "#{Rails.root}/log/stdout", "#{Rails.root}/log/stderr"
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
 # the concurrency of the application would be max `threads` * `workers`.
