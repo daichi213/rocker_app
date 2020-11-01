@@ -8,13 +8,16 @@ threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-#
-# port        ENV.fetch("PORT") { 3000 }
-bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
 
+app_root = File.expand_path("../..",__FILE__)
+
+# port        ENV.fetch("PORT") { 3000 }
+bind "unix:/opt/locker_app/tmp/sockets/puma.sock"
+pidfile "#{app_root}/tmp/pids/puma.pid"
+state_path "#{app_root}/tmp/pids/puma.state"
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch("RAILS_ENV") { "development" }
+environment ENV.fetch("RAILS_ENV") { "production" }
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
@@ -55,3 +58,4 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+daemonize
