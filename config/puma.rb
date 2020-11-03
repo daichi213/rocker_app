@@ -10,9 +10,15 @@ threads threads_count, threads_count
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port        ENV.fetch("PORT") { 3000 }
 
+app_root = File.expand_path("../..",__FILE__)
+
+# port        ENV.fetch("PORT") { 3000 }
+# bind "unix:/opt/locker_app/tmp/sockets/puma.sock"
+pidfile "#{app_root}/tmp/pids/puma.pid"
+state_path "#{app_root}/tmp/pids/puma.state"
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch("RAILS_ENV") { "development" }
+environment ENV.fetch("RAILS_ENV") { "production" }
 
 # socket
 # bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
@@ -57,3 +63,4 @@ stdout_redirect "#{Rails.root}/log/stdout", "#{Rails.root}/log/stderr"
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+daemonize
