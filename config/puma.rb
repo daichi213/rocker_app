@@ -11,8 +11,8 @@ threads threads_count, threads_count
 
 app_root = File.expand_path("../..",__FILE__)
 
-# port        ENV.fetch("PORT") { 3000 }
-bind "unix:/opt/locker_app/tmp/sockets/puma.sock"
+port        ENV.fetch("PORT") { 3000 }
+# bind "unix:/opt/locker_app/tmp/sockets/puma.sock"
 pidfile "#{app_root}/tmp/pids/puma.pid"
 state_path "#{app_root}/tmp/pids/puma.state"
 # Specifies the `environment` that Puma will run in.
