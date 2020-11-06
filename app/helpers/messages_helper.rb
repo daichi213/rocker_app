@@ -3,7 +3,7 @@ module MessagesHelper
     if baggage_request_to_user.required_id == current_user.id
       @user = User.find_by(id: baggage_request_to_user.requires_id)
     else
-      @user = User.find_by(id: baggage_request_to_user.requires_id)
+      @user = User.find_by(id: baggage_request_to_user.required_id)
     end
   end
 end

@@ -90,6 +90,11 @@ class BaggagesController < ApplicationController
     @intend_to_requests = current_user.requiring_baggage
   end
 
+  def intend_to_request_show
+    @intend_to_request = BaggageRequest.find_by(id: params[:baggage_request_id])
+    @to_users = @intend_to_request.to_users
+  end
+
   private
 
   def request_params

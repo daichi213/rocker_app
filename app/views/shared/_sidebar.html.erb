@@ -22,11 +22,10 @@
             <section class='menu-content'>
                 <ul>
                     <!-- TODO リンクの表示部分if文削除 -->
-                    <li><%= link_to "Map", root_path if request.fullpath != root_path %></li>
-                    <li><%= link_to "Request Form", request_form_path(current_user) if request.fullpath != request_form_path(current_user) %></li>
-                    <li><%= link_to "Receives Request List", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
-                    <li><%= link_to "Received Request List", approval_requests_path(current_user) if request.fullpath != approval_requests_path(current_user) %></li>
-                    <li><%= link_to "Sent Request List", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
+                    <li><%= link_to "マップ", root_path if request.fullpath != root_path %></li>
+                    <li><%= link_to "リクエストする", request_form_path(current_user) if request.fullpath != request_form_path(current_user) %></li>
+                    <li><%= link_to "送られたリクエスト一覧", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
+                    <li><%= link_to "送ったリクエスト", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
                     <!-- TODO 条件分岐 -->
                     <div class="btn-group">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,12 +42,12 @@
                     <br>
                     <div class="btn-group">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Help
+                        管理者に問い合わせる
                         </a>
                         <div class="dropdown-menu">
-                            <li><%= link_to "Help Form", help_path(current_user) %></li>
+                            <li><%= link_to "お問い合わせフォーム", help_path(current_user) %></li>
                             <!-- TODO 回答件数が0のときは表示しない -->
-                            <li><%= link_to "Help List", index_path(current_user) %></li>
+                            <li><%= link_to "お問い合わせ一覧", index_path(current_user) %></li>
                         </div><!-- /.dropdown-menu -->
                     </div><!-- /.btn-group -->
 
