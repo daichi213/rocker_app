@@ -15,7 +15,11 @@ class BaggagesController < ApplicationController
   # フォームの作成アクション
   def create
     @request = current_user.active_requires.build(request_params)
+    @users = User.all
+    @prefecture_names = combination_city_and_state(@users).values.uniq
+    @city_names = combination_city_and_state(@users).to_a
     if @request.save
+      # debugger
       # リクエスト先の処理
       # TODO strong parameterに書き換え
       @error_user_name = []
@@ -28,6 +32,7 @@ class BaggagesController < ApplicationController
           @error_user_name.push("#{User.find_by(id: required_id).name},")
         end
       end
+      # debugger
       if !@error_user_name.empty?
         flash[:error] = "#{@error_user_name}さんへの送信に失敗しました"
       end
@@ -44,13 +49,13 @@ class BaggagesController < ApplicationController
     # debugger
   end
 
-  # リクエストの詳細・承認ページgit
+  # リクエストの詳細・承認ページ
   def receives
     @baggage_request = BaggageRequest.find_by(id: params[:baggage_request_id])
     @user = @baggage_request.user
   end
 
-  # updateですがリクエストの受け手側の承認時に使用するアクションになります。
+  # リクエストの受け手側の承認時に使用するアクション
   def update
     # リクエストの承認手続き
     @baggage_request = BaggageRequest.find_by(id: params[:baggage_request_id])
@@ -82,7 +87,7 @@ class BaggagesController < ApplicationController
   end
 
   def intend_to_requests
-    @intend_to_requests = current_user.intend_to_requests
+    @intend_to_requests = current_user.requiring_baggage
   end
 
   private
@@ -90,6 +95,9 @@ class BaggagesController < ApplicationController
   def request_params
     params.require(:baggage_request).permit(:request_content,
                                             :baggage_content,
+                                            :about_baggage_size_h,
+                                            :about_baggage_size_l,
+                                            :about_baggage_size_w,
                                             :from_time,
                                             :to_time,
                                             :transaction_message,

@@ -42,9 +42,12 @@ class User < ApplicationRecord
     get_activation_request_from.find_by(baggage_request_id: baggage_request_id)
   end
 
-  # includes内のキー名称は左側に従属するクラスのキーを持ってくる
   def required_baggage
     BaggageRequest.get_required_baggage_request(self.id)
+  end
+
+  def requiring_baggage
+    BaggageRequest.get_requiring_baggage_request(self.id)
   end
 
   def approval_requests

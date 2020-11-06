@@ -245,28 +245,25 @@ footer{
     z-index: 0;
     margin-left: auto;
     margin-right: auto;
-    .user-show {
-      .user-show-top {
-        display: flex;
-        margin-right: auto;
-        margin-left: auto;
-          img {
-            width: 70px;
-            height: 70px;
-            border-radius: 80%;
-            padding: 0 auto;
-          }
-        ul {
-          display: block;
-          list-style-type: none;
-        }
+  }
+  .user-show-top {
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 80%;
+        padding: 0 auto;
       }
-      div.user-info {
-        display: block;
-      }
+    ul {
+      display: block;
+      list-style-type: none;
     }
   }
-
+  div.user-info {
+    display: block;
+  }
 
   /* forms */
 
