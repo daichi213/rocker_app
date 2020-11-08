@@ -97,14 +97,16 @@
                     </div><!-- /.dropdown-menu -->
                 </div><!-- /.btn-group -->
                 <ul class='users'>
-                    <%= f.collection_check_boxes(:required_id, User.all, :id, :name, 
-                                                {checked:@request.to_user_ids, include_hidden: false}) do |c|%>
-                        <% if c.object.id != current_user.id %>
-                            <%= c.label(data: {state: c.object.state,
-                                            city: c.object.city,
-                                            street: c.object.street}, class: "list_item") do %>
-                                <%= c.check_box %>
-                                <%= c.object.name %>
+                    <%= f.fields_for :to_user do |b| %>
+                        <%= b.collection_check_boxes(:required_id, User.all, :id, :name,
+                                                    {checked: @checked_user, include_hidden: false}) do |c|%>
+                            <% if c.object.id != current_user.id %>
+                                <%= c.label(data: {state:   c.object.state,
+                                                city:    c.object.city,
+                                                street:  c.object.street}, class: "list_item") do %>
+                                    <%= c.check_box %>
+                                    <%= c.object.name %>
+                                <% end %>
                             <% end %>
                         <% end %>
                     <% end %>

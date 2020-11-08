@@ -82,7 +82,7 @@
                                 var infowindow = new google.maps.InfoWindow();
                                 // TODO 表示部の氏名を詳細ページへのリンクにする
                                 var marker, i;
-                                for (i = 0; i < locations.length; i++) {  
+                                for (i = 0; i < locations.length; i++) {
                                     marker = new google.maps.Marker({
                                         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                                         map: map
@@ -90,7 +90,10 @@
 
                                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                                         return function() {
-                                        infowindow.setContent(locations[i][0]);
+                                        // タグの表示部
+                                        infowindow.setContent(
+                                            `<a href=/users/${i}>${locations[i][0]}</a>`
+                                        );
                                         infowindow.open(map, marker);
                                         }
                                     })(marker, i));

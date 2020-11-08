@@ -66,7 +66,7 @@
         .done(function(data){
           var html = buildHTML(data);
           $('.message-lists').append(html);
-          $('form')[1].reset();
+          $('form')[0].reset();
           $('.message-lists').animate({ scrollTop: $('.message-lists')[0].scrollHeight});
         })
         .fail(function(data){

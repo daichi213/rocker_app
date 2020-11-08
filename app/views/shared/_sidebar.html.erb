@@ -1,80 +1,80 @@
 <% if logged_in? %>
     <div class='col-md-3 sidebar'>
         <nav class='navbar navbar-fixed'>
-            <section class="user_info">
-                <h1 class="user-image">
-                    <%= link_to current_user do %>
-                        <% if current_user.picture? %>
-                            <%= image_tag current_user.picture.thumb.url %>
-                        <% else %>
-                            <%= image_tag "/uploads/user/picture/thumb_default.jpg" %>
+            <ul class='side-ul'>
+                <section class="user_info">
+                    <h1 class="user-image">
+                        <%= link_to current_user do %>
+                            <% if current_user.picture? %>
+                                <%= image_tag current_user.picture.thumb.url %>
+                            <% else %>
+                                <%= image_tag "/uploads/user/picture/thumb_default.jpg" %>
+                            <% end %>
                         <% end %>
+                        <%= current_user.name %>
+                    </h1>
+                    <% if request.fullpath != "/users/#{params[:id]}/edit" %>
+                        <span><%= link_to "Edit", edit_user_path(current_user) %></span>
                     <% end %>
-                    <%= current_user.name %>
-                </h1>
-                <% if request.fullpath != "/users/#{params[:id]}/edit" %>
-                    <span><%= link_to "Edit", edit_user_path(current_user) %></span>
-                <% end %>
-            </section>
-            <section class="stats">
-                <%#= render 'shared/stats' %>
-            </section>
-            <section class='menu-content'>
-                <ul>
-                    <!-- TODO リンクの表示部分if文削除 -->
-                    <li><%= link_to "マップ", root_path if request.fullpath != root_path %></li>
-                    <li><%= link_to "リクエストする", request_form_path(current_user) if request.fullpath != request_form_path(current_user) %></li>
-                    <li><%= link_to "送られたリクエスト一覧", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
-                    <li><%= link_to "送ったリクエスト", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
-                    <!-- TODO 条件分岐 -->
-                    <div class="btn-group">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        取引関係
-                        </a>
-                        <div class="dropdown-menu">
-                            <li><%= link_to "預り予定", receives_index_path(current_user) %></li>
-                            <li><%= link_to "預り中", receiving_index_path(current_user) %></li>
-                            <li><%= link_to "預け予定", leaves_index_path(current_user) %></li>
-                            <li><%= link_to "預け中", leaving_index_path(current_user) %></li>
-                            <li><%= link_to "取引履歴", transaction_history_path(current_user) %></li>
-                        </div><!-- /.dropdown-menu -->
-                    </div><!-- /.btn-group -->
-                    <br>
-                    <div class="btn-group">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        管理者に問い合わせる
-                        </a>
-                        <div class="dropdown-menu">
-                            <li><%= link_to "お問い合わせフォーム", help_path(current_user) %></li>
-                            <!-- TODO 回答件数が0のときは表示しない -->
-                            <li><%= link_to "お問い合わせ一覧", index_path(current_user) %></li>
-                        </div><!-- /.dropdown-menu -->
-                    </div><!-- /.btn-group -->
+                </section>
+                <section class="stats">
+                    <%#= render 'shared/stats' %>
+                </section>
+                <!-- TODO リンクの表示部分if文削除 -->
+                <li><%= link_to "マップ", root_path if request.fullpath != root_path %></li>
+                <li><%= link_to "リクエストする", request_form_path(current_user) if request.fullpath != request_form_path(current_user) %></li>
+                <li><%= link_to "送られたリクエスト一覧", request_list_path(current_user) if request.fullpath != request_list_path(current_user) %></li>
+                <li><%= link_to "送ったリクエスト", intend_to_requests_path(current_user) if request.fullpath != intend_to_requests_path(current_user) %></li>
+                <!-- TODO 条件分岐 -->
+                <div class="btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    取引関係
+                    </a>
+                    <div class="dropdown-menu">
+                        <li><%= link_to "預り予定", receives_index_path(current_user) %></li>
+                        <li><%= link_to "預り中", receiving_index_path(current_user) %></li>
+                        <li><%= link_to "預け予定", leaves_index_path(current_user) %></li>
+                        <li><%= link_to "預け中", leaving_index_path(current_user) %></li>
+                        <li><%= link_to "取引履歴", transaction_history_path(current_user) %></li>
+                    </div><!-- /.dropdown-menu -->
+                </div><!-- /.btn-group -->
+                <br>
+                <div class="btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    管理者に問い合わせる
+                    </a>
+                    <div class="dropdown-menu">
+                        <li><%= link_to "お問い合わせフォーム", help_path(current_user) %></li>
+                        <!-- TODO 回答件数が0のときは表示しない -->
+                        <li><%= link_to "お問い合わせ一覧", index_path(current_user) %></li>
+                    </div><!-- /.dropdown-menu -->
+                </div><!-- /.btn-group -->
 
-                    <!-- TODO 以下ボタンをクリック時に別ページに現在地周辺のユーザを表示するようにする -->
-                    <%= form_tag(searches_area_search_path, method: 'get') do %>
-                        <%= hidden_field_tag :latitude, id: 'current_latitude' %>
-                        <%= hidden_field_tag :longitude, id: 'current_longitude' %>
-                        <%= text_field_tag :range %>
+                <!-- TODO 以下ボタンをクリック時に別ページに現在地周辺のユーザを表示するようにする -->
+                <%#= form_tag(searches_area_search_path, method: 'get') do %>
+                    <%#= hidden_field_tag :latitude, id: 'current_latitude' %>
+                    <%#= hidden_field_tag :longitude, id: 'current_longitude' %>
+                    <%#= text_field_tag :range %>
 
-                        <%= submit_tag 'Search', class: 'current_position_button' %>
-                    <% end %>
-
-                </ul>
-            </section>
+                    <%#= submit_tag 'Search', class: 'current_position_button' %>
+                <%# end %>
+            </ul>
         </nav>
     </div>
 <% end %>
 
-
+<!-- TODO jsファイルに -->
 <script>
     // ここは変数定義をしない
     var searchItem = '.search_item';   // 絞り込む項目を選択するエリア
     var listItem = '.list_item';       // 絞り込み対象のアイテム
     var hideClass = 'is-hide';         // 絞り込み対象外の場合に付与されるclass名
     var activeClass = 'is-active';     // 選択中のグループに付与されるclass名
-    
+
     $(function () {
+        $("nav").click(function() {
+            $(this).toggleClass("on");
+        });
         // stateレベルでの絞り込み検索
         $(searchItem).on('click', function(){
             $(searchItem).removeClass(activeClass);

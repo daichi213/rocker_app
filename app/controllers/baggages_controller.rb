@@ -10,6 +10,7 @@ class BaggagesController < ApplicationController
     @users = User.all
     @prefecture_names = combination_city_and_state(@users).values.uniq
     @city_names = combination_city_and_state(@users).to_a
+    @checked_user = params[:format] if params[:format]
   end
 
   # フォームの作成アクション
@@ -23,7 +24,7 @@ class BaggagesController < ApplicationController
       # リクエスト先の処理
       # TODO strong parameterに書き換え
       @error_user_name = []
-      params[:baggage_request][:required_id].each do |required_id|
+      params[:baggage_request][:to_user][:required_id].each do |required_id|
         @request_to = @request.to_users.create(required_id: required_id,
                                                requires_id: current_user.id,
                                                del_flag: 0)
