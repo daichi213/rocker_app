@@ -42,7 +42,7 @@
         <% end %>
         <% if !(request.fullpath == intend_to_requests_path(current_user) ||
                 request.fullpath == intend_to_request_show_path(current_user, baggage_request)) %>
-            <%= link_to "メッセージルーム", message_page_path(current_user, baggage_request.get_to_user.id), class: "to_request_show btn btn-primary" %>
+            <%= link_to "メッセージルーム #{baggage_request.get_to_user.dont_read_message(current_user).count}", message_page_path(current_user, baggage_request.get_to_user.id), class: "to_request_show btn btn-primary" %>
         <% end %>
     </div>
 <% end %>

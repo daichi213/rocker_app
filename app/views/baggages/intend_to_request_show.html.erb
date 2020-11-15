@@ -12,7 +12,7 @@
                     <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
                 <% end %>
                 <%= link_to to_user.required.name, user_path(to_user.required), class: "user_show_links" %>
-                <%= link_to "メッセージルーム", message_page_path(current_user, to_user.id), class: "to_request_show btn btn-primary" %>
+                <%= link_to "メッセージルーム #{@intend_to_request.get_to_user.dont_read_message(current_user).count}", message_page_path(current_user, to_user.id), class: "to_request_show btn btn-primary" %>
             <% end %>
         <% end %>
     </ul>

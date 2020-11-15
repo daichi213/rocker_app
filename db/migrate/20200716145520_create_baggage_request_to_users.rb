@@ -5,6 +5,7 @@ class CreateBaggageRequestToUsers < ActiveRecord::Migration[5.1]
       t.integer :baggage_request_id
       t.integer :requires_id
       t.integer :transaction_id
+      t.integer :read_flag
       t.integer :del_flag
 
       t.timestamps

@@ -60,13 +60,6 @@ class User < ApplicationRecord
     BaggageRequest.get_intend_to_request(self.id)
   end
 
-  # TODO includesを使用する、全ユーザーのmessagesを取得してしまっている
-  def dont_read_message
-    Message.where(
-      "user_id LIKE ?", self.id,
-    )
-  end
-
   def dont_read_inquiry
     Inquiry.where(
       "user_id LIKE ? AND solved_flag LIKE ?", self.id, 1
@@ -84,6 +77,24 @@ class User < ApplicationRecord
   # TODO 要チェック
   def contracted_transaction
     BaggageRequest.get_contracted_transaction(self.id)
+  end
+
+  def count_dont_read_message_required
+    Message.check_dont_read_message_required(self.id)
+  end
+
+  def count_dont_read_message_requires
+    Message.check_dont_read_message_requires(self.id)
+  end
+
+  # 受信したリクエスト
+  def count_dont_read_request_in_required
+    BaggageRequestToUser.dont_read_request_in_required(self.id).count
+  end
+
+  # 送信したリクエスト
+  def count_dont_read_request_in_requires
+    BaggageRequestToUser.dont_read_request_in_requires(self.id).count
   end
 
   accepts_nested_attributes_for :receivable_baggages

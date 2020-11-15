@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # home page
   root 'static_pages#home'
-  post '/get_location', to: 'static_page#create'
+  post 'guest_login', to: 'static_pages#create'
   get '/about', to: 'static_pages#about', as: 'about'
 
   # user
