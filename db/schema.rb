@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20200916134638) do
     t.integer "baggage_request_id"
     t.integer "requires_id"
     t.integer "transaction_id"
+    t.integer "read_flag"
     t.integer "del_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

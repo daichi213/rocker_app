@@ -11,6 +11,13 @@ class BaggageRequest < ApplicationRecord
   accepts_nested_attributes_for :to_users
 
   # TODO VALIDATION追加
+  validates :about_baggage_size_h, presence: true
+  validates :about_baggage_size_l, presence: true
+  validates :about_baggage_size_w, presence: true
+  validates :baggage_content, presence: true
+  validates :from_time, presence: true
+  validates :to_time, presence: true
+
   # TODO relationのテスト追加
 
   def required?(user)
@@ -32,6 +39,12 @@ class BaggageRequest < ApplicationRecord
     ).where(
       "required_id LIKE ? AND del_flag LIKE ?", user_id, 0
     ).references(:to_users)
+  end
+
+  def BaggageRequest.get_requiring_baggage_request(user_id)
+    BaggageRequest.where(
+      "user_id LIKE ? AND approval_flag LIKE ?", user_id, 0
+    )
   end
 
   def BaggageRequest.get_intend_to_request(user_id)
@@ -100,6 +113,7 @@ class BaggageRequest < ApplicationRecord
   end
 
   # userの評価ポイントの実装
+  # TODO userの評価ポイントの実装
   # def calculate_my_point
   #   user = self.user
   #   my_point_sum = user.active_requries.map{|request| request.leaver_point}.sum

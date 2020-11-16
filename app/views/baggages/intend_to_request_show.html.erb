@@ -1,0 +1,19 @@
+<% provide(:title, '荷物預け予定一覧') %>
+
+<h1>依頼中</h1>
+<div class='container'>
+    <ul class="baggage_requests">
+        <%= render "baggage_request", baggage_request: @intend_to_request %>
+        <% @to_users.each do |to_user| %>
+            <%= content_tag :li, class:"list_item" do %>
+                <% if to_user.required.picture? %>
+                    <%= image_tag to_user.required.picture.thumb50.url %>
+                <% else %>
+                    <%= image_tag "/uploads/user/picture/thumb50_default.jpg" %>
+                <% end %>
+                <%= link_to to_user.required.name, user_path(to_user.required), class: "user_show_links" %>
+                <%= link_to "メッセージルーム #{@intend_to_request.get_to_user.dont_read_message(current_user).count}", message_page_path(current_user, to_user.id), class: "to_request_show btn btn-primary" %>
+            <% end %>
+        <% end %>
+    </ul>
+</div>

@@ -1,10 +1,8 @@
 class Inquiry < ApplicationRecord
   belongs_to :user
-  has_many :inquiry_solution_contents, as: :contentable
-  has_one :solution
-
-  # accepts_nested_attributes_for :inquiry_solution_contents, allow_destroy: true
-
+  # Polymorphic Relation
+  has_many :inquiry_solution_contents, class_name: 'InquirySolutionContent'
+  has_many :solutions, through: :inquiry_solution_contents, source: :solution
   validates :title, presence: true
 
   def Inquiry.list_of_title

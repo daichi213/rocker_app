@@ -36,6 +36,34 @@
                 <%= f.label :baggage_content, "簡単に荷物の内容を記入して下さい。", class: "baggage-content" %>
                 <%= f.text_area :baggage_content, class: "baggage-content" %>
 
+                <h3>荷物サイズ</h3>
+                <%= f.label :about_baggage_size_w, "荷物の横幅" %>
+                <%= f.select :about_baggage_size_w, [["0〜30cm", 30],
+                                                    ["30cm〜60cm", 60], 
+                                                    ["60cm〜100cm", 100], 
+                                                    ["100cm〜160cm", 160]],
+                                                    {iclude_blank: true, 
+                                                    selected: @request.about_baggage_size_w}, 
+                                                    {class: "baggage-size"} %>
+
+                <%= f.label :about_baggage_size_l, "荷物の奥行" %>
+                <%= f.select :about_baggage_size_l, [["0〜30cm", 30],
+                                                    ["30cm〜60cm", 60], 
+                                                    ["60cm〜100cm", 100], 
+                                                    ["100cm〜160cm", 160]],
+                                                    {iclude_blank: true, 
+                                                    selected: @request.about_baggage_size_l}, 
+                                                    {class: "baggage-size"} %>
+
+                <%= f.label :about_baggage_size_h, "荷物の高さ" %>
+                <%= f.select :about_baggage_size_h, [["0〜30cm", 30],
+                                                    ["30cm〜60cm", 60], 
+                                                    ["60cm〜100cm", 100], 
+                                                    ["100cm〜160cm", 160]],
+                                                    {iclude_blank: true, 
+                                                    selected: @request.about_baggage_size_h}, 
+                                                    {class: "baggage-size"} %>
+
                 <!-- TODO 荷物サイズの入力フォーム -->
 
                 <h3>希望取引日時</h3>
@@ -69,14 +97,16 @@
                     </div><!-- /.dropdown-menu -->
                 </div><!-- /.btn-group -->
                 <ul class='users'>
-                    <%= f.collection_check_boxes(:required_id, User.all, :id, :name, 
-                                                {checked:@request.to_user_ids, include_hidden: false}) do |c|%>
-                        <% if c.object.id != current_user.id %>
-                            <%= c.label(data: {state: c.object.state,
-                                            city: c.object.city,
-                                            street: c.object.street}, class: "list_item") do %>
-                                <%= c.check_box %>
-                                <%= c.object.name %>
+                    <%= f.fields_for :to_user do |b| %>
+                        <%= b.collection_check_boxes(:required_id, User.all, :id, :name,
+                                                    {checked: @checked_user, include_hidden: false}) do |c|%>
+                            <% if c.object.id != current_user.id %>
+                                <%= c.label(data: {state:   c.object.state,
+                                                city:    c.object.city,
+                                                street:  c.object.street}, class: "list_item") do %>
+                                    <%= c.check_box %>
+                                    <%= c.object.name %>
+                                <% end %>
                             <% end %>
                         <% end %>
                     <% end %>

@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  # before_action :display_dont_read_message
 
   include SessionsHelper
   # protect_from_forgery with: :null_session
@@ -9,6 +8,7 @@ class ApplicationController < ActionController::Base
   #  messages_num = current_user.dont_read_message.count
   #  @dont_read_messages_num = session[:dont_read_message_number] - messages_num
   # end
+  include BaggagesHelper
 
   private
 

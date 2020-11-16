@@ -3,7 +3,7 @@ module MessagesHelper
     if baggage_request_to_user.required?(user)
       @user = baggage_request_to_user.requires
     else
-      @user = baggage_request_to_user.required
+      @user = User.find_by(id: baggage_request_to_user.required_id)
     end
   end
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # home page
   root 'static_pages#home'
-  post '/get_location', to: 'static_page#create'
+  post 'guest_login', to: 'static_pages#create'
   get '/about', to: 'static_pages#about', as: 'about'
 
   # user
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   patch '/:id/baggages/:baggage_request_id/refuse', to: 'baggages#refuse', as: 'refuse'
   get '/:id/baggages/approval_requests', to: 'baggages#approval_requests', as: 'approval_requests'
   get '/:id/baggages/intend_to_requests', to: 'baggages#intend_to_requests', as: 'intend_to_requests'
+  get '/:id/baggages/:baggage_request_id/intend_to_request_show', to: 'baggages#intend_to_request_show', as: 'intend_to_request_show'
 
   # transaction
   get '/:id/transactions/receives_index', to: 'transactions#receives_index', as: 'receives_index'

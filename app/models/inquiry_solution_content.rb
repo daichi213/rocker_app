@@ -1,4 +1,8 @@
 class InquirySolutionContent < ApplicationRecord
-  # ポリモーフィック関連
-  belongs_to :contentable, polymorphic: true
+  # Polymorphic Relation
+  # InquiryとSolutionモデルの内容をどちらも関連付けさせている
+  belongs_to :inquiry
+  belongs_to :solution
+
+  validates :content, presence: true
 end

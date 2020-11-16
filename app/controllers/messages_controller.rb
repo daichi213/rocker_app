@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     @baggage_request_to_user = BaggageRequestToUser.find_by(id: params[:baggage_request_to_id])
     @messages = @baggage_request_to_user.messages
     @user = judgement_to_destination(@baggage_request_to_user, current_user)
+    @baggage_request_to_user.check_message(current_user)
   end
 
   def create

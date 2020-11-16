@@ -12,7 +12,7 @@ port        ENV.fetch("PORT") { 3000 }
 
 app_root = File.expand_path("../..",__FILE__)
 
-# port        ENV.fetch("PORT") { 3000 }
+port        ENV.fetch("PORT") { 3000 }
 # bind "unix:/opt/locker_app/tmp/sockets/puma.sock"
 pidfile "#{app_root}/tmp/pids/puma.pid"
 state_path "#{app_root}/tmp/pids/puma.state"
