@@ -22,7 +22,7 @@ environment ENV.fetch("RAILS_ENV") { "production" }
 
 # socket
 # bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
-daemonize true
+# daemonize true
 stdout_redirect "#{Rails.root}/log/stdout", "#{Rails.root}/log/stderr"
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
@@ -63,4 +63,3 @@ stdout_redirect "#{Rails.root}/log/stdout", "#{Rails.root}/log/stderr"
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-daemonize

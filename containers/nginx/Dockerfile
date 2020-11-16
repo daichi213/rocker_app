@@ -1,6 +1,6 @@
 FROM nginx:1.15.8
 
-RUN apt-get update && apt-get install -y vim
+RUN apt-get update && apt-get install -y vim curl
 
 RUN rm -f /etx/nginx/conf.d/*
 
