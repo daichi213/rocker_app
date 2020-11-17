@@ -81,12 +81,11 @@ jobs:
     machine:
       image: circleci/classic:edge
     steps:
-      steps:
-        - checkout
-        # CircleCIに登録した秘密キーを呼び出す
-        - add_ssh_keys:
-        # CircleCIに登録した環境変数を使ってSSH接続する
-        - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /opt/locker_app && git pull'
+      - checkout
+      # CircleCIに登録した秘密キーを呼び出す
+      - add_ssh_keys:
+      # CircleCIに登録した環境変数を使ってSSH接続する
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /opt/locker_app && git pull'
 
 workflows:
   version: 2
