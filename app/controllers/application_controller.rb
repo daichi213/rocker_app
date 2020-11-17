@@ -2,13 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+  include BaggagesHelper
+  # csrf対策を無効化するコマンド
   # protect_from_forgery with: :null_session
 
   # def display_dont_read_message
   #  messages_num = current_user.dont_read_message.count
   #  @dont_read_messages_num = session[:dont_read_message_number] - messages_num
   # end
-  include BaggagesHelper
 
   private
 

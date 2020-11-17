@@ -26,7 +26,7 @@ class BaggageRequestToUser < ApplicationRecord
 
   def dont_read_message(read_user)
     Message.where(
-      "read_flag LIKE ? AND 
+      "read_flag LIKE ? AND
        baggage_request_to_user_id LIKE ? AND
        user_id NOT LIKE ?",
        0, self.id, read_user
