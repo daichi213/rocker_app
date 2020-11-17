@@ -87,7 +87,7 @@ jobs:
           fingerprints:
             - "df:d5:fe:d5:72:22:38:18:7b:0a:42:bd:c1:73:2d:d0"
       # CircleCIに登録した環境変数を使ってSSH接続する
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /opt/locker_app && ssh -T github && git pull'
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /opt/locker_app && git pull'
 
 workflows:
   version: 2
