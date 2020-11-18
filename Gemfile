@@ -43,8 +43,6 @@ gem 'rmagick'
 gem 'mini_magick', '4.7.0'
 gem 'will_paginate', '3.1.6'
 gem 'bootstrap-will_paginate', '1.0.0'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 gem 'rails-erd'
 gem 'jp_prefecture'
 gem 'forgery_ja'
@@ -69,6 +67,15 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', require: false
+end
+
+# Use Capistrano for deployment
+group :deployment, :test do
+  gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  # gem 'capistrano3-puma'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
