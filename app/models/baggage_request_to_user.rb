@@ -14,7 +14,7 @@ class BaggageRequestToUser < ApplicationRecord
   #      del_flag LIKE ?",
   #      read_user, 0, 0
   #   )
-  # end
+  end
 
   # def BaggageRequestToUser.dont_read_request_in_requires(read_user)
   #   BaggageRequestToUser.where(

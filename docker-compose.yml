@@ -39,7 +39,7 @@ services:
     build:
       context: ./containers/nginx
     ports:
-      - 8080:80
+      - 80:80
     volumes:
       - ./containers/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
 

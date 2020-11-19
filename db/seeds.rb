@@ -1,11 +1,11 @@
 # ユーザーデータの生成
-User.create!(name: "Daichi Ozaki",
+User.create!(name: "ゲスト様",
              sex: 1,
              email: "example@locker.org",
              password: "foobar",
              password_confirmation: "foobar",
              birthday: Date.new(1994, 2, 13),
-             occupation: "フリーター",
+             occupation: "会社員",
              prefecture_code: 13,
              state: '東京都',
              city: '北区',

@@ -1,6 +1,6 @@
 <% provide(:title, "Home") %>
 
-<div class='row'>
+<div class='row home_container'>
     <% if logged_in? %>
         <% if flash[:request] %>
             <h1 class='receive_message'><%= flash[:receive_message] %></h1>
@@ -134,6 +134,26 @@
             async defer></script>
         </div>
     <% else %>
-        <%= link_to "ゲストとしてログインする", guest_login_path, class:"btn btn-primary", method: :post %>
+        <div class='home_picture_group'>
+            <%= image_tag "enoshima_jinja.jpg", class: "enoshima_jinja, home_picture" %>
+            <%= image_tag "shopping.jpg", class: "shopping, home_picture" %>
+        </div>
+
+        <div class='legend'>
+            <h2>荷物を預かってお小遣い稼ぎしてみませんか？</h2>
+            <h4>　外出時、アプリの登録ユーザー同士で荷物を預け合うことができるサービスになります。登録したユーザーは荷物を預けることと預かることのどちらも行え、そのマッチングを助けるアプリになります。</h4>
+            <h3>取引の流れ</h3>
+            <ol>
+                <li>預けたいユーザーが</li>
+            </ol>
+            <h3>こんなときに！</h3>
+            <ul>
+                <li>買い物して手荷物が邪魔になってしまったとき・・・</li>
+                <li>コインロッカーが周りにないとき・・・</li>
+                <li>自宅から遠出している最中に手荷物が邪魔になってしまったとき・・・</li>
+            </ul>
+        </div>
+        <%= link_to "採用担当者様用ログイン", guest_login_path, class:"btn btn-primary", method: :post %>
+        <%= link_to "新規登録", signup_path, class:"btn btn-primary" %>
     <% end %>
 </div>
