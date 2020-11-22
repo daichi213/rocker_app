@@ -13,8 +13,10 @@ HTML, CSS, JavaScript, Ruby, SQL, SCSS
 ### フレームワーク
 Ruby on Rails
 ### TOOL
-git, Docker, circleci, terraform, puma, nginx, MySQL
+git, Docker, puma, nginx, MySQL, terraform
+### AWS（インフラ）
+EC2, VPC, ELB, ACM, S3
 ### OS
 macOS
-## 作品
-http://ec2-18-179-245-147.ap-northeast-1.compute.amazonaws.com
+## 作品URL
+https://www.lockerappli.com

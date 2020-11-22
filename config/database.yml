@@ -10,19 +10,19 @@ default: &default
   timeout: 5000
   encoding: utf8
   # TODO EC2用
-  username: root
-  password: password
-  socket: /tmp/mysql.sock
+  # username: root
+  # password: password
+  # socket: /tmp/mysql.sock
   # TODO LOCAL用
   # username: ozaki
   # password: password
   # host: 127.0.0.1
   # socket: /tmp/sockets/mysql.sock
   # TODO docker用
-  # username: <%= ENV['MYSQL_USER'] %>
-  # password: <%= ENV['MYSQL_PASSWORD'] %>
-  # socket: /var/run/mysqld/mysqld.sock
-  # host: db
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+  socket: /var/run/mysqld/mysqld.sock
+  host: db
 
 development:
   <<: *default

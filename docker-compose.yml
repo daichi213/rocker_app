@@ -26,8 +26,9 @@ services:
     # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
     # command: export SECRET_KEY_BASE=`bundle exec rake secret` && bundle exec puma -t 5:5 -p 3000 -e production -C config/puma.rb
     command: bash -c "bundle exec rake db:create RAILS_ENV=production &&
-             bundle exec rake db:migrate RAILS_ENV=production &&
-             bundle exec rake assets:precompile RAILS_ENV=production &&
+             bundle exec rake db:migrate:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=production &&
+             bundle exec rake db:seed RAILS_ENV=production &&
+             bundle exec rake assets:precompile --trace RAILS_ENV=production &&
              rails server -e production &&
              bash entrypoint.sh && /bin/bash"
     volumes:
@@ -42,6 +43,8 @@ services:
       - 80:80
     volumes:
       - ./containers/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      # userのプロフィール画像をnginxでレスポンスするためのマウント
+      - ./public:/opt/locker_app/public
 
     depends_on:
       - app
