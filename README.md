@@ -14,6 +14,8 @@ HTML, CSS, JavaScript, Ruby, SQL, SCSS
 Ruby on Rails
 ### TOOL
 git, Docker, puma, nginx, MySQL, terraform, vim
+### Editor
+visual stadio code, vim
 ### AWS（インフラ）
 EC2, VPC, ELB, ACM, S3
 ### OS
