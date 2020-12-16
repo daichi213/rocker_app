@@ -13,7 +13,7 @@ HTML, CSS, JavaScript, Ruby, SQL, SCSS
 ### フレームワーク
 Ruby on Rails
 ### TOOL
-git, Docker, puma, nginx, MySQL, terraform
+git, Docker, puma, nginx, MySQL, terraform, vim
 ### AWS（インフラ）
 EC2, VPC, ELB, ACM, S3
 ### OS
