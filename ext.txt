@@ -1,3 +1,4 @@
+8amjp.charactercount
 aki77.rails-db-schema
 aki77.rails-partial
 aki77.rails-routes
@@ -22,15 +23,18 @@ ICS.japanese-proofreading
 ionutvmi.path-autocomplete
 jvandyke.vscode-circleci
 kaiwood.endwise
+magicstack.MagicPython
 MashDuek.jbuilder-highlight
 mechatroner.rainbow-csv
 Mikael.Angular-BeastCode
+mikestead.dotenv
 misogi.ruby-rubocop
 mosapride.zenkaku
 mrded.railscasts
 ms-azuretools.vscode-docker
 MS-CEINTL.vscode-language-pack-ja
 ms-python.python
+ms-toolsai.jupyter
 ms-vscode.cpptools
 PaulOlteanu.theme-railscasts
 raynigon.nginx-formatter
@@ -40,6 +44,7 @@ redhat.vscode-yaml
 ryu1kn.partial-diff
 shanoor.vscode-nginx
 shardulm94.trailing-spaces
+shd101wyy.markdown-preview-enhanced
 sianglim.slim
 TabNine.tabnine-vscode
 vayan.haml
